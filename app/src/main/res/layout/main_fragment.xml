@@ -5,6 +5,8 @@
 >
 
     <data>
+        <import type="android.view.View"/>
+
         <variable
                 name="MyBalance"
                 type="com.codesroots.mac.cards.models.MyBalance"/>
@@ -59,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textStyle="bold"
+                android:visibility="@{MyBalance.account != `0` ? View.VISIBLE : View.GONE}"
                 android:id="@+id/textView5" android:textSize="24sp" android:layout_marginRight="16dp"
                 android:layout_marginEnd="16dp" app:layout_constraintBottom_toTopOf="@id/textView11"/>
         <TextView

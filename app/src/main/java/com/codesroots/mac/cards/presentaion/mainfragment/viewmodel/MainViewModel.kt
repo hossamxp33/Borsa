@@ -15,7 +15,7 @@ import java.util.ArrayList
 
 @BindingAdapter("app:imageResource")
 fun setImageResource(imageView: AppCompatImageView, resource: String?) {
-    Glide.with(imageView.context).load("http://across-cities.com/"+resource).into(imageView)
+    Glide.with(imageView.context).load(resource).into(imageView)
 }
 @BindingAdapter("app:imageResourcee")
 fun setImageResourcee(imageView: AppCompatImageView, resource: String?) {
@@ -73,7 +73,7 @@ class MainViewModel : ViewModel() {
         DateRepoCompnay.GetMyMonthReport(auth,from,to,ReportDailyResponseLD)
     }
     fun GetMyImages(auth:String){
-        DateRepoCompnay.GetMyImages(auth,SliderDataResponseLD)
+        DateRepoCompnay.GetMyImages(SliderDataResponseLD)
     }
 
     override fun onCleared() {

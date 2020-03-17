@@ -1,5 +1,7 @@
 package com.codesroots.mac.cards.models
 
+import com.google.gson.annotations.SerializedName
+
 
 data class MyLocation (
     val videos: List<Video>? = null
@@ -27,8 +29,10 @@ data class  SliderData (
     val data: List<SliderElement>? = null
 )
 data class SliderElement (
+
     val no: Long,
     val headline: String,
+    @SerializedName("photo")
     val image: String
 )
 

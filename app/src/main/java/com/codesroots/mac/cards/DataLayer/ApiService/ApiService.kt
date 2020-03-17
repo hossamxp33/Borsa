@@ -25,9 +25,9 @@ interface APIServices {
         @Field("password") password: String
     ): Observable<LoginModel>
 
-    @POST("wserv?page=2&val=0")/*{company_id}*/
+    @POST("companies.json")/*{company_id}*/
     fun GetCompanyData(@Query("auth") auth: String):
-            Observable<List<CompanyDatum>>
+            Observable<CompanyData>
 
     @POST("wserv?page=12")/*{company_id}*/
     fun GetMyBlanceData(@Query("auth") auth: String):
@@ -47,9 +47,9 @@ interface APIServices {
     @POST("wserv?page=18")/*{company_id}*/
     fun PrintReport(@Query("val") packageid: String,@Query("auth") auth: String):
             Observable<Buypackge>
-    @POST("wserv?page=17")/*{company_id}*/
-    fun SliderData(@Query("auth") auth: String):
-            Observable<List<SliderElement>>
+    @POST("sliders.json")/*{company_id}*/
+    fun SliderData():
+            Observable<SliderData>
     @POST("wserv?page=13")/*{company_id}*/
     fun GetMyDeialyReport(@Query("auth") auth: String):
             Observable<List<ReportDaily>>

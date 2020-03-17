@@ -25,8 +25,8 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
         .observeOn(AndroidSchedulers.mainThread())
         .map { data -> data }
     .subscribe(
-                { books ->
-                    livedata?.postValue(books.data)
+                { success ->
+                    livedata?.postValue(success.data)
                 },
             { error ->
 
@@ -44,7 +44,7 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
             .map { data -> data }
             .subscribe(
                 { books ->
-                    livedata?.postValue(books)
+                    livedata?.postValue(books.data)
                 },
                 { error ->
 
@@ -207,15 +207,15 @@ print(error)
 
     @SuppressLint("CheckResult")
 
-    fun GetMyImages(auth:String,livedata: MutableLiveData<List<SliderElement>>?) {
+    fun GetMyImages(livedata: MutableLiveData<List<SliderElement>>?) {
 
-        getServergetway().SliderData(auth)
+        getServergetway().SliderData()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { data -> data }
             .subscribe(
                 { books ->
-                    livedata?.postValue(books)
+                    livedata?.postValue(books.data)
                 },
                 { error ->
                     print(error)
