@@ -14,7 +14,10 @@ data class CompanyDatum (
     val name: String? = null,
     @SerializedName("logo")
     val src: String? = null,
+    @SerializedName("price")
     val sprice: String? = null,
     val code: String? = null,
-    val created: String? = null
+    val created: String? = null,
+    @SerializedName("company_id")
+    val companyID: Long
 )
