@@ -150,7 +150,7 @@ class ClickHandler {
             .replace(com.codesroots.mac.cards.R.id.main_frame, frag).addToBackStack(null).commit()
     }
 
-    fun SwitchToPayment(context: Context,id:String,viewmodel:MainViewModel,user_id:String,package_id:String) {
+    fun SwitchToPayment(context: Context,id:String,viewmodel:MainViewModel) {
 
         val dialogBuilder = AlertDialog.Builder(( context as MainActivity) )
         val inflater = ( context as MainActivity).getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -176,7 +176,7 @@ class ClickHandler {
 
             mLastClickTime = SystemClock.elapsedRealtime();
             val auth = PreferenceHelper.getToken()
-            viewmodel.BuyPackage(user_id,id,package_id,dialogView.from.text.toString())
+            viewmodel.BuyPackage(id,dialogView.from.text.toString())
 
             if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
                 viewmodel.BuyPackageResponseLD?.observe(context, Observer {

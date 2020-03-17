@@ -29,13 +29,14 @@ interface APIServices {
 
 
 
-
+    @FormUrlEncoded
     @POST("orders/add.json")/*{company_id}*/
     fun BuyPackage(
-        @Query("val") user_id: String, package_id: String,
-        phone: String,
-        id: String
-    ):
+        @Field("user_id") useris: String,
+        @Field("package_id") packageid: String,
+        @Field("phone") phone: String
+
+        ):
             Observable<Buypackge>
 
     @POST("wserv?page=18")/*{company_id}*/

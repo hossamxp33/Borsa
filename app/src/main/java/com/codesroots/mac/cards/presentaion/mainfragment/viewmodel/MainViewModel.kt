@@ -6,6 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
+import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.models.*
 import com.codesroots.mac.firstkotlon.DataLayer.Repo.DataRepo
 
@@ -57,9 +58,9 @@ class MainViewModel : ViewModel() {
     }
 
 
-    fun BuyPackage(id:String,user_id:String,package_id:String,phone:String){
+    fun BuyPackage(id:String,phone:String){
 
-        DateRepoCompnay.BuyPackage(id,user_id,package_id,phone,BuyPackageResponseLD,mCompositeDisposable)
+        DateRepoCompnay.BuyPackage(id,PreferenceHelper.getUserId().toString(),phone,BuyPackageResponseLD,mCompositeDisposable)
 
     }
     fun PrintReport(oopo:String,auth:String){
