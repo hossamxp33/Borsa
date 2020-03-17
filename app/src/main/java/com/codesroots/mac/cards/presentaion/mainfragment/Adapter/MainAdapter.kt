@@ -30,7 +30,6 @@ class MainAdapter ( var viewModel: MainViewModel,var context :Context?,var data:
 
         val  binding: MainAdapterBinding = DataBindingUtil.inflate (LayoutInflater.from(p0.context),R.layout.main_adapter,p0,false)
         val typeface = Typeface.createFromAsset(context!!.assets, "fonts/DroidKufi_Regular.ttf")
-        binding.textView7.typeface = typeface
         return  CustomViewHolder(binding)
     }
 
