@@ -37,7 +37,6 @@ import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.menufragmen.MenuFragment
 import com.codesroots.mac.cards.presentaion.payment.Payment
-import com.codesroots.mac.cards.presentaion.portiflioFragment.PortiflioFragment
 import com.codesroots.mac.cards.presentaion.reportsFragment.ReportsFragment
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
@@ -81,12 +80,9 @@ class MainActivity : AppCompatActivity() {
             R.drawable.more, R.color.signinpurple
         )
 
-        val item4 = AHBottomNavigationItem(
-            R.string.tab_4,
-            R.drawable.work, R.color.signinpurple
-        )
+
         with(bottom_navigation) {
-            addItems(listOf(item2, item1,item3,item4))
+            addItems(listOf(item2, item1,item3))
             inactiveColor = ContextCompat.getColor(context ,R.color.gray )
             accentColor  =  ContextCompat.getColor(context ,R.color.signinpurple )
 
@@ -95,10 +91,7 @@ class MainActivity : AppCompatActivity() {
             setOnTabSelectedListener { position, wasSelected ->Unit
                 Log.e( "tab positiion",position.toString())
                 /*  getLastLocation()*/
-                if (position==3) {
-                    supportFragmentManager!!.beginTransaction()
-                        .replace(com.codesroots.mac.cards.R.id.main_frame, PortiflioFragment()).addToBackStack(null).commit()
-                }
+
                 if (position==2) {
                     supportFragmentManager!!.beginTransaction()
                         .replace(com.codesroots.mac.cards.R.id.main_frame, MenuFragment()).addToBackStack(null).commit()
@@ -238,101 +231,11 @@ class ClickHandler {
                 })
             }
         }
-        dialogView.saveToRoom.setOnClickListener { v: View? ->
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-                return@setOnClickListener
-            }
-            v!!.isGone = true
-            mLastClickTime = SystemClock.elapsedRealtime();
-            val auth = PreferenceHelper.getToken()
-            viewmodel.BuyPackage(id,auth!!,dialogView.from.text.toString())
-
-            if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
-                viewmodel.BuyPackageResponseLD?.observe(context, Observer {
-
-
-                    if (it.err != null) {
-                        it.err!!.snack((context as MainActivity).window.decorView.rootView)
-                        dialogView.err.text = it.err
-                        dialogView.err.isGone = false
-                    } else {
-                        if (!it!!.pencode.isNullOrEmpty()) {
-                            Thread {
-                                val db = Room.databaseBuilder(
-                                    context,
-                                    CardDatabase::class.java, "card-database"
-                                ).build()
-                                insertUserWithPet(it, db.getCardDao())
-                                "تم الحفظ بالمحفظة بنجاح".snack((context).window.decorView.rootView)
-                            }.start()
-
-//                   GlobalScope.launch {
-//                       val db = Room.databaseBuilder(
-//                          context,
-//                           CardDatabase::class.java, "card-database"
-//                       ).build()
-//                       db.getCardDao().GetAllData()
-//                  "تم الحفظ بالمحفظة بنجاح".snack((context).window.decorView.rootView)
-//                   }
-//
-//                            Glide.with(context as MainActivity)
-//                                .asBitmap()
-//                                .load( "https://device-smart-iq.com/"+it.src)
-//                                .into(object : SimpleTarget<Bitmap>(100, 100) {
-//                                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-//                                        try {
-//
-//                                            val homeIntent = Intent(context, Payment::class.java)
-//
-//                                            homeIntent.putExtra("myobj", it)
-//
-//                                            (context as MainActivity).startActivity(homeIntent)
-//
-//                                        }
-//                                        catch (e: IOException) {
-//                                            // handle exception
-//                                        }
-//                                    }
-//
-//                                    override fun onLoadFailed(errorDrawable: Drawable?) {
-//                                        // handle exception
-//                                    }
-//                                })
-
-                        }
-
-                    }
-
-                })
-            }
-        }
-    }
-    fun insertUserWithPet(user: Buypackge, cardDao: CardDao) {
-        val pets = user.pencode!!
-        for (i in pets.indices) {
-            pets.get(i).buypackageid = user.opno!!
-        }
-        cardDao.insertPetList(pets)
-        cardDao. insertPackege(user)
     }
 
-    fun  deletedata(context: MainActivity,its:Buypackge) {
-        GlobalScope.launch {
-            let {
-                val db = Room.databaseBuilder(context ,
-                    CardDatabase::class.java, "card-database"
-                ).build()
-                db.getCardDao().deleteCard(its.opno!!)
 
-            }}
 
-    }
-    suspend fun getUserWithPets(id: Int, room: CardDao): Buypackge {
-        val user = room.getUser(id)
-        val pets = room.getPetList(id)
-        user.pencode = pets
-        return user
-    }
+
     fun ShowReport(context: Context,id:String) {
 
         lateinit var viewModel: MainViewModel
@@ -438,45 +341,5 @@ class ClickHandler {
     }
 
 
-    fun PrintReportFromPortifoliio(context: Context,its:Buypackge) {
-        var card: Buypackge? = null
 
-        GlobalScope.launch {
-            context.let {
-                val db = Room.databaseBuilder(
-                    it,
-                    CardDatabase::class.java, "card-database"
-                ).build()
-                var data = getUserWithPets(its.opno!!, db.getCardDao())
-                card = data
-                if (!card!!.pencode.isNullOrEmpty()) {
-                    Thread {
-                        context!!.runOnUiThread {
-                            Glide.with(context as MainActivity)
-                                .asBitmap()
-                                .load( "http://across-cities.com/"+ card!!.src)
-                                .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                    override fun onResourceReady(
-                                        resource: Bitmap,
-                                        transition: Transition<in Bitmap>?
-                                    ) {
-                                        try {
-                                            IPosPrinterTestDemo.getInstance().printText(card, resource,resource);
-                                            deletedata(context, card!!)
-
-
-                                        } catch (e: IOException) {
-                                            // handle exception
-                                        }
-                                    }
-
-                                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                                        // handle exception
-                                    }
-                                })
-                        }
-                    }.start()
-                }
-            }
-        }}
     }
