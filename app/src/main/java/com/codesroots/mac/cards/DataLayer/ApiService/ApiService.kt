@@ -33,8 +33,8 @@ interface APIServices {
     fun GetMyBlanceData(@Query("auth") auth: String):
             Observable<MyBalance>
 
-    @POST("packages/GetPackgesByCompanyId/1.json")/*{company_id}*/
-    fun GetPackageDetails(@Query("val") packageid: String,@Query("auth") auth: String):
+    @GET("packages/GetPackgesByCompanyId/\"+id+\"/1.json")/*{company_id}*/
+    fun GetPackageDetails(@Path("val") packageId: String, @Query("auth") auth: String):
             Observable<CompanyData>
 
 
