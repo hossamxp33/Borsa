@@ -57,9 +57,9 @@ class MainViewModel : ViewModel() {
     }
 
 
-    fun BuyPackage(id:String,auth:String,amount:String){
+    fun BuyPackage(id:String,user_id:String,package_id:String,phone:String){
 
-        DateRepoCompnay.BuyPackage(id,auth,amount,BuyPackageResponseLD,mCompositeDisposable)
+        DateRepoCompnay.BuyPackage(id,user_id,package_id,phone,BuyPackageResponseLD,mCompositeDisposable)
 
     }
     fun PrintReport(oopo:String,auth:String){

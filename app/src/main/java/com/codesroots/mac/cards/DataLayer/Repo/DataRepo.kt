@@ -10,7 +10,6 @@ import com.codesroots.mac.firstkotlon.DataLayer.ApiService.APIServices
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import retrofit2.create
 
 class  DataRepo {
 
@@ -57,7 +56,7 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
 
     fun GetPackageDetails(id:String,livedata: MutableLiveData<List<CompanyDatum>>?) {
 
-        getServergetway().GetPackageDetails(id,PreferenceHelper.getToken())
+        getServergetway().GetPackageDetails(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { data -> data }
@@ -73,9 +72,9 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
 
     @SuppressLint("CheckResult")
 
-    fun BuyPackage(id:String,auth:String,amount:String,livedata: MutableLiveData<Buypackge>?,compiste: CompositeDisposable) {
+    fun BuyPackage(user_id:String,package_id:String,phone:String,id:String,livedata: MutableLiveData<Buypackge>?,compiste: CompositeDisposable) {
 
-        compiste .add(   getServergetway().BuyPackage(id,auth,amount)
+        compiste .add(   getServergetway().BuyPackage(user_id,package_id,phone,id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 

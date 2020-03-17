@@ -1,19 +1,9 @@
 package com.codesroots.mac.firstkotlon.DataLayer.ApiService
 
-import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.models.*
 
-import com.google.gson.GsonBuilder
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-import java.util.concurrent.TimeUnit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-
 
 
 interface APIServices {
@@ -40,8 +30,12 @@ interface APIServices {
 
 
 
-    @POST("wserv?page=5")/*{company_id}*/
-    fun BuyPackage(@Query("val") packageid: String,@Query("auth") auth: String,@Query("mount") amount: String):
+    @POST("orders/add.json")/*{company_id}*/
+    fun BuyPackage(
+        @Query("val") user_id: String, package_id: String,
+        phone: String,
+        id: String
+    ):
             Observable<Buypackge>
 
     @POST("wserv?page=18")/*{company_id}*/
