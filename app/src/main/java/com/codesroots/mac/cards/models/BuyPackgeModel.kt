@@ -72,12 +72,12 @@ data class Product (
     val modified: String,
     val approve: Long,
     val mobile: String,
-    val center: Center,
+    val center: Centers,
     @SerializedName("package")
     val productPackage: Package
 )
 
-data class Center (
+data class Centers (
     val id: Long,
     val username: String
 )

@@ -51,7 +51,7 @@ class CustomViewHolder (
     ) {
 
         binding.listener = ClickHandler()
-        binding.data = data
+      //  binding.data = data
         binding.context = context as MainActivity?
     }
 
