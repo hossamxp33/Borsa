@@ -41,7 +41,7 @@
                                                       app:layout_constraintTop_toTopOf="parent"
 
                                                       android:id="@+id/appCompatImageView"
-                                                      app:imageResourcee="@{data.src}"
+                                                      app:imageResourcee="@{data.photo}"
 
                                                       android:layout_marginRight="24dp"
                                                       android:layout_marginEnd="24dp"/>

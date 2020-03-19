@@ -1,6 +1,5 @@
 package com.codesroots.mac.cards.presentaion.mainfragment.viewmodel
 
-import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
@@ -11,8 +10,6 @@ import com.codesroots.mac.cards.models.*
 import com.codesroots.mac.firstkotlon.DataLayer.Repo.DataRepo
 
 import io.reactivex.disposables.CompositeDisposable
-import org.jetbrains.anko.doAsyncResult
-import java.util.ArrayList
 
 @BindingAdapter("app:imageResource")
 fun setImageResource(imageView: AppCompatImageView, resource: String?) {
@@ -31,7 +28,7 @@ class MainViewModel : ViewModel() {
     var MyBalanceResponseLD : MutableLiveData<MyBalance>? = null
     var SliderDataResponseLD : MutableLiveData<List<SliderElement>>? = null
     var BuyPackageResponseLD : MutableLiveData<Buypackge>? = null
-    var ReportDailyResponseLD : MutableLiveData<List<ReportDaily>>? = null
+    var ReportDailyResponseLD : MutableLiveData<List<Product>>? = null
     var ReportHistroyResponseLD : MutableLiveData<List<ReportDaily>>? = null
 
     init {

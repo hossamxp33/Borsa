@@ -45,13 +45,13 @@ interface APIServices {
     @POST("sliders.json")/*{company_id}*/
     fun SliderData():
             Observable<SliderData>
-    @POST("wserv?page=13")/*{company_id}*/
-    fun GetMyDeialyReport(@Query("auth") auth: String):
-            Observable<List<ReportDaily>>
+    @GET("orders/dailyreportproducts.json")/*{company_id}*/
+    fun GetMyDeialyReport():
+            Observable<ReportDaily>
 
-    @POST("wserv?page=13")/*{company_id}*/
-    fun GetMyDeialyReport(@Query("auth") auth: String,@Query("val") fromto:String):
-            Observable<List<ReportDaily>>
+    @GET("orders/dailyreportproducts.json")/*{company_id}*/
+    fun GetMyDeialyReport(@Query("auth") auth: String, @Query("val") fromto:String):
+            Observable<ReportDaily>
     @GET("wserv?page=15")/*{company_id}*/
     fun GetTerms():
             Observable<Terms>

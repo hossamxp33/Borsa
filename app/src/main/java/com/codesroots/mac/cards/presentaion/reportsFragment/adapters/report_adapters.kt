@@ -2,21 +2,17 @@ package com.codesroots.mac.cards.presentaion.reportsFragment.adapters
 
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.codesroots.mac.cards.R
-import com.codesroots.mac.cards.databinding.MainAdapterBinding
 import com.codesroots.mac.cards.databinding.ReportItemBinding
-import com.codesroots.mac.cards.models.CompanyDatum
-import com.codesroots.mac.cards.models.MyLocationUseCase
-import com.codesroots.mac.cards.models.ReportDaily
+import com.codesroots.mac.cards.models.Product
 import com.codesroots.mac.cards.presentaion.ClickHandler
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
-class report_adapters ( var viewModel: MainViewModel,var context :Context?,var data:List<ReportDaily>) : RecyclerView.Adapter<CustomViewHolder>() {
+class report_adapters ( var viewModel: MainViewModel,var context :Context?,var data:List<Product>) : RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
 
         return  data.size
@@ -48,7 +44,11 @@ class CustomViewHolder (
     private val binding:ReportItemBinding
 ) : RecyclerView.ViewHolder(binding.root){
 
-    fun bind(viewModel:MainViewModel,context: Context?,data:ReportDaily) {
+    fun bind(
+        viewModel:MainViewModel,
+        context: Context?,
+        data: Product
+    ) {
 
         binding.listener = ClickHandler()
         binding.data = data

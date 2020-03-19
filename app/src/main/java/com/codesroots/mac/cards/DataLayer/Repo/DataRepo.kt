@@ -105,15 +105,18 @@ print(error)
             )
     }
     @SuppressLint("CheckResult")
-    fun GetMyDeialyReport(auth:String,livedata: MutableLiveData<List<ReportDaily>>?) {
+    fun GetMyDeialyReport(
+        auth:String,
+        livedata: MutableLiveData<List<Product>>?
+    ) {
 
-        getServergetway().GetMyDeialyReport(auth)
+        getServergetway().GetMyDeialyReport()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { data -> data }
             .subscribe(
                 { books ->
-                    livedata?.postValue(books)
+                    livedata?.postValue(books.data)
                 },
                 { error ->
                     print(error)
@@ -121,7 +124,12 @@ print(error)
             )
     }
     @SuppressLint("CheckResult")
-    fun GetMyMonthReport(auth:String,from:String,to:String,livedata: MutableLiveData<List<ReportDaily>>?) {
+    fun GetMyMonthReport(
+        auth:String,
+        from:String,
+        to:String,
+        livedata: MutableLiveData<List<Product>>?
+    ) {
 
         getServergetway().GetMyDeialyReport(auth,from+","+to)
             .subscribeOn(Schedulers.io())
@@ -129,7 +137,7 @@ print(error)
             .map { data -> data }
             .subscribe(
                 { books ->
-                    livedata?.postValue(books)
+                    livedata?.postValue(books.data)
                 },
                 { error ->
                     print(error)

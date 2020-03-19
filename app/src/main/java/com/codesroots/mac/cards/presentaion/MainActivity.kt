@@ -236,12 +236,12 @@ class ClickHandler {
 
 
 
-    fun ShowReport(context: Context,id:String) {
+    fun ShowReport(context: Context) {
 
         lateinit var viewModel: MainViewModel
         val auth = PreferenceHelper.getToken()
         viewModel =   ViewModelProviders.of(( context as MainActivity)).get(MainViewModel::class.java)
-        viewModel.PrintReport(id,auth!!)
+
         if (viewModel.BuyPackageResponseLD?.hasObservers() == false) {
 
             viewModel.BuyPackageResponseLD?.observe(context, Observer {
@@ -287,7 +287,6 @@ class ClickHandler {
 
         val auth = PreferenceHelper.getToken()
         viewModel =   ViewModelProviders.of(( context as MainActivity)).get(MainViewModel::class.java)
-        viewModel.PrintReport(id,auth!!)
         if (viewModel.BuyPackageResponseLD?.hasObservers() == false) {
 
             viewModel.BuyPackageResponseLD?.observe(context, Observer {

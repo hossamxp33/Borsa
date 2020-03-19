@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.R
+import com.codesroots.mac.cards.models.Product
 import com.codesroots.mac.cards.models.ReportDaily
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
@@ -49,26 +50,15 @@ class ReportsFragment  : Fragment() {
 
         val view = inflater.inflate(R.layout.report_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-
-
             viewModel.GetMyDeialyReport(PreferenceHelper.getToken());
             viewModel.ReportDailyResponseLD?.observe(this , Observer {
-                if (it.first().err != null){
-                    it.first().err!!.snack(( context as MainActivity).window.decorView.rootView)
-
-                } else {
-                    val invitedPeople: List<ReportDaily> = it.filter { it.opid > 0 }
-
-                    MainAdapter = report_adapters(viewModel, context, invitedPeople)
-                    lastvalue.text = it.first().amount
-                    value.text = it.get(it.size - 2).amount
-                    println(it.get(it.size - 2).amount)
-                    commision.text = it.last().amount
+                    MainAdapter = report_adapters(viewModel, context, it)
 
                     view.recyler.layoutManager = LinearLayoutManager(context);
                     view.recyler.adapter = MainAdapter;
-                }
+
             })
+
         val cal = Calendar.getInstance()
 
         view.to.setOnClickListener { v ->
@@ -87,10 +77,7 @@ class ReportsFragment  : Fragment() {
                 v.to.text = SimpleDateFormat("yyyy-MM-dd").format(cal.time)
                 viewModel.GetMyDatesReport(PreferenceHelper.getToken(),from.text.toString(),to.text.toString())
                 viewModel.ReportDailyResponseLD?.observe(this , Observer {
-                    lastvalue.text = it.first().amount
-                    value.text = it.get(it.size - 2).amount
-                    println(it.get(it.size - 2).amount)
-                    commision.text = it.last().amount
+
 
                     MainAdapter.notifyDataSetChanged()
 

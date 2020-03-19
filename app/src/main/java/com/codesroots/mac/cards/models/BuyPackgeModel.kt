@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
@@ -53,17 +54,35 @@ data class MyBalance (
     val account: String? = null,
     val commession: String? = null
 )
-data class ReportDaily (
-    val opid: Long,
-    val opno: String,
-    val opdate: String,
-    val strcase: String,
-    val amount: String,
-    val err: String? = null,
-    val cardname: String? = null,
-    val logo:String? = null
 
-    )
+
+
+data class ReportDaily (
+    val data: List<Product>
+)
+
+
+data class Product (
+    val id: Long,
+    @SerializedName("package_id")
+    val packageID: Long,
+    @SerializedName("user_id")
+    val userID: Long,
+    @SerializedName("center_id")
+    val centerID: Long,
+    val created: String,
+    val modified: String,
+    val approve: Long,
+    val mobile: String,
+    val center: Center,
+    @SerializedName("package")
+    val productPackage: Package
+)
+
+data class Center (
+    val id: Long,
+    val username: String
+)
 
 
 @Entity(tableName = "pencode")
