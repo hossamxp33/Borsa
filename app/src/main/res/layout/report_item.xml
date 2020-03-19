@@ -14,7 +14,7 @@
                 type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
         <variable
                 name="data"
-                type="com.codesroots.mac.cards.models.Product"/>
+                type="com.codesroots.mac.cards.models.ReportDaily"/>
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +28,7 @@
                   android:id="@+id/name"
                   android:textColor="@color/black"
                   android:textStyle="bold"
-                  android:text="@{data.mobile}"
+                  android:text="@{data.opno}"
                   android:layout_height="wrap_content"
                   android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
                   android:layout_marginRight="16dp" android:layout_marginTop="16dp"
@@ -37,7 +37,7 @@
 
         <TextView android:layout_width="0dp"
                   app:layout_constraintTop_toBottomOf="@+id/name"
-                  android:text="@{data.mobile}"
+                  android:text="@{data.amount}"
                   android:layout_marginTop="5dp"
                   android:gravity="right"
                   android:textColor="@color/red"
@@ -49,7 +49,7 @@
 
         <TextView android:layout_width="0dp"
                   app:layout_constraintTop_toTopOf="@+id/name"
-                  android:text="@{data.mobile}"
+                  android:text="@{data.opdate}"
                   android:layout_marginTop="5dp"
                   android:textColor="#726868"
                   android:id="@+id/time"
@@ -59,6 +59,15 @@
                   app:layout_constraintEnd_toStartOf="@+id/name" android:layout_marginRight="32dp"
                   android:layout_marginEnd="32dp"/>
 
+        <androidx.appcompat.widget.AppCompatImageView android:layout_width="50dp" android:layout_height="50dp"
+                                                      app:srcCompat="@drawable/icons8print100"
+                                                      tools:srcComact="@drawable/icons8print100"
+                                                      android:layout_marginTop="8dp"
+                                                      app:layout_constraintTop_toTopOf="parent"
+                                                      app:layout_constraintBottom_toBottomOf="parent"
+                                                      app:layout_constraintStart_toStartOf="parent"
+                                                      android:layout_marginLeft="32dp"
+                                                      android:layout_marginStart="32dp"/>
 <!--        <androidx.appcompat.widget.AppCompatImageView-->
 <!--                android:id="@+id/appCompatImageView"-->
 <!--                android:layout_width="75dp"-->

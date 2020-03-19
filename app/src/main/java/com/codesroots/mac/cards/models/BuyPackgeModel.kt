@@ -8,30 +8,28 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
-@Entity(tableName = "Buypackge")
-@Parcelize
 data class Buypackge (
-    var opno: Int? = null,
-    var salor: String? = null,
-    var time: String? = null,
-    var device: String? = null,
-    var name: String? = null,
-    var src: String? = null,
-    var price: String? = null,
-    var notes: String? = null,
-    var count: String? = null,
-    var err: String? = null,
-    var notesimg :String? = null,
 
+    val center: Center? = null,
     @Ignore
     var pencode:List<Pencode>? = null
 
-):Parcelable {
-    @PrimaryKey(autoGenerate = true)
-    var id : Int = 0
+) {
+
 
 
 }
+
+data class Center (
+    val packageID: Long? = null,
+    val userID: Long? = null,
+    val mobile: String? = null,
+    val centerID: Long? = null,
+    val created: String? = null,
+    val modified: String? = null,
+    val id: Long? = null,
+    val err:String? = null
+)
 
 data class LoginModel (
     val success: Boolean? = null,
@@ -39,7 +37,7 @@ data class LoginModel (
 )
 
 data class LoginData (
-    val userid: Long? = null,
+    val userid: Int? = null,
     val roomid: Long? = null,
     val email: String? = null,
     val mobile: Long? = null,

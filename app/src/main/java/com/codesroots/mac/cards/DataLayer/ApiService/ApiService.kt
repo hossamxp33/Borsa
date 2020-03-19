@@ -30,11 +30,11 @@ interface APIServices {
 
 
     @FormUrlEncoded
-    @POST("orders/add.json")/*{company_id}*/
+    @POST("users/adds.json")/*{company_id}*/
     fun BuyPackage(
         @Field("user_id") useris: String,
         @Field("package_id") packageid: String,
-        @Field("phone") phone: String
+        @Field("mobile") phone: String
 
         ):
             Observable<Buypackge>
