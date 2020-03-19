@@ -28,28 +28,11 @@ class Payment : AppCompatActivity() {
         setContentView(R.layout.activity_payment)
         val binding = DataBindingUtil.setContentView<ActivityPaymentBinding>(this, R.layout.activity_payment)
 
-        var extras = intent.extras
-        val value = extras!!.getParcelable<Buypackge>("myobj")
 
 
 
-        if (!value!!.pencode.isNullOrEmpty()) {
-
-            value!!.pencode!!.forEach {
-
-                secret.append(it.pencode)
-                secret.append("\n")
-                secret.text.toString()
 
 
-
-            }
-
-        }
-
-
-
-        binding.buy = value
     }
 
     override fun onBackPressed() {

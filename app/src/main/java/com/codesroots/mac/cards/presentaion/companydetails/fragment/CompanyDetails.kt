@@ -1,7 +1,5 @@
 package com.codesroots.mac.cards.presentaion.companydetails.fragment
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,19 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codesroots.mac.cards.R
-import com.codesroots.mac.cards.presentaion.IPosPrinterTestDemo
 
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.CompanyDetailsAdapter
 import kotlinx.android.synthetic.main.company_details.view.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.support.v4.runOnUiThread
-import java.io.IOException
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 class CompanyDetails  : Fragment() {
@@ -43,7 +34,6 @@ class CompanyDetails  : Fragment() {
             class.java
         )
         if (arguments != null) {
-            IPosPrinterTestDemo.getInstance().connectPrinterService(context)
             val packageId = arguments?.getString("packageId")
             viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
             viewModel.getPackageDetails(packageId!!)

@@ -28,9 +28,6 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.R
-import com.codesroots.mac.cards.db.CardDao
-import com.codesroots.mac.cards.db.CardDatabase
-import com.codesroots.mac.cards.models.Buypackge
 
 import com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetails
 import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
@@ -61,7 +58,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        IPosPrinterTestDemo.getInstance().connectPrinterService(this)
         PreferenceHelper(this)
         // Create messages
         Fabric.with(this,  Crashlytics());
@@ -182,47 +178,18 @@ class ClickHandler {
                 viewmodel.BuyPackageResponseLD?.observe(context, Observer {
 
 
-                    if (it.err != null) {
-                        it.err!!.snack((context as MainActivity).window.decorView.rootView)
-                        dialogView.err.text = it.err
+                    if (it.center!!.err != null) {
+                        it.center!!.err!!.snack((context as MainActivity).window.decorView.rootView)
+                        dialogView.err.text = it.center!!.err
                         dialogView.err.isGone = false
                     } else {
-                        if (!it!!.pencode.isNullOrEmpty()) {
 
-                            Glide.with(context as MainActivity)
-                                .asBitmap()
-                                .load("http://across-cities.com/"+it.src)
-                                .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                    override fun onResourceReady(resourcee: Bitmap, transition: Transition<in Bitmap>?) {
+                        if (it!!.center!!.id != null) {
+                            val homeIntent = Intent(context, Payment::class.java)
 
 
-                                        Glide.with(context as MainActivity)
-                                            .asBitmap()
-                                            .load("http://across-cities.com/"+it.notesimg)
-                                            .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                                                    try {
+                            (context as MainActivity).startActivity(homeIntent)
 
-                                                        IPosPrinterTestDemo.getInstance().printText(it,resourcee,resource);
-
-                                                        val homeIntent = Intent(context, Payment::class.java)
-
-                                                        homeIntent.putExtra("myobj", it)
-
-                                                        (context as MainActivity).startActivity(homeIntent)
-
-                                                    } catch (e: IOException) {
-                                                        // handle exception
-                                                    }
-
-
-                                                }
-                                            })
-                                    }
-                                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                                        // handle exception
-                                    }
-                                })
 
                         }
 
@@ -233,112 +200,6 @@ class ClickHandler {
         }
     }
 
-
-
-
-    fun ShowReport(context: Context,id:String) {
-
-        lateinit var viewModel: MainViewModel
-        val auth = PreferenceHelper.getToken()
-        viewModel =   ViewModelProviders.of(( context as MainActivity)).get(MainViewModel::class.java)
-        viewModel.PrintReport(id,auth!!)
-        if (viewModel.BuyPackageResponseLD?.hasObservers() == false) {
-
-            viewModel.BuyPackageResponseLD?.observe(context, Observer {
-                if (it.err != null) {
-                    it.err!!.snack((context as MainActivity).window.decorView.rootView)
-
-
-                } else {
-                    if (!it!!.pencode.isNullOrEmpty()) {
-
-
-                        Glide.with(context as MainActivity)
-                            .asBitmap()
-                            .load("http://across-cities.com/" + it.src)
-                            .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                                    try {
-
-                                        val homeIntent = Intent(context, Payment::class.java)
-
-                                        homeIntent.putExtra("myobj", it)
-
-                                        (context as MainActivity).startActivity(homeIntent)
-
-                                    } catch (e: IOException) {
-                                        // handle exception
-                                    }
-                                }
-
-                                override fun onLoadFailed(errorDrawable: Drawable?) {
-                                    // handle exception
-                                }
-                            })
-                    }
-                }
-            })
-        }
-
-    }
-    fun PrintReport(context: Context,id:String) {
-
-        lateinit var viewModel: MainViewModel
-
-        val auth = PreferenceHelper.getToken()
-        viewModel =   ViewModelProviders.of(( context as MainActivity)).get(MainViewModel::class.java)
-        viewModel.PrintReport(id,auth!!)
-        if (viewModel.BuyPackageResponseLD?.hasObservers() == false) {
-
-            viewModel.BuyPackageResponseLD?.observe(context, Observer {
-                if (it.err != null) {
-                    it.err!!.snack((context as MainActivity).window.decorView.rootView)
-
-
-                } else {
-                    if (!it!!.pencode.isNullOrEmpty()) {
-
-
-                        Glide.with(context as MainActivity)
-                            .asBitmap()
-                            .load("http://across-cities.com/"+it.src)
-                            .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                override fun onResourceReady(resourcee: Bitmap, transition: Transition<in Bitmap>?) {
-
-
-                                    Glide.with(context as MainActivity)
-                                        .asBitmap()
-                                        .load("http://across-cities.com/"+it.notesimg)
-                                        .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                                                try {
-
-                                                    IPosPrinterTestDemo.getInstance().printText(it,resourcee,resource);
-
-                                                    val homeIntent = Intent(context, Payment::class.java)
-
-                                                    homeIntent.putExtra("myobj", it)
-
-                                                    (context as MainActivity).startActivity(homeIntent)
-
-                                                } catch (e: IOException) {
-                                                    // handle exception
-                                                }
-
-
-                                            }
-                                        })
-                                }
-                                override fun onLoadFailed(errorDrawable: Drawable?) {
-                                    // handle exception
-                                }
-                            })
-                    }
-                }
-            })
-        }
-
-    }
 
 
 

@@ -18,7 +18,6 @@
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:onClick="@{() -> listener.ShowReport(Context,data.opno)}"
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
             android:background="@color/white"
@@ -68,7 +67,6 @@
                                                       app:layout_constraintBottom_toBottomOf="parent"
                                                       app:layout_constraintStart_toStartOf="parent"
                                                       android:layout_marginLeft="32dp"
-                                                      android:onClick="@{() -> listener.PrintReport(Context,data.opno)}"
                                                       android:layout_marginStart="32dp"/>
 <!--        <androidx.appcompat.widget.AppCompatImageView-->
 <!--                android:id="@+id/appCompatImageView"-->

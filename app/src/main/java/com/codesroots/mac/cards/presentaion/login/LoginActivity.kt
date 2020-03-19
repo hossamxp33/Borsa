@@ -49,6 +49,7 @@ viewModel.Login(etUsername.text.toString(),etPassword.text.toString())
         it.message!!.snack(window.decorView.rootView)
     }else {
        PreferenceHelper.setToken(it.token,this)
+        PreferenceHelper.setUserId(it.userid!!)
 
         startActivity(Intent(this, MainActivity::class.java))
     }
