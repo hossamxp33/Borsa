@@ -1,83 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-        xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/layout"
->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/card_background"
+        android:layoutDirection="rtl"
+        android:padding="5dp">
 
-    <data>
 
-        <variable
-                name="Context"
-                type="com.codesroots.mac.cards.presentaion.MainActivity"/>
-        <variable
-                name="listener"
-                type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
-        <variable
-                name="data"
-                type="com.codesroots.mac.cards.models.ReportDaily"/>
-
-    </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
+    <TextView
+            android:id="@+id/tvUnpaid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@color/white"
-            android:layout_height="wrap_content">
+            android:ems="2"
+            android:lineSpacingExtra="0.3dp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="40000000"
+            android:textColor="@color/darkgreen"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/btnProducts"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toEndOf="@+id/tvPreviousText"
+            app:layout_constraintTop_toBottomOf="@+id/tvNameP"
+            app:layout_constraintWidth_percent="0.15" />
 
-        <TextView android:layout_width="0dp"
-                  android:textSize="18dp"
-                  android:id="@+id/name"
-                  android:textColor="@color/black"
-                  android:textStyle="bold"
-                  android:text="@{data.opno}"
-                  android:layout_height="wrap_content"
-                  android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
-                  android:layout_marginRight="16dp" android:layout_marginTop="16dp"
-                  app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+            android:id="@+id/tvPreviousText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@color/white"
+            android:paddingStart="1dp"
+            android:text=" مستحقات سابقة :"
+            android:textColor="@color/darkgreen"
+
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toEndOf="@+id/tvTotalPrice"
+            app:layout_constraintTop_toTopOf="@+id/tvTotalPrice"
+            app:layout_constraintWidth_percent="0.22"
+            android:layout_marginLeft="8dp"
+            android:paddingLeft="1dp" />
+
+    <TextView
+            android:id="@+id/tvTotalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/white"
+            android:paddingStart="1dp"
+            android:text="4000"
+            android:textColor="@color/darkgreen"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toEndOf="@+id/tvMessageC"
+            app:layout_constraintTop_toBottomOf="@+id/tvNameP"
+            app:layout_constraintWidth_percent="0.15"
+            android:layout_marginLeft="4dp"
+            android:paddingLeft="1dp" />
+
+    <androidx.cardview.widget.CardView
+
+            app:cardElevation="3dp"
+
+            app:cardUseCompatPadding="true"
+            android:id="@+id/ivProfileP"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.25">
+
+        <ImageView
+                android:id="@+id/ivProfilePe"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.25"
+                app:srcCompat="@drawable/delivery_concept" />
+
+    </androidx.cardview.widget.CardView>
 
 
-        <TextView android:layout_width="0dp"
-                  app:layout_constraintTop_toBottomOf="@+id/name"
-                  android:text="@{data.amount}"
-                  android:layout_marginTop="5dp"
-                  android:gravity="right"
-                  android:textColor="@color/red"
-                  android:id="@+id/discount"
-                  android:textSize="14sp"
-                  android:layout_height="wrap_content" android:layout_marginEnd="8dp"
-                  app:layout_constraintEnd_toEndOf="@+id/name" android:layout_marginRight="8dp"/>
+
+    <TextView
+            android:id="@+id/tvNameP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="start|center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+
+            android:singleLine="true"
+            android:text=" شركة البشرى للخدمات الطبية "
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ivProfileP"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.45" />
 
 
-        <TextView android:layout_width="0dp"
-                  app:layout_constraintTop_toTopOf="@+id/name"
-                  android:text="@{data.opdate}"
-                  android:layout_marginTop="5dp"
-                  android:textColor="#726868"
-                  android:id="@+id/time"
-                  android:textSize="14sp"
+    <TextView
+            android:id="@+id/tvMessageC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/white"
+            android:paddingStart="1dp"
+            android:text="ثمن الطلبية :"
+            android:textColor="@color/darkgreen"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toEndOf="@+id/ivProfileP"
+            app:layout_constraintTop_toBottomOf="@+id/tvNameP"
+            app:layout_constraintWidth_percent="0.15"
+            android:layout_marginLeft="6dp"
+            android:paddingLeft="1dp" />
 
-                  android:layout_height="wrap_content"
-                  app:layout_constraintEnd_toStartOf="@+id/name" android:layout_marginRight="32dp"
-                  android:layout_marginEnd="32dp"/>
+    <TextView
+            android:id="@+id/tvDatetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:gravity="bottom|start"
+            android:paddingStart="1dp"
+            android:text="تاريخ التسليم :"
+            android:textColor="@color/darkred"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMessageC"
+            app:layout_constraintWidth_percent="0.3"
+            android:layout_marginLeft="8dp"
+            android:paddingLeft="1dp" />
 
-        <androidx.appcompat.widget.AppCompatImageView android:layout_width="50dp" android:layout_height="50dp"
-                                                      app:srcCompat="@drawable/icons8print100"
-                                                      tools:srcComact="@drawable/icons8print100"
-                                                      android:layout_marginTop="8dp"
-                                                      app:layout_constraintTop_toTopOf="parent"
-                                                      app:layout_constraintBottom_toBottomOf="parent"
-                                                      app:layout_constraintStart_toStartOf="parent"
-                                                      android:layout_marginLeft="32dp"
-                                                      android:layout_marginStart="32dp"/>
-<!--        <androidx.appcompat.widget.AppCompatImageView-->
-<!--                android:id="@+id/appCompatImageView"-->
-<!--                android:layout_width="75dp"-->
-<!--                android:layout_height="75dp"-->
-<!--                android:layout_marginEnd="16dp"-->
-<!--                android:layout_marginRight="16dp"-->
-<!--                app:imageResource="@{data.cardname != `` &amp;&amp;  data.cardname != null ? `images/`+data.logo : `1` }"-->
-<!--                app:layout_constraintBottom_toTopOf="@+id/time"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+            android:id="@+id/tvDateP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
 
-</layout>
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:gravity="bottom|start"
+            android:text="2018 / 10 / 15"
+            android:textColor="@color/darkred"
+            android:textDirection="ltr"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toEndOf="@+id/tvDatetext"
+            app:layout_constraintTop_toBottomOf="@+id/tvMessageC"
+            app:layout_constraintWidth_percent="0.3"
+            android:layout_marginLeft="6dp" />
+
+    <ImageView
+            android:id="@+id/ivLocationP"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.08"
+            app:srcCompat="@drawable/location" />
+
+    <ImageView
+            android:id="@+id/ivCallP"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toStartOf="@id/ivLocationP"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.08"
+            app:srcCompat="@drawable/call" />
+
+    <Button
+            android:id="@+id/btnProducts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_back"
+            tools:ignore="MissingPrefix"
+            fontPath="fonts/URWGeometricArabic_Regular.ttf"
+            android:text="المنتجات"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintTop_toBottomOf="@+id/tvPreviousText"
+            app:layout_constraintWidth_percent="0.3"
+            android:layout_marginRight="8dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
