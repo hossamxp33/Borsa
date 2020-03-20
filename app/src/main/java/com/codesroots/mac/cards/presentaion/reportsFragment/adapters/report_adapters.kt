@@ -8,11 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.databinding.ReportItemBinding
-import com.codesroots.mac.cards.models.Product
+import com.codesroots.mac.cards.models.Report
 import com.codesroots.mac.cards.presentaion.ClickHandler
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
-class report_adapters ( var viewModel: MainViewModel,var context :Context?,var data:List<Product>) : RecyclerView.Adapter<CustomViewHolder>() {
+class report_adapters ( var viewModel: MainViewModel,var context :Context?,var data:List<Report>) : RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
 
         return  data.size
@@ -47,11 +47,11 @@ class CustomViewHolder (
     fun bind(
         viewModel:MainViewModel,
         context: Context?,
-        data: Product
+        data: Report
     ) {
 
         binding.listener = ClickHandler()
-      //  binding.data = data
+        binding.data = data
         binding.context = context as MainActivity?
     }
 

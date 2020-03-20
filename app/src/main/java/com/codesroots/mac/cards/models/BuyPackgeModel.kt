@@ -10,9 +10,8 @@ import kotlinx.android.parcel.RawValue
 
 data class Buypackge (
 
-    val center: Center? = null,
-    @Ignore
-    var pencode:List<Pencode>? = null
+    val center: Center? = null
+
 
 ) {
 
@@ -56,11 +55,11 @@ data class MyBalance (
 
 
 data class ReportDaily (
-    val data: List<Product>
+    val orders: List<Report>
 )
 
 
-data class Product (
+data class Report (
     val id: Long,
     @SerializedName("package_id")
     val packageID: Long,
@@ -83,18 +82,7 @@ data class Centers (
 )
 
 
-@Entity(tableName = "pencode")
-@Parcelize
-data class Pencode (
-    val pencode: String? = null,
-    val expdate: String? = null,
-    val serial: String? = null,
-    var buypackageid: Int
 
-):Parcelable {
-    @PrimaryKey(autoGenerate = true)
-    var id : Int = 0
-}
 
 data class Terms (
     val headline: String,
