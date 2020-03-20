@@ -43,7 +43,7 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
             .map { data -> data }
             .subscribe(
                 { books ->
-                    livedata?.postValue(books.data)
+                    livedata?.postValue(books.companies)
                 },
                 { error ->
 
@@ -62,7 +62,7 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
             .map { data -> data }
             .subscribe(
                 { books ->
-                    livedata?.postValue(books.data)
+                    livedata?.postValue(books.companies)
                 },
                 { error ->
 
