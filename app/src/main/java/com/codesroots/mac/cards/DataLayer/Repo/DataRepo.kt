@@ -107,7 +107,7 @@ print(error)
     @SuppressLint("CheckResult")
     fun GetMyDeialyReport(
         auth:String,
-        livedata: MutableLiveData<List<Product>>?
+        livedata: MutableLiveData<List<Report>>?
     ) {
 
         getServergetway().GetMyDeialyReport()
@@ -128,7 +128,7 @@ print(error)
         auth:String,
         from:String,
         to:String,
-        livedata: MutableLiveData<List<Product>>?
+        livedata: MutableLiveData<List<Report>>?
     ) {
 
         getServergetway().GetMyDeialyReport(auth,from+","+to)
