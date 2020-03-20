@@ -5,7 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class CompanyData (
     val success: Boolean? = null,
-    val data: List<CompanyDatum>? = null
+    val companies: List<CompanyDatum>? = null,
+    var usercredit:Float? = null
+
 )
 
 
@@ -20,5 +22,5 @@ data class CompanyDatum (
     val code: String? = null,
     val created: String? = null,
     @SerializedName("company_id")
-    val companyID: Long
+    val companyID: Long? = null
 )
