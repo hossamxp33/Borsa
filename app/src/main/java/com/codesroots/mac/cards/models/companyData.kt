@@ -6,7 +6,10 @@ import com.google.gson.annotations.SerializedName
 data class CompanyData (
     val success: Boolean? = null,
     val companies: List<CompanyDatum>? = null,
+    val data: List<CompanyDatum>? = null,
+
     var usercredit:Float? = null
+
 
 )
 
