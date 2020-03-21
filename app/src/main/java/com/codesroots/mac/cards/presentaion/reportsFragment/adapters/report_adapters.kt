@@ -8,20 +8,21 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.databinding.ReportItemBinding
+import com.codesroots.mac.cards.models.Packagess
 import com.codesroots.mac.cards.models.Report
 import com.codesroots.mac.cards.presentaion.ClickHandler
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
-class report_adapters ( var viewModel: MainViewModel,var context :Context?,var data:List<Report>) : RecyclerView.Adapter<CustomViewHolder>() {
+class report_adapters ( var viewModel: MainViewModel,var context :Context?,var data: Packagess) : RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
 
-        return  data.size
+        return  5
 
     }
 
     override fun onBindViewHolder(p0: CustomViewHolder, p1: Int) {
 
-        p0.bind(viewModel,context,data.get(p1))
+        p0.bind(viewModel,context,data)
 
     }
 
@@ -47,7 +48,7 @@ class CustomViewHolder (
     fun bind(
         viewModel:MainViewModel,
         context: Context?,
-        data: Report
+        data: Packagess
     ) {
 
         binding.listener = ClickHandler()

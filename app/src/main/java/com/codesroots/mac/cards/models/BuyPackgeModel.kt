@@ -9,10 +9,7 @@ import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
 data class Buypackge (
-
     val center: Center? = null
-
-
 ) {
 
 
@@ -73,7 +70,7 @@ data class Report (
     val mobile: String,
     val center: Centers,
     @SerializedName("package")
-    val productPackage: Package
+    val productPackage: Packagess
 )
 
 data class Centers (
@@ -90,4 +87,13 @@ data class Terms (
     val mobile: String,
     val email: String,
     val fb: String
+)
+
+data class Packagess (
+    val id: Long,
+    val name: String,
+    @SerializedName("company_id")
+    val companyID: Long,
+    val price: Long,
+    val photo: String
 )

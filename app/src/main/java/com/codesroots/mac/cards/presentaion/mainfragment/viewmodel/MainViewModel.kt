@@ -28,7 +28,7 @@ class MainViewModel : ViewModel() {
     var MyBalanceResponseLD : MutableLiveData<MyBalance>? = null
     var SliderDataResponseLD : MutableLiveData<List<SliderElement>>? = null
     var BuyPackageResponseLD : MutableLiveData<Buypackge>? = null
-    var ReportDailyResponseLD : MutableLiveData<List<Report>>? = null
+    var ReportDailyResponseLD : MutableLiveData<Packagess>? = null
     var ReportHistroyResponseLD : MutableLiveData<List<ReportDaily>>? = null
 
     init {
