@@ -13,16 +13,16 @@ import com.codesroots.mac.cards.models.Report
 import com.codesroots.mac.cards.presentaion.ClickHandler
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
-class report_adapters ( var viewModel: MainViewModel,var context :Context?,var data: Packagess) : RecyclerView.Adapter<CustomViewHolder>() {
+class report_adapters ( var viewModel: MainViewModel,var context :Context?,var data: List<Report>) : RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
 
-        return  5
+        return  data.size
 
     }
 
     override fun onBindViewHolder(p0: CustomViewHolder, p1: Int) {
 
-        p0.bind(viewModel,context,data)
+        p0.bind(viewModel,context,data[p1])
 
     }
 
@@ -48,7 +48,7 @@ class CustomViewHolder (
     fun bind(
         viewModel:MainViewModel,
         context: Context?,
-        data: Packagess
+        data: Report
     ) {
 
         binding.listener = ClickHandler()

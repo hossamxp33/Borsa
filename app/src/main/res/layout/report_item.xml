@@ -14,7 +14,7 @@
                 type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
         <variable
                 name="data"
-                type="com.codesroots.mac.cards.models.Packagess"/>
+                type="com.codesroots.mac.cards.models.Report"/>
 
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -130,7 +130,7 @@
             android:scrollHorizontally="true"
 
             android:singleLine="true"
-            android:text="@{data.name}"
+            android:text="@{data.productPackage.name}"
             android:textColor="@color/black"
             android:textSize="12dp"
             android:textStyle="bold"
@@ -187,7 +187,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:gravity="bottom|start"
-            android:text="@{data.name}"
+            android:text="@{data.productPackage.name}"
             android:textColor="@color/darkred"
             android:textDirection="ltr"
             android:textSize="12sp"

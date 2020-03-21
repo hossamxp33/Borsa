@@ -47,11 +47,11 @@ interface APIServices {
             Observable<SliderData>
     @GET("orders/dailyreportproducts.json")/*{company_id}*/
     fun GetMyDeialyReport():
-            Observable<Packagess>
+            Observable<ReportDaily>
 
     @GET("orders/dailyreportproducts.json")/*{company_id}*/
     fun GetMyDeialyReport(@Query("auth") auth: String, @Query("val") fromto:String):
-            Observable<Packagess>
+            Observable<ReportDaily>
     @GET("wserv?page=15")/*{company_id}*/
     fun GetTerms():
             Observable<Terms>
