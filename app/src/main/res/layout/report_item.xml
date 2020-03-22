@@ -78,7 +78,7 @@
             android:layout_marginTop="12dp"
             android:background="@color/white"
             android:paddingStart="1dp"
-            android:text="4000"
+            android:text="@{data.productPackage.price}"
             android:textColor="@color/darkgreen"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -90,22 +90,20 @@
             android:paddingLeft="1dp" />
 
     <androidx.cardview.widget.CardView
-
             app:cardElevation="3dp"
-
             app:cardUseCompatPadding="true"
             android:id="@+id/ivProfileP"
             android:layout_width="0dp"
             android:layout_height="75dp"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.25">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivProfilePe"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
+                app:imageResourcee="@{data.productPackage.photo}"
 
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"

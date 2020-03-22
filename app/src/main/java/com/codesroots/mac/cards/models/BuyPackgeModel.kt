@@ -94,6 +94,22 @@ data class Packagess (
     val name: String,
     @SerializedName("company_id")
     val companyID: Long,
-    val price: Long,
-    val photo: String
+    val price: String,
+    val photo:String? = null
+)
+data class ReportMonthly (
+    val products: List<Product>
+)
+data class Product (
+    val id: Long,
+    @SerializedName("package_id")
+    val packageID: Long,
+    @SerializedName("user_id")
+    val userID: Long,
+    @SerializedName("center_id")
+    val centerID: Long,
+    val created: String,
+    val modified: String,
+    val approve: Long,
+    val mobile: String
 )
