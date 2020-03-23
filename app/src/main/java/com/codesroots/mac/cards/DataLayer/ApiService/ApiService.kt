@@ -49,7 +49,7 @@ interface APIServices {
     fun GetMyDeialyReport():
             Observable<ReportDaily>
 
-    @GET("orders/dailyreportproducts.json")/*{company_id}*/
+    @GET("orders/reportproducts.json")/*{company_id}*/
     fun GetMyDeialyReport(@Query("auth") auth: String, @Query("val") fromto:String):
             Observable<ReportDaily>
     @GET("wserv?page=15")/*{company_id}*/
