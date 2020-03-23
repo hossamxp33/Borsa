@@ -185,7 +185,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:gravity="bottom|start"
-            android:text="@{data.productPackage.name}"
+            android:text="@{data.modified}"
             android:textColor="@color/darkred"
             android:textDirection="ltr"
             android:textSize="12sp"

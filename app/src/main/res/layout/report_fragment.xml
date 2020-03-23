@@ -21,7 +21,7 @@
                 android:id="@+id/img"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="عبر المدن"
+                android:text="Credit"
                 android:textSize="25dp"
                 android:textColor="@color/black"
                 android:scaleType="fitXY"
