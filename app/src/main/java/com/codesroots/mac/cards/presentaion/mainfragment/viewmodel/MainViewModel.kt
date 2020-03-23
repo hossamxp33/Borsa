@@ -1,5 +1,6 @@
 package com.codesroots.mac.cards.presentaion.mainfragment.viewmodel
 
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +11,8 @@ import com.codesroots.mac.cards.models.*
 import com.codesroots.mac.firstkotlon.DataLayer.Repo.DataRepo
 
 import io.reactivex.disposables.CompositeDisposable
+import java.text.SimpleDateFormat
+import java.util.*
 
 @BindingAdapter("app:imageResource")
 fun setImageResource(imageView: AppCompatImageView, resource: String?) {
@@ -18,6 +21,22 @@ fun setImageResource(imageView: AppCompatImageView, resource: String?) {
 @BindingAdapter("app:imageResourcee")
 fun setImageResourcee(imageView: AppCompatImageView, resource: String?) {
     Glide.with(imageView.context).load(resource).into(imageView)
+}
+@BindingAdapter("app:datetext")
+fun setDatetext(text:TextView,resource: String?) {
+
+    val myFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+
+    val dateObj: Date
+
+    dateObj = myFormat.parse(resource)
+    val timestamp = dateObj.getTime().toString()//  //Example -> in ms
+    val fromServer = SimpleDateFormat("yyyy-MM-dd")
+    val dateString = fromServer.format(Date(java.lang.Long.parseLong(timestamp)))
+
+
+    text.text = dateString
+
 }
 class MainViewModel : ViewModel() {
 
@@ -30,12 +49,15 @@ class MainViewModel : ViewModel() {
     var BuyPackageResponseLD : MutableLiveData<Buypackge>? = null
     var ReportDailyResponseLD : MutableLiveData<List<Report>>? = null
     var ReportHistroyResponseLD : MutableLiveData<List<ReportDaily>>? = null
+    var EditResponseLD : MutableLiveData<EditOrder>? = null
 
     init {
         CompanyResponseLD = MutableLiveData()
         BuyPackageResponseLD = MutableLiveData()
         MyBalanceResponseLD = MutableLiveData()
         SliderDataResponseLD = MutableLiveData()
+        EditResponseLD = MutableLiveData()
+
         ReportDailyResponseLD = MutableLiveData()
         ReportHistroyResponseLD = MutableLiveData()
         mCompositeDisposable  = CompositeDisposable()
@@ -53,7 +75,11 @@ class MainViewModel : ViewModel() {
     fun getPackageDetails(id:String){
         DateRepoCompnay.GetPackageDetails(id,CompanyResponseLD)
     }
+    fun EditOrder(id:Long){
 
+        DateRepoCompnay.EditOrder(id,EditResponseLD)
+
+    }
 
     fun BuyPackage(id:String,phone:String){
 

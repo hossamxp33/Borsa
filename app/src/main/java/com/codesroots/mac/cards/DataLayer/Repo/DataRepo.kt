@@ -104,6 +104,21 @@ print(error)
                 }
             )
     }
+    fun EditOrder(id:Long,livedata: MutableLiveData<EditOrder>?) {
+
+        getServergetway().EditOrder("1",id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+
+                }
+            )
+    }
     @SuppressLint("CheckResult")
     fun GetMyDeialyReport(
         auth:String,
@@ -131,7 +146,7 @@ print(error)
         livedata: MutableLiveData<List<Report>>?
     ) {
 
-        getServergetway().GetMyDeialyReport(auth,from+","+to)
+        getServergetway().GetDatesReport(from,to)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { data -> data }
@@ -162,22 +177,7 @@ print(error)
             )
     }
 
-    @SuppressLint("CheckResult")
-    fun GetContactData(livedata: MutableLiveData<Terms>?) {
 
-        getServergetway().GetContactData()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books)
-                },
-                { error ->
-                    print(error)
-                }
-            )
-    }
     @SuppressLint("CheckResult")
     fun GetPartnersData(livedata: MutableLiveData<List<PartnersModel>>?) {
 

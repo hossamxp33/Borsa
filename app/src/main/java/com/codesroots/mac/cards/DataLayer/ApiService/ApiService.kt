@@ -48,16 +48,32 @@ interface APIServices {
     @GET("orders/dailyreportproducts.json")/*{company_id}*/
     fun GetMyDeialyReport():
             Observable<ReportDaily>
-
-    @GET("orders/reportproducts.json")/*{company_id}*/
+    @GET("orders/getOrderForCenter.json")/*{company_id}*/
+    fun GetCenterOrder():
+            Observable<ReportDaily>
+    @GET("orders/dailyreportproducts.json")/*{company_id}*/
     fun GetMyDeialyReport(@Query("auth") auth: String, @Query("val") fromto:String):
             Observable<ReportDaily>
+
+
+    @FormUrlEncoded
+    @POST("orders/reportproducts.json")/*{company_id}*/
+    fun GetDatesReport(       @Field("start") start: String,
+                              @Field("end") end: String):
+            Observable<ReportDaily>
+
+
+
     @GET("wserv?page=15")/*{company_id}*/
     fun GetTerms():
             Observable<Terms>
-    @GET("wserv?page=14")/*{company_id}*/
-    fun GetContactData():
-            Observable<Terms>
+
+
+    @FormUrlEncoded
+    @POST("orders/edit/{order_id}.json")/*{company_id}*/
+    fun EditOrder(        @Field("approve") approve: String,
+                          @Path("order_id") order_id: Long):
+            Observable<EditOrder>
 
     @GET("wserv?page=16")/*{company_id}*/
     fun GetPartnersData():

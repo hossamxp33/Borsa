@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
+import org.jetbrains.anko.db.NULL
 
 data class Buypackge (
     val center: Center? = null
@@ -15,6 +16,11 @@ data class Buypackge (
 
 
 }
+
+data class EditOrder (
+    val success: Boolean? = null,
+    val data: List<Any?>? = null
+)
 
 data class Center (
     val packageID: Long? = null,
@@ -52,7 +58,9 @@ data class MyBalance (
 
 
 data class ReportDaily (
-    val orders: List<Report>
+    val orders: List<Report>?= null,
+    val myorders: Report?= null
+
 )
 
 
@@ -94,6 +102,7 @@ data class Packagess (
     val name: String,
     @SerializedName("company_id")
     val companyID: Long,
+    var company:CompanyDatum?=null,
     val price: String,
     val photo:String? = null
 )
