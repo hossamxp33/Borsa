@@ -6,10 +6,7 @@ import com.codesroots.mac.cards.models.PartnersModel
 import com.codesroots.mac.cards.models.Terms
 import com.codesroots.mac.firstkotlon.DataLayer.Repo.DataRepo
 
-
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 class ContactViewModel() : ViewModel() {
 
@@ -21,25 +18,30 @@ class ContactViewModel() : ViewModel() {
 
     private val mCompositeDisposable = CompositeDisposable()
 //
+
     init {
     contactMutableLiveData = MutableLiveData()
     PartnersMutableLiveData = MutableLiveData()
 
-}
 
+}
 
      fun getTermsData() {
         DateRepoCompnay.GetTermsData(contactMutableLiveData)
     }
 
     fun getContactData() {
+
         DateRepoCompnay.GetContactData(contactMutableLiveData)
+
     }
     fun getPartnersData() {
         DateRepoCompnay.GetPartnersData(PartnersMutableLiveData)
     }
+
     override fun onCleared() {
         super.onCleared()
         mCompositeDisposable.clear()
     }
+
 }

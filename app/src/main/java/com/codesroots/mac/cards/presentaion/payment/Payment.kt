@@ -1,13 +1,16 @@
 package com.codesroots.mac.cards.presentaion.payment
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.library.baseAdapters.BR.context
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.databinding.ActivityPaymentBinding
 import com.codesroots.mac.cards.models.Buypackge
+import com.codesroots.mac.cards.presentaion.MainActivity
 
 import kotlinx.android.synthetic.main.activity_payment.*
 import java.io.IOException
@@ -29,10 +32,10 @@ class Payment : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityPaymentBinding>(this, R.layout.activity_payment)
 
 
-
-
-
-
+        home.setOnClickListener {
+                    val homeIntent = Intent(this, MainActivity::class.java)
+                                       (context as MainActivity).startActivity(homeIntent)
+        }
     }
 
     override fun onBackPressed() {
