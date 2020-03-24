@@ -21,7 +21,6 @@ import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.report_adap
 import com.codesroots.mac.cards.presentaion.snack
 import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.android.synthetic.main.main_fragment.lastvalue
-import kotlinx.android.synthetic.main.main_fragment.value
 import kotlinx.android.synthetic.main.main_fragment.view.recyler
 import kotlinx.android.synthetic.main.report_fragment.*
 import kotlinx.android.synthetic.main.report_fragment.view.*

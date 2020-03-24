@@ -51,16 +51,18 @@ class mainFragment  : Fragment(){
             MainAdapter = MainAdapter( viewModel,context,it)
             view.recyler.layoutManager = GridLayoutManager(context,2)
             view.recyler.adapter = MainAdapter;
-            view.textView11.typeface = typeface
+
             view.textView5.typeface = typeface
             view.lastvalue.typeface = typeface
 
-            view.value.typeface = typeface
+
 
         })
         viewModel.MyBalanceResponseLD?.observe(this , Observer {
 
-            view.myBalance = it
+            lastvalue.append(it.usercredit.toString())
+            lastvalue.append("\n")
+            lastvalue.text.toString()
         })
         viewModel.SliderDataResponseLD?.observe(this , Observer {
 

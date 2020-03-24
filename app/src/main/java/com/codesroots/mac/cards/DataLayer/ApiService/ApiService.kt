@@ -19,7 +19,7 @@ interface APIServices {
     fun GetCompanyData(@Query("auth") auth: String):
             Observable<CompanyData>
 
-    @POST("wserv?page=12")/*{company_id}*/
+    @POST("Companies.json")/*{company_id}*/
     fun GetMyBlanceData(@Query("auth") auth: String):
             Observable<MyBalance>
 

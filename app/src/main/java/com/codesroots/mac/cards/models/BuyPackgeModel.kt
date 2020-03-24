@@ -45,8 +45,17 @@ data class LoginData (
     )
 
 data class MyBalance (
-    val account: String? = null,
-    val commession: String? = null
+    val companies: List<Company>,
+    val usercredit: Int? = null
+)
+
+
+data class Company (
+    val id: Long,
+    val name: String,
+    val logo: String,
+    val code: String,
+    val created: String
 )
 
 
