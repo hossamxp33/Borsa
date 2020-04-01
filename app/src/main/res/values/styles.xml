@@ -7,6 +7,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/flat</item>
     </style>
 
 
@@ -14,11 +15,13 @@
     <style name="NoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="android:fontFamily">@font/flat</item>
 
 
     </style>
 
     <style name="edittextStyle" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:fontFamily">@font/flat</item>
 
         <item name="android:textColorHint">@color/black</item>
         <item name="android:textCursorDrawable">@color/colorPrimary</item>
@@ -26,6 +29,7 @@
     <style name="dialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/black</item>
+        <item name="android:fontFamily">@font/flat</item>
 
         <item name="android:textColorHint">@color/black</item>
 
@@ -34,12 +38,15 @@
 
     </style>
     <style name="edittextStyleChat" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:fontFamily">@font/flat</item>
 
         <item name="android:textColorHint">@color/gray</item>
         <item name="android:textCursorDrawable">@color/colorPrimary</item>
     </style>
 
     <style name="TextAppearance.FontPath" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/flat</item>
+
         <!-- Custom Attr-->
     </style>
 

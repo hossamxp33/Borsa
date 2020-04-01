@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,7 +18,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isGone
+import androidx.databinding.library.baseAdapters.BR.context
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.room.Room
@@ -41,6 +44,7 @@ import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.alert_add_reserve.view.*
+import kotlinx.android.synthetic.main.company_details_item.*
 import kotlinx.android.synthetic.main.terms_layout.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -57,10 +61,20 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         println("onressomes")
     }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         PreferenceHelper(this)
+
+
+
+
+
+        val typeface = ResourcesCompat.getFont(this, R.font.fonts)
+
+
         // Create messages
         Fabric.with(this,  Crashlytics());
         //Crashlytics.getInstance().crash() // Force a crash
@@ -68,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         val item1 = AHBottomNavigationItem(
             R.string.tab_1,
             R.drawable.house_outline, R.color.signinpurple
+
         )
         val item2 = AHBottomNavigationItem(
             R.string.tab_2,
@@ -81,6 +96,7 @@ class MainActivity : AppCompatActivity() {
 
         with(bottom_navigation) {
             addItems(listOf(item2, item1,item3))
+
             inactiveColor = ContextCompat.getColor(context ,R.color.gray )
             accentColor  =  ContextCompat.getColor(context ,R.color.signinpurple )
 

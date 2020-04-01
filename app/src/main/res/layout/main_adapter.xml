@@ -48,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/company_name_bg"
+                android:fontFamily="@font/fonts"
                 android:gravity="center"
                 android:padding="7dp"
                 android:text="@{data.name}"

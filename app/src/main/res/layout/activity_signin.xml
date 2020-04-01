@@ -52,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/textlines"
+                android:fontFamily="@font/fonts"
                 android:gravity="center"
                 android:hint=" اسم المستخدم "
                 android:inputType="text"
@@ -72,6 +73,7 @@
                 android:layout_marginTop="24dp"
                 android:autoSizeTextType="uniform"
                 android:background="@drawable/textlines"
+                android:fontFamily="@font/fonts"
                 android:gravity="center"
                 android:hint=" كلمة المرور "
                 android:inputType="textPassword"
@@ -93,18 +95,18 @@
                 android:layout_marginTop="15dp"
                 android:autoSizeMaxTextSize="18dp"
                 android:background="@drawable/loginback"
+                android:fontFamily="@font/flat"
                 android:gravity="center"
                 android:inputType="text"
-                android:text="تسجيل الدخول"
 
+                android:text="تسجيل الدخول"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.08"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etPassword"
-                app:layout_constraintWidth_percent="0.5"
 
-                />
+                app:layout_constraintWidth_percent="0.5" />
 
         <ImageView
                 android:id="@+id/user_icon"
