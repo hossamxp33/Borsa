@@ -16,31 +16,44 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.DataLayer.usecases.checkUserLogin
+import kotlinx.android.synthetic.main.contact_fragment.*
+import kotlinx.android.synthetic.main.contact_fragment.view.*
+import kotlinx.android.synthetic.main.menu_fragment.*
+import org.jetbrains.anko.support.v4.makeCall
+import android.net.Uri
+
+
 
 
 class MenuFragment : Fragment() {
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?,  savedInstanceState: Bundle? ): View? {
 
-        val view= inflater.inflate(R.layout.menu_fragment, container, false)
+        val view= inflater.inflate(com.codesroots.mac.cards.R.layout.menu_fragment, container, false)
 
 //        view.login.setOnClickListener {
 //            val homeIntent = Intent(context, LoginActivity::class.java)
 //            ( context as MainActivity).startActivity(homeIntent)
 //        }
-        view.partners.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_frame,Partners())?.addToBackStack("login")?.commit()
-        }
+//        view.partners.setOnClickListener {
+//            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_frame,Partners())?.addToBackStack("login")?.commit()
+//        }
 //
+//        view.profile.setOnClickListener {
+//            if (checkUserLogin(context!!))
+//                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_frame,ContactFragment())?.addToBackStack("login")?.commit()
+//        }
         view.profile.setOnClickListener {
-            if (checkUserLogin(context!!))
-                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_frame,ContactFragment())?.addToBackStack("login")?.commit()
-        }
+            val phone = "01141087755"
+            val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
+            startActivity(intent)
+            }
 //
-        view.favoffers.setOnClickListener {
-            if (checkUserLogin(context!!))
-                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_frame,TermsFragment())?.addToBackStack(null)?.commit()
-        }
+//        view.favoffers.setOnClickListener {
+//            if (checkUserLogin(context!!))
+//                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_frame,TermsFragment())?.addToBackStack(null)?.commit()
+//        }
+   //     view.profile.setOnClickListener { v -> makeCall(profile.text.toString()) }
 
         view.logout.setOnClickListener {
             if (checkUserLogin(context!!)) {

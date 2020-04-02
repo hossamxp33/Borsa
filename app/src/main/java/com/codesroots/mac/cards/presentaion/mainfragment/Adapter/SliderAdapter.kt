@@ -12,6 +12,9 @@ import com.codesroots.mac.cards.presentaion.loudImage
 import kotlinx.android.synthetic.main.viewpagerslide.view.*
 
 
+
+
+
 class SliderAdapter(activity: FragmentActivity, sliders: List<SliderElement>) : PagerAdapter() {
 
     private val context: Context
@@ -40,5 +43,8 @@ class SliderAdapter(activity: FragmentActivity, sliders: List<SliderElement>) : 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         val view = `object` as View
         container.removeView(view)
+    }
+    override fun getPageWidth(position: Int): Float {
+        return 0.93f
     }
 }

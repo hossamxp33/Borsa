@@ -16,35 +16,49 @@
                 name="data"
                 type="com.codesroots.mac.cards.models.CompanyDatum"/>
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
-android:layout_marginTop="25dp"
-            android:orientation="vertical"
-android:background="@drawable/reduisbackground"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-android:layout_marginLeft="8dp"
-android:layout_marginEnd="8dp"
-android:layout_marginRight="8dp"
-android:onClick="@{() -> listener.SwitchToPackages(Context,data.id)}"
 
-    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/reduisbackground"
+            android:onClick="@{() -> listener.SwitchToPackages(Context,data.id)}"
+            android:orientation="vertical"
+
+            >
 
         <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/appCompatImageView"
                 android:layout_width="0dp"
-
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 app:imageResource="@{data.src}"
-                app:layout_constraintBottom_toBottomOf="parent"
-
+                app:layout_constraintBottom_toTopOf="@+id/comoanyName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="1"
                 app:layout_constraintStart_toStartOf="parent"
+
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.7" />
 
-                app:layout_constraintWidth_percent="0.5" />
-
+        <TextView
+                android:id="@+id/comoanyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/company_name_bg"
+                android:fontFamily="@font/fonts"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="@{data.name}"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
