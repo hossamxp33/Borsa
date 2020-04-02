@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.load.engine.Resource
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.databinding.MainFragmentBinding
@@ -29,9 +30,11 @@ class mainFragment  : Fragment(){
     lateinit var viewModel: MainViewModel
     private var currentPage = 0
     private var NUM_PAGES = 0
-    var pager: ViewPager? = null
+   private var pager: ViewPager? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
 
 
@@ -42,7 +45,8 @@ class mainFragment  : Fragment(){
         var view:MainFragmentBinding =
             DataBindingUtil.inflate(inflater,R.layout.main_fragment, container,false)
         val typeface = Typeface.createFromAsset(getContext()!!.assets, "fonts/DroidKufi_Regular.ttf")
-        pager = view.pager
+        pager = view.pagerr
+
         viewModel =   ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getcompanyData()
         viewModel.getMyBalance()
@@ -52,8 +56,6 @@ class mainFragment  : Fragment(){
             view.recyler.layoutManager = GridLayoutManager(context,2)
             view.recyler.adapter = MainAdapter;
 
-            view.textView5.typeface = typeface
-            view.lastvalue.typeface = typeface
 
 
 
@@ -66,8 +68,14 @@ class mainFragment  : Fragment(){
         })
         viewModel.SliderDataResponseLD?.observe(this , Observer {
 
-            view.pager.adapter = it?.let { it1 -> SliderAdapter(activity!!, it1) }
-            indicator.setViewPager(view.pager)
+            pager!!.offscreenPageLimit = 3
+            pager!!.pageMargin = 20
+            pager!!.clipChildren = false
+            pager!!.clipToPadding = false
+            pager!!.setPadding(100, 0, 50, 0)
+
+            view.pagerr.adapter = it?.let { it1 -> SliderAdapter(activity!!, it1) }
+            indicator.setViewPager(view.pagerr)
 
             it?.size?.let { it1 -> init(it1) }
         })
@@ -104,3 +112,5 @@ class mainFragment  : Fragment(){
         })
     }
 }
+
+
