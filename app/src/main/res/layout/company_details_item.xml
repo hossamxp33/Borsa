@@ -48,16 +48,17 @@
 
         <TextView
                 android:id="@+id/textView1"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="64dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/fonts"
                 android:text="@{data.name}"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/appCompatImageView"
-                app:layout_constraintStart_toEndOf="@+id/sprice"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.56" />
 
         <TextView
                 android:id="@+id/sprice"
