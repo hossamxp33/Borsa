@@ -31,33 +31,39 @@
             android:id="@+id/tvUnpaid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
             android:background="@color/white"
-            android:text="@{data.productPackage.company.name}"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="@{data.mobile}"
             android:textColor="@color/darkgreen"
             android:textSize="12sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.3"
             app:layout_constraintStart_toEndOf="@+id/tvPreviousText"
-            app:layout_constraintTop_toBottomOf="@+id/tvNameP"
-             />
+            app:layout_constraintTop_toBottomOf="@+id/tvNameP" />
 
     <TextView
             android:id="@+id/tvPreviousText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:background="@color/white"
             android:paddingStart="1dp"
             android:paddingLeft="1dp"
 
-            android:text="   إسم الشركة :"
+            android:text="  الجوال :"
             android:textColor="@color/darkgreen"
             android:textSize="11sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/tvTotalPrice"
             app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toEndOf="@+id/tvTotalPrice"
             app:layout_constraintTop_toTopOf="@+id/tvTotalPrice"
-            app:layout_constraintWidth_percent="0.22"
-            tools:layout_editor_absoluteX="170dp" />
+            app:layout_constraintWidth_percent="0.22" />
 
     <TextView
             android:id="@+id/tvTotalPrice"
@@ -92,7 +98,7 @@
                 android:id="@+id/ivProfilePe"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                app:imageResourcee="@{data.productPackage.company.src}"
+                app:imageResourcee="@{data.productPackage.photo}"
 
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +125,7 @@
             android:singleLine="true"
             android:text="@{data.productPackage.name}"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="12dp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ivProfileP"
             app:layout_constraintTop_toTopOf="parent"
@@ -131,19 +137,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
             android:layout_marginTop="12dp"
             android:background="@color/white"
             android:paddingStart="1dp"
-            android:paddingLeft="1dp"
-            android:text="ثمن الطلب :"
+            android:text="ثمن الطلبية :"
             android:textColor="@color/darkgreen"
             android:textSize="11sp"
             android:textStyle="bold"
             app:layout_constraintHeight_percent="0.3"
             app:layout_constraintStart_toEndOf="@+id/ivProfileP"
             app:layout_constraintTop_toBottomOf="@+id/tvNameP"
-            app:layout_constraintWidth_percent="0.15" />
+            app:layout_constraintWidth_percent="0.15"
+            android:layout_marginLeft="6dp"
+            android:paddingLeft="1dp" />
 
     <TextView
             android:id="@+id/tvDatetext"
@@ -174,7 +180,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:gravity="bottom|start"
-            app:datetext="@{data.created}"
+            android:text="@{data.created}"
             android:textColor="@color/darkred"
             android:textDirection="ltr"
             android:textSize="12sp"
@@ -190,16 +196,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="5dp"
-            android:onClick="@{() -> listener.makePhonecall(Context,data.mobile)}"
             android:scaleType="centerInside"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.08"
-            app:srcCompat="@drawable/call" />
-
-
-
+            app:srcCompat="@drawable/call"
+            tools:layout_editor_absoluteX="40dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

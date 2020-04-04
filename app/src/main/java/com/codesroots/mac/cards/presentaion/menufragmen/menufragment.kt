@@ -44,7 +44,7 @@ class MenuFragment : Fragment() {
 //                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_frame,ContactFragment())?.addToBackStack("login")?.commit()
 //        }
         view.profile.setOnClickListener {
-            val phone = "01141087755"
+            val phone = "07721499299"
             val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
             startActivity(intent)
             }
