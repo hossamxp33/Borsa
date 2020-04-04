@@ -58,7 +58,6 @@ class mainFragment  : Fragment(){
 
 
 
-
         })
         viewModel.MyBalanceResponseLD?.observe(this , Observer {
 
@@ -90,7 +89,7 @@ class mainFragment  : Fragment(){
         indicator.setRadius(4 * density)
         NUM_PAGES = size
         val handler = Handler()
-        val Update:Runnable =Runnable {
+        val Update:Runnable = Runnable {
             if (currentPage == NUM_PAGES) {
                 currentPage = 0
             }

@@ -34,41 +34,36 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:background="@color/white"
-            android:ems="2"
-            android:lineSpacingExtra="0.3dp"
             android:gravity="center"
             android:maxLines="2"
-            android:text="40000000"
+            android:text="@{data.mobile}"
             android:textColor="@color/darkgreen"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/btnProducts"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.3"
             app:layout_constraintStart_toEndOf="@+id/tvPreviousText"
-            app:layout_constraintTop_toBottomOf="@+id/tvNameP"
-            app:layout_constraintWidth_percent="0.15" />
+            app:layout_constraintTop_toBottomOf="@+id/tvNameP" />
 
     <TextView
             android:id="@+id/tvPreviousText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:background="@color/white"
             android:paddingStart="1dp"
-            android:text=" مستحقات سابقة :"
-            android:textColor="@color/darkgreen"
+            android:paddingLeft="1dp"
 
+            android:text="  الجوال :"
+            android:textColor="@color/darkgreen"
             android:textSize="11sp"
             android:textStyle="bold"
             app:layout_constraintHeight_percent="0.3"
             app:layout_constraintStart_toEndOf="@+id/tvTotalPrice"
             app:layout_constraintTop_toTopOf="@+id/tvTotalPrice"
-            app:layout_constraintWidth_percent="0.22"
-            android:layout_marginLeft="8dp"
-            android:paddingLeft="1dp" />
+            app:layout_constraintWidth_percent="0.22" />
 
     <TextView
             android:id="@+id/tvTotalPrice"
@@ -185,7 +180,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:gravity="bottom|start"
-            android:text="@{data.modified}"
+            android:text="@{data.created}"
             android:textColor="@color/darkred"
             android:textDirection="ltr"
             android:textSize="12sp"
@@ -197,50 +192,16 @@
             android:layout_marginLeft="6dp" />
 
     <ImageView
-            android:id="@+id/ivLocationP"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-
-            android:scaleType="centerInside"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.08"
-            app:srcCompat="@drawable/location" />
-
-    <ImageView
             android:id="@+id/ivCallP"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
             android:scaleType="centerInside"
-            app:layout_constraintEnd_toStartOf="@id/ivLocationP"
             app:layout_constraintHeight_percent="0.2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.08"
-            app:srcCompat="@drawable/call" />
-
-    <Button
-            android:id="@+id/btnProducts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/rounded_back"
-            tools:ignore="MissingPrefix"
-            fontPath="fonts/URWGeometricArabic_Regular.ttf"
-            android:text="المنتجات"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.3"
-            app:layout_constraintTop_toBottomOf="@+id/tvPreviousText"
-            app:layout_constraintWidth_percent="0.3"
-            android:layout_marginRight="8dp" />
+            app:srcCompat="@drawable/call"
+            tools:layout_editor_absoluteX="40dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
