@@ -8,21 +8,17 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
-import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.codesroots.mac.cards.DataLayer.ApiService.ApiClient
 import com.codesroots.mac.cards.models.ReportDaily
 
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
-import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.report_adapters
+import com.codesroots.mac.cards.presentaion.toast
 import com.codesroots.mac.firstkotlon.DataLayer.ApiService.APIServices
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.main_fragment.view.*
 
 import java.util.Timer
 import java.util.TimerTask
@@ -59,7 +55,8 @@ class MyService : Service(), NetworkChangeReceiver.ConnectivityReceiverListener 
                             { books ->
                                 if (books.myorders!!.id != null) {
                                     val intent1 = Intent(applicationContext, MainActivity::class.java)
-
+                                      //  toast.ma(this@MyService,"aa")
+                                    Toast.makeText(this@MyService,"طلب جديد", Toast.LENGTH_SHORT).show()
                                     intent1.putExtra("new_order",1)
                                     intent1.putExtra("id",books.myorders.id)
                                     intent1.putExtra("price",books.myorders.productPackage.price)
@@ -70,6 +67,9 @@ class MyService : Service(), NetworkChangeReceiver.ConnectivityReceiverListener 
                                     intent1.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
                                     startActivity(intent1)
+                                }else {
+                                    Toast.makeText(this@MyService,"خطا", Toast.LENGTH_SHORT).show()
+
                                 }
                             },
                             { error ->
@@ -79,7 +79,7 @@ class MyService : Service(), NetworkChangeReceiver.ConnectivityReceiverListener 
 
                 }
             },
-            0, 30000
+            0, 10000
         )
 
 

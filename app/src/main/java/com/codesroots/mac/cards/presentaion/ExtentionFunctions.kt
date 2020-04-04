@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import java.math.RoundingMode
 
 
-fun Any.toast(context: Context) {
+fun Any.toast(context: Context, s: String) {
     Toast.makeText(context, this.toString(), Toast.LENGTH_LONG).show()
 }
 

@@ -4,8 +4,8 @@
           package="com.codesroots.mac.cards">
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -17,7 +17,7 @@
         <activity android:name=".presentaion.MainActivity" android:launchMode="singleTask">
 
         </activity>
-        <service android:name=".DataLayer.helper.USSDService"
+        <service android:name="com.romellfudi.ussdlibrary.USSDServiceKT"
                 android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
@@ -45,6 +45,7 @@
                 android:name="io.fabric.ApiKey"
                 android:value="4bc37138f80daa650d02b18eb1d8e96c292de8fd"
         />
+
     </application>
 
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
