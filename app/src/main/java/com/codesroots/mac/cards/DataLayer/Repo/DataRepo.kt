@@ -35,7 +35,7 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
 
     @SuppressLint("CheckResult")
 
-    fun GetData(livedata: MutableLiveData<List<CompanyDatum>>?) {
+    fun GetData(livedata: MutableLiveData<CompanyData>?) {
 
         getServergetway().GetCompanyData(PreferenceHelper.getToken())
             .subscribeOn(Schedulers.io())
@@ -43,7 +43,7 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
             .map { data -> data }
             .subscribe(
                 { books ->
-                    livedata?.postValue(books.companies)
+                    livedata?.postValue(books)
                 },
                 { error ->
 
@@ -54,7 +54,7 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
 
     @SuppressLint("CheckResult")
 
-    fun GetPackageDetails(id:String,livedata: MutableLiveData<List<CompanyDatum>>?) {
+    fun GetPackageDetails(id:String,livedata: MutableLiveData<CompanyData>?) {
 
         getServergetway().GetPackageDetails(id)
             .subscribeOn(Schedulers.io())
@@ -62,7 +62,7 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
             .map { data -> data }
             .subscribe(
                 { books ->
-                    livedata?.postValue(books.data)
+                    livedata?.postValue(books)
                 },
                 { error ->
 

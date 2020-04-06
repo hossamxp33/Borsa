@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.TargetApi
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -86,35 +87,9 @@ class MainActivity : AppCompatActivity()  {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun makePhonecall(id:Long, phone: String) {
 
+
         viewModel =   ViewModelProviders.of(this).get(MainViewModel::class.java)
 
-        viewModel.EditOrder(id)
-
-        if (viewModel.EditResponseLD?.hasObservers() == false) {
-            viewModel.EditResponseLD?.observe(this, Observer {
-                    if (it.success == true) {
-//                var phoneListener = PhoneCallListener()
-//                var mTelephonyManager = getSystemService(TELEPHONY_SERVICE);
-//
-//                this.getSystemService(Context.TELEPHONY_SERVICE)
-//                telephonyManager.listen(phoneListener, PhoneStateListener.LISTEN_CALL_STATE)
-//
-//                val intent = Intent(Intent.ACTION_CALL)
-//                intent.data = Uri.fromParts("tel", phone, "#")
-//                if (ActivityCompat.checkSelfPermission(
-//                        this,
-//                        Manifest.permission.CALL_PHONE
-//                    ) != PackageManager.PERMISSION_GRANTED
-//                ) {
-//                    ActivityCompat.requestPermissions(
-//                        this,
-//                        arrayOf(Manifest.permission.CALL_PHONE),
-//                        15
-//                    )
-//
-//                }
-//                startActivity(intent)
-//           }
                 map = HashMap()
                 map!!["KEY_LOGIN"] = HashSet(Arrays.asList("espere", "waiting", "loading", "esperando"))
                 map!!["KEY_ERROR"] = HashSet(Arrays.asList("problema", "problem", "error", "null"))
@@ -129,29 +104,39 @@ class MainActivity : AppCompatActivity()  {
 
                         var dataToSend = "data"// <- send "data" into USSD's input text
                         ussdApi!!.send("1") {
-                            // it: response String
                             print(it)
-                            if (it == "0مزيد") {
 
+                            if (it == "0مزيد") {
                                 ussdApi!!.cancel()
+                                viewModel.EditOrder(id)
+
+                                if (viewModel.EditResponseLD?.hasObservers() == false) {
+                                    viewModel.EditResponseLD?.observe(this@MainActivity, Observer {
+                                        if (it.success == true) {
+                                            supportFragmentManager!!.beginTransaction()
+                                                .replace(R.id.main_frame, mainFragment()).addToBackStack(null).commit()
+                                        }
+
+
+
+                                    })
+                                }
                             }
                             Toast.makeText(this@MainActivity,it, Toast.LENGTH_SHORT).show()
 
                             // message has the response string data from USSD
-                        }
-                    }
 
+                    }
+                            }
                     override fun over(message: String) {
                         // message has the response string data from USSD or error
                         // response no have input text, NOT SEND ANY DATA
                         print(message)
                         Toast.makeText(this@MainActivity,message, Toast.LENGTH_SHORT).show()
 
-                    }
-                })
                 }
             })
-    }
+
     }
     @TargetApi(Build.VERSION_CODES.O)
     @RequiresApi(Build.VERSION_CODES.O)

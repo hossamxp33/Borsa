@@ -43,7 +43,7 @@ class MainViewModel : ViewModel() {
     var DateRepoCompnay: DataRepo = DataRepo()
      var mCompositeDisposable = CompositeDisposable()
 
-    var CompanyResponseLD : MutableLiveData<List<CompanyDatum>>? = null
+    var CompanyResponseLD : MutableLiveData<CompanyData>? = null
     var MyBalanceResponseLD : MutableLiveData<MyBalance>? = null
     var SliderDataResponseLD : MutableLiveData<List<SliderElement>>? = null
     var BuyPackageResponseLD : MutableLiveData<Buypackge>? = null

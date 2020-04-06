@@ -34,7 +34,7 @@ class Payment : AppCompatActivity() {
 
         home.setOnClickListener {
                     val homeIntent = Intent(this, MainActivity::class.java)
-                                       (context as MainActivity).startActivity(homeIntent)
+                                       startActivity(homeIntent)
         }
     }
 

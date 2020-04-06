@@ -49,22 +49,18 @@ class mainFragment  : Fragment(){
 
         viewModel =   ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getcompanyData()
-        viewModel.getMyBalance()
+       // viewModel.getMyBalance()
         viewModel.GetMyImages(PreferenceHelper.getToken())
         viewModel.CompanyResponseLD?.observe(this , Observer {
-            MainAdapter = MainAdapter( viewModel,context,it)
+            MainAdapter = MainAdapter( viewModel,context,it.companies!!)
             view.recyler.layoutManager = GridLayoutManager(context,2)
             view.recyler.adapter = MainAdapter;
-
+            //lastvalue.append(it.usercredit.toString())
+            lastvalue.text =  it.usercredit.toString()
 
 
         })
-        viewModel.MyBalanceResponseLD?.observe(this , Observer {
 
-            lastvalue.append(it.usercredit.toString())
-            lastvalue.append("\n")
-            lastvalue.text.toString()
-        })
         viewModel.SliderDataResponseLD?.observe(this , Observer {
 
             pager!!.offscreenPageLimit = 3

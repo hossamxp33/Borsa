@@ -40,7 +40,7 @@ class CompanyDetails  : Fragment() {
             viewModel.CompanyResponseLD?.observe(this, Observer {
 
 
-                MainAdapter = CompanyDetailsAdapter(viewModel, context, it)
+                MainAdapter = CompanyDetailsAdapter(viewModel, context, it.data!!)
                 view.recyler.layoutManager = LinearLayoutManager(context)
                 view.recyler.adapter = MainAdapter;
 
