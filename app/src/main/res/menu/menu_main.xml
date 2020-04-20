@@ -1,0 +1,36 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:showIn="nav_view">
+    <group android:checkableBehavior="single"
+            >
+        <item
+                android:id="@+id/home"
+                android:icon="@drawable/house_outline"
+                android:title="الرئيسية" />
+
+        <item
+                android:id="@+id/reports"
+                android:icon="@drawable/analytics"
+                android:title="تقارير" />
+
+        <item
+                android:id="@+id/more"
+                android:icon="@drawable/more"
+                android:title="االمزيد" />
+
+
+    </group>
+
+    <item android:title="Communicate">
+
+        <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/more"
+                android:title="Share" />
+        <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/logout"
+                android:title="Send" />
+
+    </item>
+</menu>

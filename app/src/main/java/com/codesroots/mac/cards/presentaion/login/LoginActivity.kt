@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             if (!isInternetConnectionAvailable(this)) "رجاء تأكد من اتصالك بالانترنت".snack(window.decorView.rootView)
-viewModel.Login(etUsername.text.toString(),etPassword.text.toString())
+            viewModel.Login(etUsername.text.toString(),etPassword.text.toString())
 
         }
 
