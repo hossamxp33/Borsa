@@ -9,7 +9,7 @@ apply plugin: 'io.fabric'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.codesroots.mac.credit"
+        applicationId "com.codesroots.mac.Tajnaz"
         minSdkVersion 23
         targetSdkVersion 29
         multiDexEnabled true
@@ -105,8 +105,8 @@ dependencies {
 
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    implementation 'com.github.ozodrukh:CircularReveal:2.1.0'
-    implementation 'com.github.yalantis:Side-Menu.Android:1.0.2'
+    implementation 'me.samlss:timomenu:1.0.0'
+
 
 }
 

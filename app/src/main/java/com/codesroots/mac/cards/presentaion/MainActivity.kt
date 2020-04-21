@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -33,6 +34,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.codesroots.mac.cards.DataLayer.helper.MyService
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
+import com.codesroots.mac.cards.MenuHelper
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetails
 import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
@@ -43,21 +45,19 @@ import com.codesroots.mac.cards.presentaion.reportsFragment.ReportsFragment
 import com.crashlytics.android.Crashlytics
 import com.google.android.material.navigation.NavigationView
 import com.romellfudi.ussdlibrary.USSDController
-import io.codetail.animation.ViewAnimationUtils
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.alert_add_reserve.view.*
-import yalantis.com.sidemenu.interfaces.Resourceble
-import yalantis.com.sidemenu.interfaces.ScreenShotable
-import yalantis.com.sidemenu.model.SlideMenuItem
-import yalantis.com.sidemenu.util.ViewAnimator
+import me.samlss.timomenu.TimoMenu
+import me.samlss.timomenu.animation.ScaleItemAnimation
+
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
 
-class MainActivity : AppCompatActivity(),   ViewAnimator.ViewAnimatorListener {
+class MainActivity : AppCompatActivity() {
 
 
     private var drawerToggle: ActionBarDrawerToggle? = null
@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity(),   ViewAnimator.ViewAnimatorListener {
     private var map: HashMap<String, HashSet<String>>? = null
     private var res = R.drawable.content_music
     private var linearLayout: LinearLayout? = null
-    private val viewAnimator: ViewAnimator<*>? = null
     lateinit var homeFragment: mainFragment
     lateinit var reportsFragment: ReportsFragment
     lateinit var moreFragment: MenuFragment
@@ -165,54 +164,22 @@ class MainActivity : AppCompatActivity(),   ViewAnimator.ViewAnimatorListener {
             )
         }
 //
+        var itemViewWidth = (getWindow().getWindowManager().getDefaultDisplay().getWidth() - 40) / 5;
 
+var timoMenu =  TimoMenu.Builder(this)
+                .setGravity(Gravity.CENTER)
+                .setMenuMargin( Rect(20, 20, 20, 20))
+                .setMenuPadding( Rect(0, 10, 0, 10))
+    .addRow(ScaleItemAnimation.create(), MenuHelper.getTopList(itemViewWidth))
+    .addRow(ScaleItemAnimation.create(), MenuHelper.getBottomList(itemViewWidth))
 
-        var list = ArrayList<SlideMenuItem>();
-        val contentFragment: ContentFragment = ContentFragment.newInstance(R.drawable.content_music)
-        val menuItem0 = SlideMenuItem("الرئيسية", R.drawable.house_outline)
-        list.add(menuItem0);
-        val menuItem1 = SlideMenuItem("الرئيسية", R.drawable.house_outline)
-        list.add(menuItem1);
-        val menuItem2 = SlideMenuItem("الرئيسية", R.drawable.house_outline)
-        list.add(menuItem2);
-        val menuItem3 = SlideMenuItem("الرئيسية", R.drawable.house_outline)
-        list.add(menuItem3);
-        linearLayout = left_drawer
-        var viewAnimator = ViewAnimator(this, list, contentFragment, drawer_layout, this);
+    .build();
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setHomeButtonEnabled(true)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        drawerToggle = object : ActionBarDrawerToggle(
-            this,  /* host Activity */
-            drawer_layout,  /* DrawerLayout object */
-            toolbar,  /* nav drawer icon to replace 'Up' caret */
-            R.string.drawer_open,  /* "open drawer" description */
-            R.string.drawer_close /* "close drawer" description */
-        ) {
+//Show menu
+timoMenu.show();
 
-
-            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-                super.onDrawerSlide(drawerView, slideOffset)
-                viewAnimator!!.showMenuContent()
-            }
-
-            override fun onDrawerClosed(view: View) {
-                super.onDrawerClosed(view!!)
-                linearLayout!!.removeAllViews()
-                linearLayout!!.invalidate()
-            }
-
-            override fun onDrawerOpened(drawerView: View) {
-                super.onDrawerOpened(drawerView!!)
-            }
-
-        }
-
-
-
-        drawer_layout.addDrawerListener(drawerToggle as ActionBarDrawerToggle)
+//Dismiss menu.
+//timoMenu.dismiss();
 
 
         val typeface = ResourcesCompat.getFont(this, R.font.fonts)
@@ -300,30 +267,8 @@ class MainActivity : AppCompatActivity(),   ViewAnimator.ViewAnimatorListener {
         }
     }
 
-    override fun disableHomeButton() {
-        supportActionBar!!.setHomeButtonEnabled(false)
-    }
 
-    override fun enableHomeButton() {
-        supportActionBar!!.setHomeButtonEnabled(true)
-        drawer_layout.closeDrawers()
-    }
 
-    override fun addViewToContainer(view: View?) {
-    }
-
-    override fun onSwitch(
-        slideMenuItem: Resourceble?,
-        screenShotable: ScreenShotable?,
-        position: Int
-    ): ScreenShotable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
-        drawerToggle!!.syncState()
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -356,7 +301,6 @@ class MainActivity : AppCompatActivity(),   ViewAnimator.ViewAnimatorListener {
                     .commit()
             }
         }
-        drawer_layout.closeDrawer(GravityCompat.START)
         return true
 
     }

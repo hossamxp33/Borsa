@@ -33,5 +33,6 @@
     <color name="lightGrey">#e6eaed</color>
     <color name="grayback">#E6EAED</color>
 
-
+    <color name="normal_text_color">#666666</color>
+    <color name="highlight_text_color">#888888</color>
 </resources>

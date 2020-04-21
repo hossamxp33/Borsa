@@ -59,7 +59,7 @@ class MyService : Service(), NetworkChangeReceiver.ConnectivityReceiverListener 
                                     Toast.makeText(this@MyService,"طلب جديد", Toast.LENGTH_SHORT).show()
                                     intent1.putExtra("new_order",1)
                                     intent1.putExtra("id",books.myorders.id)
-                                    intent1.putExtra("price",books.myorders.productPackage.price)
+                                    intent1.putExtra("name",books.myorders.productPackage.name)
                                     intent1.putExtra("code",books.myorders.productPackage.company!!.code)
                                     intent1.putExtra("phone",books.myorders.mobile)
 
