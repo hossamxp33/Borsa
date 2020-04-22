@@ -34,7 +34,8 @@ interface APIServices {
     fun BuyPackage(
         @Field("user_id") useris: String,
         @Field("package_id") packageid: String,
-        @Field("mobile") phone: String
+        @Field("mobile") phone: String,
+        @Field("type") type: Int
 
         ):
             Observable<Buypackge>

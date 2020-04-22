@@ -25,5 +25,5 @@ data class CompanyDatum (
     val code: String? = null,
     val created: String? = null,
     @SerializedName("company_id")
-    val companyID: Long? = null
+    val companyID: Int? = null
 )

@@ -81,9 +81,9 @@ class MainViewModel : ViewModel() {
 
     }
 
-    fun BuyPackage(id:String,phone:String){
+    fun BuyPackage(type:Int,id:String,phone:String){
 
-        DateRepoCompnay.BuyPackage(id,PreferenceHelper.getUserId().toString(),phone,BuyPackageResponseLD,mCompositeDisposable)
+        DateRepoCompnay.BuyPackage(type,id,PreferenceHelper.getUserId().toString(),phone,BuyPackageResponseLD,mCompositeDisposable)
 
     }
     fun PrintReport(oopo:String,auth:String){

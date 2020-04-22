@@ -36,6 +36,7 @@ import com.codesroots.mac.cards.DataLayer.helper.MyService
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.MenuHelper
 import com.codesroots.mac.cards.R
+import com.codesroots.mac.cards.models.CompanyDatum
 import com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetails
 import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
@@ -202,10 +203,13 @@ timoMenu.show();
             R.string.tab_3,
             R.drawable.more, R.color.signinpurple
         )
-
+        val item4 = AHBottomNavigationItem(
+            R.string.tab_4,
+            R.drawable.more, R.color.signinpurple
+        )
 
         with(bottom_navigation) {
-            addItems(listOf(item2, item1, item3))
+            addItems(listOf(item2, item1, item3,item4))
 
             inactiveColor = ContextCompat.getColor(context, R.color.gray)
             accentColor = ContextCompat.getColor(context, R.color.signinpurple)
@@ -353,7 +357,7 @@ class ClickHandler {
             .replace(com.codesroots.mac.cards.R.id.main_frame, frag).addToBackStack(null).commit()
     }
 
-    fun SwitchToPayment(context: Context,id:String,viewmodel:MainViewModel) {
+    fun SwitchToPayment(context: Context, id: CompanyDatum, viewmodel:MainViewModel) {
 
         val dialogBuilder = AlertDialog.Builder(( context as MainActivity) )
         val inflater = ( context as MainActivity).getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -379,7 +383,12 @@ class ClickHandler {
 
             mLastClickTime = SystemClock.elapsedRealtime();
             val auth = PreferenceHelper.getToken()
-            viewmodel.BuyPackage(id,dialogView.from.text.toString())
+           var type = 1
+            if (id.companyID!! == 2 ) {
+                type = 2
+
+            }
+            viewmodel.BuyPackage(type,id.id!!,dialogView.from.text.toString())
 
             if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
                 viewmodel.BuyPackageResponseLD?.observe(context, Observer {

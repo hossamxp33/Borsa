@@ -72,9 +72,9 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
 
     @SuppressLint("CheckResult")
 
-    fun BuyPackage(id:String,user_id:String,phone:String,livedata: MutableLiveData<Buypackge>?,compiste: CompositeDisposable) {
+    fun BuyPackage(type:Int,id:String,user_id:String,phone:String,livedata: MutableLiveData<Buypackge>?,compiste: CompositeDisposable) {
 
-        compiste .add(   getServergetway().BuyPackage(user_id,id,phone)
+        compiste .add(   getServergetway().BuyPackage(user_id,id,phone,type)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
