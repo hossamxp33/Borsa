@@ -8,21 +8,23 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.graphics.Rect
 import android.net.Uri
+import android.opengl.ETC1.getHeight
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
-import android.view.*
-import android.view.animation.AccelerateInterpolator
-import android.widget.LinearLayout
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -34,9 +36,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.codesroots.mac.cards.DataLayer.helper.MyService
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
-import com.codesroots.mac.cards.MenuHelper
 import com.codesroots.mac.cards.R
-import com.codesroots.mac.cards.models.CompanyDatum
 import com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetails
 import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
@@ -49,29 +49,21 @@ import com.romellfudi.ussdlibrary.USSDController
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.alert_add_reserve.view.*
-import me.samlss.timomenu.TimoMenu
-import me.samlss.timomenu.animation.ScaleItemAnimation
-
+import kotlinx.android.synthetic.main.app_bar_main.*
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
 
-class MainActivity : AppCompatActivity() {
-
-
-    private var drawerToggle: ActionBarDrawerToggle? = null
-
+class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var viewModel: MainViewModel
     private var map: HashMap<String, HashSet<String>>? = null
-    private var res = R.drawable.content_music
-    private var linearLayout: LinearLayout? = null
     lateinit var homeFragment: mainFragment
     lateinit var reportsFragment: ReportsFragment
     lateinit var moreFragment: MenuFragment
     lateinit var navigationView: NavigationView
+
 
     @TargetApi(Build.VERSION_CODES.O)
     @RequiresApi(Build.VERSION_CODES.O)
@@ -151,7 +143,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         PreferenceHelper(this)
-        createMenuList()
+
+
+        ///////// tool bar and drawerToggle
+        setSupportActionBar(toolBar)
+        val actionBar = supportActionBar
+        actionBar?.title = ""
+        val drawerToggle: ActionBarDrawerToggle =
+            object : ActionBarDrawerToggle(this, drawerLayout, toolBar, (R.string.open), (R.string.close)) {
+
+        }
+        drawerToggle.isDrawerIndicatorEnabled = true
+        drawerLayout.addDrawerListener(drawerToggle)
+        animation()
+        drawerToggle.syncState()
+        nav_view.setNavigationItemSelectedListener(this)
+        homeFragment = mainFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frame, homeFragment)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
+
+
         //startService(Intent(this, USSDService::class.java))
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -165,22 +178,6 @@ class MainActivity : AppCompatActivity() {
             )
         }
 //
-        var itemViewWidth = (getWindow().getWindowManager().getDefaultDisplay().getWidth() - 40) / 5;
-
-var timoMenu =  TimoMenu.Builder(this)
-                .setGravity(Gravity.CENTER)
-                .setMenuMargin( Rect(20, 20, 20, 20))
-                .setMenuPadding( Rect(0, 10, 0, 10))
-    .addRow(ScaleItemAnimation.create(), MenuHelper.getTopList(itemViewWidth))
-    .addRow(ScaleItemAnimation.create(), MenuHelper.getBottomList(itemViewWidth))
-
-    .build();
-
-//Show menu
-timoMenu.show();
-
-//Dismiss menu.
-//timoMenu.dismiss();
 
 
         val typeface = ResourcesCompat.getFont(this, R.font.fonts)
@@ -203,13 +200,10 @@ timoMenu.show();
             R.string.tab_3,
             R.drawable.more, R.color.signinpurple
         )
-        val item4 = AHBottomNavigationItem(
-            R.string.tab_4,
-            R.drawable.more, R.color.signinpurple
-        )
+
 
         with(bottom_navigation) {
-            addItems(listOf(item2, item1, item3,item4))
+            addItems(listOf(item2, item1, item3))
 
             inactiveColor = ContextCompat.getColor(context, R.color.gray)
             accentColor = ContextCompat.getColor(context, R.color.signinpurple)
@@ -222,16 +216,16 @@ timoMenu.show();
                 /*  getLastLocation()*/
 
                 if (position == 2) {
-                    supportFragmentManager!!.beginTransaction()
+                    supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                         .replace(com.codesroots.mac.cards.R.id.main_frame, MenuFragment())
                         .addToBackStack(null).commit()
                 }
                 if (position == 1) {
-                    supportFragmentManager!!.beginTransaction()
+                    supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                         .replace(R.id.main_frame, mainFragment()).addToBackStack(null).commit()
                 }
                 if (position == 0) {
-                    supportFragmentManager!!.beginTransaction()
+                    supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                         .replace(R.id.main_frame, ReportsFragment()).addToBackStack(null).commit()
 
 
@@ -239,23 +233,20 @@ timoMenu.show();
                 true
 
             }
-            supportFragmentManager.beginTransaction()
+            supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                 .replace(R.id.main_frame, mainFragment(), "Main").addToBackStack(null).commit()
 
         }
+
+
         if (PreferenceHelper.getUserId() == 1) {
             startService(Intent(this, MyService::class.java))
             //   startService(Intent(this, USSDService::class.java))
 
         }
 
-    }
-
-    private fun createMenuList() {
-
 
     }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -272,18 +263,12 @@ timoMenu.show();
     }
 
 
+    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
 
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        when (menuItem.itemId) {
             R.id.home -> {
                 homeFragment = mainFragment()
-                supportFragmentManager.beginTransaction()
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                     .replace(R.id.main_frame, homeFragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit()
@@ -292,24 +277,44 @@ timoMenu.show();
             }
             R.id.reports -> {
                 reportsFragment = ReportsFragment()
-                supportFragmentManager.beginTransaction()
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                     .replace(R.id.main_frame, reportsFragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit()
             }
             R.id.more -> {
                 moreFragment = MenuFragment()
-                supportFragmentManager.beginTransaction()
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                     .replace(R.id.main_frame, moreFragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit()
             }
-        }
-        return true
 
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
     }
 
+    override fun onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.isDrawerOpen(GravityCompat.START)
+        }
+        else{
+        super.onBackPressed()
+            }
+    }
+
+    private fun animation(){
+        navigationView = nav_view
+        val ttb = AnimationUtils.loadAnimation(this, R.anim.ttb)
+        navigationView!!.animation = ttb
+
+
+
+    }
 }
+
 
 class ClickHandler {
     var  mLastClickTime: Long = 0
@@ -341,9 +346,9 @@ class ClickHandler {
         val bundle = Bundle()
         //  bundle.putParcelable("cliObj" ,clients[position] )
         val frag = CompanyDetails()
-        frag.arguments =bundle
+        frag.arguments = bundle
         bundle.putString("packageId" , comid)
-        ( context as MainActivity).supportFragmentManager!!.beginTransaction()
+        ( context as MainActivity).supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb,0, 0,0)
             .replace(R.id.main_frame, frag).addToBackStack(null).commit()
     }
     fun SwitchToReports( context: Context,comid :String) {
@@ -354,10 +359,11 @@ class ClickHandler {
         frag.arguments =bundle
         bundle.putString("packageId" , comid)
         ( context as MainActivity).supportFragmentManager!!.beginTransaction()
+
             .replace(com.codesroots.mac.cards.R.id.main_frame, frag).addToBackStack(null).commit()
     }
 
-    fun SwitchToPayment(context: Context, id: CompanyDatum, viewmodel:MainViewModel) {
+    fun SwitchToPayment(context: Context,id:String,viewmodel:MainViewModel) {
 
         val dialogBuilder = AlertDialog.Builder(( context as MainActivity) )
         val inflater = ( context as MainActivity).getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -383,12 +389,7 @@ class ClickHandler {
 
             mLastClickTime = SystemClock.elapsedRealtime();
             val auth = PreferenceHelper.getToken()
-           var type = 1
-            if (id.companyID!! == 2 ) {
-                type = 2
-
-            }
-            viewmodel.BuyPackage(type,id.id!!,dialogView.from.text.toString())
+            viewmodel.BuyPackage(id,dialogView.from.text.toString())
 
             if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
                 viewmodel.BuyPackageResponseLD?.observe(context, Observer {
@@ -415,6 +416,8 @@ class ClickHandler {
             }
         }
     }
+
+
 
 
 }

@@ -9,7 +9,7 @@ apply plugin: 'io.fabric'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.codesroots.mac.Tajnaz"
+        applicationId "com.codesroots.mac.credit"
         minSdkVersion 23
         targetSdkVersion 29
         multiDexEnabled true
@@ -34,11 +34,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-repositories {
-    maven {
-        url "https://jitpack.io"
-    }
-}
+
 dependencies {
 
     def room_version = "2.2.3"
@@ -105,8 +101,9 @@ dependencies {
 
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    implementation 'me.samlss:timomenu:1.0.0'
-
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.github.andremion:floatingnavigationview:1.2.0'
 
 }
 

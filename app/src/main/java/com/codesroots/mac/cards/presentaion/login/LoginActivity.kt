@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.transition.TransitionInflater
 import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +32,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         PreferenceHelper(this)
       setContentView(R.layout.activity_signin)
+         animation()
+
 
         if (checkUserLogin(this))    startActivity(Intent(this  , MainActivity::class.java))
 
@@ -76,5 +79,10 @@ class LoginActivity : AppCompatActivity() {
                 afterTextChanged.invoke(editable.toString())
             }
         })
+    }
+    private fun animation(){
+
+        val slide = TransitionInflater.from(this).inflateTransition(R.transition.slide_activity)
+        getWindow().setEnterTransition(slide);
     }
 }

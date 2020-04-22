@@ -12,7 +12,7 @@ import com.codesroots.mac.cards.R
 
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.CompanyDetailsAdapter
-import kotlinx.android.synthetic.main.company_details.view.*
+import kotlinx.android.synthetic.main.main_fragment.view.*
 
 
 class CompanyDetails  : Fragment() {

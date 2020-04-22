@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.codesroots.mac.cards.R
@@ -30,7 +32,9 @@ class MainAdapter ( var viewModel: MainViewModel,var context :Context?,var data:
 
         val  binding: MainAdapterBinding = DataBindingUtil.inflate (LayoutInflater.from(p0.context),R.layout.main_adapter,p0,false)
         val typeface = Typeface.createFromAsset(context!!.assets, "fonts/DroidKufi_Regular.ttf")
+
         return  CustomViewHolder(binding)
+
     }
 
 

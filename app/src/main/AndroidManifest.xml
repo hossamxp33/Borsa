@@ -34,6 +34,14 @@
 
         </activity>
 
+
+        <activity android:name=".presentaion.splash.SplashScreen"
+                   android:theme="@style/AppFullScreenTheme"
+                >
+
+
+        </activity>
+
         <activity android:name=".presentaion.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

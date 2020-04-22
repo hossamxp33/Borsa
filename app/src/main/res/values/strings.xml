@@ -2,8 +2,6 @@
     <string name="app_name">TAJ NAZ</string>
     <string name="tab_1">الرئيسية</string>
     <string name="tab_2">تقارير</string>
-    <string name="tab4">طلبات</string>
-
     <string name="tab_3">المزيد</string>
     <string name="tab_4">المحفظة</string>
 
@@ -17,25 +15,7 @@
     <string name="toast_2">The service has been disconnected!</string>
     <string name="format">%1$td/%1$tm/%1$tY</string>
     <string name="accessibility_service_description">please enable permission</string>
-    <string name="drawer_open">Open</string>
-    <string name="drawer_close">Close</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 
-
-
-
-    <string name="face_book">Facebook</string>
-    <string name="alipay">Alipay</string>
-    <string name="ding_ding">Ding</string>
-    <string name="moments">Moments</string>
-    <string name="we_chat">We chat</string>
-    <string name="qq">QQ</string>
-
-    <string name="collect">Collect</string>
-    <string name="night">Night</string>
-    <string name="font">Font</string>
-    <string name="block">Block</string>
-    <string name="report">Report</string>
-
-    <string name="options">Options</string>
-    <string name="cancel">Cancel</string>
 </resources>
