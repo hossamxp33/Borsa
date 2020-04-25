@@ -11,7 +11,6 @@ import android.os.IBinder
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.codesroots.mac.cards.DataLayer.ApiService.ApiClient
-import com.codesroots.mac.cards.models.ReportDaily
 
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
@@ -30,7 +29,7 @@ class MyService : Service(), NetworkChangeReceiver.ConnectivityReceiverListener 
     internal var userKey: String? = null
     internal var timer = Timer()
     lateinit var viewModel: MainViewModel
-    var ReportHistroyResponseLD : MutableLiveData<ReportDaily>? = null
+
 
     override fun onCreate() {
         // get an instance of the receiver in your service

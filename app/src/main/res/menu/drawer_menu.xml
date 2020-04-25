@@ -13,25 +13,23 @@
                 android:id="@+id/reports"
                 android:icon="@drawable/analytics"
                 android:title="تقارير" />
-
         <item
-                android:id="@+id/more"
+                android:id="@+id/myorder"
                 android:icon="@drawable/more"
-                android:title="االمزيد" />
+                android:title="حسابات بنكية" />
 
 
     </group>
 
     <item android:title="Communicate">
 
-            <item
-                    android:id="@+id/nav_share"
-                    android:icon="@drawable/more"
-                    android:title="Share" />
-            <item
-                    android:id="@+id/nav_send"
-                    android:icon="@drawable/logout"
-                    android:title="حسابات بنكية" />
+
+
+
+        <item
+                android:id="@+id/more"
+                android:icon="@drawable/logout"
+                android:title="االمزيد" />
 
     </item>
 </menu>

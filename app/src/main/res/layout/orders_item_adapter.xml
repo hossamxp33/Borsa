@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/layout"
+        >
+
+    <data>
+
+        <variable
+                name="Context"
+                type="com.codesroots.mac.cards.presentaion.MainActivity"/>
+        <variable
+                name="listener"
+                type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
+        <variable
+                name="data"
+                type="com.codesroots.mac.cards.models.Myorders"/>
+        <variable
+                name="viewmodel"
+                type="com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel"/>
+
+
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layoutAnimation="@anim/layout_animation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/card_background"
+            android:layoutDirection="rtl"
+            android:padding="5dp">
+
+
+        <TextView
+                android:id="@+id/orderid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="@{data.id + ``}"
+                android:textColor="@color/darkgreen"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toEndOf="@+id/orderidtext"
+                app:layout_constraintTop_toBottomOf="@+id/tvNameP" />
+
+        <TextView
+                android:id="@+id/orderidtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@color/white"
+                android:paddingStart="1dp"
+                android:paddingLeft="1dp"
+
+                android:text="  رقم الطلب :"
+                android:textColor="@color/darkgreen"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toEndOf="@+id/tvTotalPrice"
+                app:layout_constraintTop_toTopOf="@+id/tvTotalPrice"
+                app:layout_constraintWidth_percent="0.22" />
+
+        <TextView
+                android:id="@+id/tvUnpaid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="@{data.mobile}"
+                android:textColor="@color/darkgreen"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toEndOf="@+id/tvPreviousText"
+                app:layout_constraintTop_toTopOf="@id/tvPreviousText"  />
+
+        <TextView
+                android:id="@+id/tvPreviousText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingStart="1dp"
+                android:paddingLeft="1dp"
+
+                android:text="  رقم :"
+                android:textColor="@color/darkgreen"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toStartOf ="@+id/tvMessageC"
+                app:layout_constraintTop_toBottomOf="@+id/tvTotalPrice"
+                app:layout_constraintWidth_percent="0.22" />
+        <TextView
+                android:id="@+id/tvTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/white"
+                android:paddingStart="1dp"
+                android:text="@{data.myordersPackage.price}"
+                android:textColor="@color/darkgreen"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toEndOf="@+id/tvMessageC"
+                app:layout_constraintTop_toBottomOf="@+id/tvNameP"
+                app:layout_constraintWidth_percent="0.15"
+                android:layout_marginLeft="4dp"
+                android:paddingLeft="1dp" />
+
+        <androidx.cardview.widget.CardView
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true"
+                android:id="@+id/ivProfileP"
+                android:layout_width="0dp"
+                android:layout_height="75dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.25">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivProfilePe"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    app:imageResourcee="@{data.myordersPackage.photo}"
+
+                    android:scaleType="fitXY"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.25"
+                    app:srcCompat="@drawable/delivery_concept" />
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <TextView
+                android:id="@+id/tvNameP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="start|center"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+
+                android:singleLine="true"
+                android:text="@{data.name}"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/ivProfileP"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.45" />
+
+
+        <TextView
+                android:id="@+id/tvMessageC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/white"
+                android:paddingStart="1dp"
+                android:text="مبلغ  :"
+                android:textColor="@color/darkgreen"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toEndOf="@+id/ivProfileP"
+                app:layout_constraintTop_toBottomOf="@+id/tvNameP"
+                app:layout_constraintWidth_percent="0.15"
+                android:layout_marginLeft="6dp"
+                android:paddingLeft="1dp" />
+
+        <TextView
+                android:id="@+id/tvDatetext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:gravity="bottom|start"
+                android:paddingStart="1dp"
+                android:text="تاريخ التسليم :"
+                android:textColor="@color/darkred"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMessageC"
+                app:layout_constraintWidth_percent="0.3"
+                android:layout_marginLeft="8dp"
+                android:paddingLeft="1dp" />
+
+        <TextView
+                android:id="@+id/tvDateP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:gravity="bottom|start"
+                android:text="@{data.created}"
+                android:textColor="@color/darkred"
+                android:textDirection="ltr"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toEndOf="@+id/tvDatetext"
+                app:layout_constraintTop_toBottomOf="@+id/tvMessageC"
+                app:layout_constraintWidth_percent="0.3"
+                android:layout_marginLeft="6dp" />
+
+
+        <Button
+                android:id="@+id/Confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="#5E35B1"
+                android:backgroundTint="#5E35B1"
+                android:text="Confirm"
+                android:textColor="@color/white"
+                android:textDirection="ltr"
+                android:textSize="12sp"
+                android:onClick="@{() -> listener.ConfirmOrder(data.id,viewmodel,Context)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintTop_toBottomOf="@+id/tvMessageC"
+                app:layout_constraintWidth_percent="0.3" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -56,7 +56,7 @@
             android:paddingStart="1dp"
             android:paddingLeft="1dp"
 
-            android:text="  الجوال :"
+            android:text="  رقم :"
             android:textColor="@color/darkgreen"
             android:textSize="11sp"
             android:textStyle="bold"
@@ -140,7 +140,7 @@
             android:layout_marginTop="12dp"
             android:background="@color/white"
             android:paddingStart="1dp"
-            android:text="ثمن الطلبية :"
+            android:text="مبلغ  :"
             android:textColor="@color/darkgreen"
             android:textSize="11sp"
             android:textStyle="bold"

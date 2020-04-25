@@ -19,6 +19,7 @@ import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.isInternetConnectionAvailable
 import com.codesroots.mac.cards.presentaion.snack
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_signin.*
 
 class LoginActivity : AppCompatActivity() {
@@ -53,6 +54,9 @@ class LoginActivity : AppCompatActivity() {
     }else {
        PreferenceHelper.setToken(it.token,this)
         PreferenceHelper.setUserId(it.userid!!)
+        PreferenceHelper.setUserGroupId(it.groupid!!.toInt())
+        FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserGroupId().toString())
+        FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserId().toString())
 
         startActivity(Intent(this, MainActivity::class.java))
     }

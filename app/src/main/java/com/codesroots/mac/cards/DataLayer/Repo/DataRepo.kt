@@ -72,9 +72,9 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
 
     @SuppressLint("CheckResult")
 
-    fun BuyPackage(type:Int,id:String,user_id:String,phone:String,livedata: MutableLiveData<Buypackge>?,compiste: CompositeDisposable) {
+    fun BuyPackage(type:Int,id:String,user_id:String,phone:String,name:String,livedata: MutableLiveData<Buypackge>?,compiste: CompositeDisposable) {
 
-        compiste .add(   getServergetway().BuyPackage(user_id,id,phone,type)
+        compiste .add(   getServergetway().BuyPackage(user_id,id,phone,type,name)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
@@ -104,6 +104,8 @@ print(error)
                 }
             )
     }
+    @SuppressLint("CheckResult")
+
     fun EditOrder(id:Long,livedata: MutableLiveData<EditOrder>?) {
 
         getServergetway().EditOrder("1",id)
@@ -113,6 +115,23 @@ print(error)
             .subscribe(
                 { books ->
                     livedata?.postValue(books)
+                },
+                { error ->
+
+                }
+            )
+    }
+
+    @SuppressLint("CheckResult")
+    fun GetMyorders(livedata: MutableLiveData<List<Myorders>>?) {
+
+        getServergetway().GetMyorders()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books.myorders)
                 },
                 { error ->
 
@@ -229,6 +248,24 @@ print(error)
                 }
             )
     }
+    @SuppressLint("CheckResult")
+
+    fun ConfirmOrder(id:Long,livedata: MutableLiveData<EditOrder>?) {
+
+         getServergetway().EditOrderConfirm("1",id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+                    print(error)
+                }
+            )
+    }
+
     fun getServergetway () : APIServices
     {
         return ApiClient.getClient().create(APIServices::class.java)

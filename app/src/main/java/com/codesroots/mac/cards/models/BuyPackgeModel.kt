@@ -12,9 +12,6 @@ import org.jetbrains.anko.db.NULL
 data class Buypackge (
     val center: Center? = null
 ) {
-
-
-
 }
 
 data class EditOrder (
@@ -116,3 +113,36 @@ data class Packagess (
     val photo:String? = null
 )
 
+data class Myordersdata (
+    val orders: List<Myorders>?= null,
+    val myorders: List<Myorders>?= null
+)
+
+data class Myorders (
+    val id: Long,
+    @SerializedName("package_id")
+    val packageID: Long,
+    @SerializedName("user_id")
+    val userID: Long,
+    @SerializedName("center_id")
+    val centerID: Long,
+    val created: String,
+    val modified: String,
+    val approve: Long,
+    val mobile: String,
+    val name: String,
+
+    @SerializedName("package")
+    val myordersPackage: Package
+)
+
+
+data class Package (
+    val id: Long,
+    val name: String,
+    @SerializedName("company_id")
+    val companyID: Long,
+    val price: String,
+    val photo: String,
+    val company: Company
+)

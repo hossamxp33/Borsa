@@ -35,9 +35,11 @@ interface APIServices {
         @Field("user_id") useris: String,
         @Field("package_id") packageid: String,
         @Field("mobile") phone: String,
-        @Field("type") type: Int
+        @Field("type") type: Int,
+        @Field("name") name: String
 
-        ):
+
+    ):
             Observable<Buypackge>
 
     @POST("wserv?page=18")/*{company_id}*/
@@ -68,13 +70,23 @@ interface APIServices {
     @GET("wserv?page=15")/*{company_id}*/
     fun GetTerms():
             Observable<Terms>
-
+    @FormUrlEncoded
+    @POST("orders/edit/{order_id}.json")/*{company_id}*/
+    fun EditOrderConfirm(        @Field("confirmed") approve: String,
+                          @Path("order_id") order_id: Long):
+            Observable<EditOrder>
 
     @FormUrlEncoded
     @POST("orders/edit/{order_id}.json")/*{company_id}*/
     fun EditOrder(        @Field("approve") approve: String,
                           @Path("order_id") order_id: Long):
             Observable<EditOrder>
+
+    @GET("orders/getOrderForEmployee.json")/*{company_id}*/
+    fun GetMyorders():
+            Observable<Myordersdata>
+
+
 
     @GET("wserv?page=16")/*{company_id}*/
     fun GetPartnersData():

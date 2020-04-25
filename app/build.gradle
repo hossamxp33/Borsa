@@ -5,11 +5,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.codesroots.mac.credit"
+        applicationId "com.codesroots.mac.Tajnaz"
         minSdkVersion 23
         targetSdkVersion 29
         multiDexEnabled true
@@ -104,6 +105,7 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.github.andremion:floatingnavigationview:1.2.0'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
 
 }
 

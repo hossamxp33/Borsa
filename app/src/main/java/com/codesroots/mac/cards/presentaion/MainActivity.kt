@@ -37,18 +37,27 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.codesroots.mac.cards.DataLayer.helper.MyService
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.R
+import com.codesroots.mac.cards.models.CompanyDatum
 import com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetails
 import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.menufragmen.MenuFragment
+import com.codesroots.mac.cards.presentaion.ordersfragment.OrdersFragment
+import com.codesroots.mac.cards.presentaion.ordersfragment.ordersAdapter
 import com.codesroots.mac.cards.presentaion.payment.Payment
 import com.codesroots.mac.cards.presentaion.reportsFragment.ReportsFragment
 import com.crashlytics.android.Crashlytics
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import com.romellfudi.ussdlibrary.USSDController
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.alert_add_employee.view.*
 import kotlinx.android.synthetic.main.alert_add_reserve.view.*
+import kotlinx.android.synthetic.main.alert_add_reserve.view.err
+import kotlinx.android.synthetic.main.alert_add_reserve.view.from
+import kotlinx.android.synthetic.main.alert_add_reserve.view.save
 import kotlinx.android.synthetic.main.app_bar_main.*
 import java.util.*
 import kotlin.collections.HashMap
@@ -62,6 +71,8 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     lateinit var homeFragment: mainFragment
     lateinit var reportsFragment: ReportsFragment
     lateinit var moreFragment: MenuFragment
+    lateinit var myorders: OrdersFragment
+
     lateinit var navigationView: NavigationView
 
 
@@ -143,7 +154,9 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         PreferenceHelper(this)
-
+        FirebaseApp.initializeApp(this)
+        FirebaseMessaging.getInstance()
+        FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserGroupId().toString())
 
         ///////// tool bar and drawerToggle
         setSupportActionBar(toolBar)
@@ -201,9 +214,21 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             R.drawable.more, R.color.signinpurple
         )
 
-
+        val item4 = AHBottomNavigationItem(
+            R.string.tab_4,
+            R.drawable.logout, R.color.signinpurple
+        )
         with(bottom_navigation) {
-            addItems(listOf(item2, item1, item3))
+            println(PreferenceHelper.getUserGroupId())
+            if (PreferenceHelper.getUserGroupId() == 4) {
+
+                addItems(listOf(item2,item1,  item3,item4))
+
+            }else {
+                addItems(listOf(item1,item2, item3))
+
+
+            }
 
             inactiveColor = ContextCompat.getColor(context, R.color.gray)
             accentColor = ContextCompat.getColor(context, R.color.signinpurple)
@@ -214,19 +239,26 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 Unit
                 Log.e("tab positiion", position.toString())
                 /*  getLastLocation()*/
+                if (position == 3) {
+                    supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
+                        .replace(com.codesroots.mac.cards.R.id.main_frame, OrdersFragment())
+                        .addToBackStack(null).commit()
+                }
+
 
                 if (position == 2) {
                     supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                         .replace(com.codesroots.mac.cards.R.id.main_frame, MenuFragment())
                         .addToBackStack(null).commit()
                 }
-                if (position == 1) {
-                    supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
-                        .replace(R.id.main_frame, mainFragment()).addToBackStack(null).commit()
-                }
                 if (position == 0) {
                     supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                         .replace(R.id.main_frame, ReportsFragment()).addToBackStack(null).commit()
+
+                }
+                if (position == 1) {
+                    supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
+                        .replace(R.id.main_frame, mainFragment()).addToBackStack(null).commit()
 
 
                 }
@@ -239,7 +271,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         }
 
 
-        if (PreferenceHelper.getUserId() == 1) {
+        if (PreferenceHelper.getUserGroupId() == 1) {
             startService(Intent(this, MyService::class.java))
             //   startService(Intent(this, USSDService::class.java))
 
@@ -283,13 +315,19 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                     .commit()
             }
             R.id.more -> {
-                moreFragment = MenuFragment()
+            moreFragment = MenuFragment()
+            supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
+                .replace(R.id.main_frame, moreFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit()
+        }
+            R.id.myorder -> {
+                myorders = OrdersFragment()
                 supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
-                    .replace(R.id.main_frame, moreFragment)
+                    .replace(R.id.main_frame, myorders)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit()
             }
-
         }
 
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -336,12 +374,8 @@ class ClickHandler {
          }
          context.startActivity(intent)
 
-
-
     }
     fun SwitchToPackages( context: Context,comid :String) {
-
-
 
         val bundle = Bundle()
         //  bundle.putParcelable("cliObj" ,clients[position] )
@@ -351,24 +385,30 @@ class ClickHandler {
         ( context as MainActivity).supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb,0, 0,0)
             .replace(R.id.main_frame, frag).addToBackStack(null).commit()
     }
-    fun SwitchToReports( context: Context,comid :String) {
+//    fun SwitchToReports( context: Context,comid :String) {
+//
+//        val bundle = Bundle()
+//        //  bundle.putParcelable("cliObj" ,clients[position] )
+//        val frag = ReportsFragment()
+//        frag.arguments =bundle
+//        bundle.putString("packageId" , comid)
+//        ( context as MainActivity).supportFragmentManager!!.beginTransaction()
+//
+//            .replace(com.codesroots.mac.cards.R.id.main_frame, frag).addToBackStack(null).commit()
+//    }
 
-        val bundle = Bundle()
-        //  bundle.putParcelable("cliObj" ,clients[position] )
-        val frag = ReportsFragment()
-        frag.arguments =bundle
-        bundle.putString("packageId" , comid)
-        ( context as MainActivity).supportFragmentManager!!.beginTransaction()
-
-            .replace(com.codesroots.mac.cards.R.id.main_frame, frag).addToBackStack(null).commit()
-    }
-
-    fun SwitchToPayment(context: Context,id:String,viewmodel:MainViewModel) {
+    fun SwitchToPayment(context: Context,id:CompanyDatum,viewmodel:MainViewModel) {
 
         val dialogBuilder = AlertDialog.Builder(( context as MainActivity) )
         val inflater = ( context as MainActivity).getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val dialogView = inflater.inflate(R.layout.alert_add_reserve, null)
+        var dialogView = inflater.inflate(R.layout.alert_add_reserve, null)
 
+        if (id.companyID!! == 2 ) {
+
+             dialogView = inflater.inflate(R.layout.alert_add_employee, null)
+
+
+        }
         dialogBuilder.setView(dialogView)
         val alertDialog = dialogBuilder.create()
         var  title =  TextView(context as MainActivity);
@@ -389,7 +429,14 @@ class ClickHandler {
 
             mLastClickTime = SystemClock.elapsedRealtime();
             val auth = PreferenceHelper.getToken()
-            viewmodel.BuyPackage(id,dialogView.from.text.toString())
+            var type = 1
+            var name  = "admin"
+            if (id.companyID!! == 2 ) {
+                type = 2
+name = dialogView.name.text.toString()
+            }
+            viewmodel.BuyPackage(type,id.id!!,dialogView.from.text.toString(),name)
+
 
             if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
                 viewmodel.BuyPackageResponseLD?.observe(context, Observer {
@@ -417,7 +464,24 @@ class ClickHandler {
         }
     }
 
+fun ConfirmOrder(id:Long,viewmodel:MainViewModel,context: Context){
 
+    viewmodel.ConfirmOrder(id)
+
+
+    if (viewmodel.EditResponseLD?.hasObservers() == false) {
+        viewmodel.EditResponseLD?.observe( context as MainActivity, Observer {
+
+            viewmodel.GetMyorders();
+
+
+
+
+        })
+    }
+
+
+}
 
 
 }

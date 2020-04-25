@@ -50,6 +50,8 @@ class MainViewModel : ViewModel() {
     var ReportDailyResponseLD : MutableLiveData<List<Report>>? = null
     var ReportHistroyResponseLD : MutableLiveData<List<ReportDaily>>? = null
     var EditResponseLD : MutableLiveData<EditOrder>? = null
+    var OrdersResponseLD : MutableLiveData<List<Myorders>>? = null
+
 
     init {
         CompanyResponseLD = MutableLiveData()
@@ -57,7 +59,7 @@ class MainViewModel : ViewModel() {
         MyBalanceResponseLD = MutableLiveData()
         SliderDataResponseLD = MutableLiveData()
         EditResponseLD = MutableLiveData()
-
+        OrdersResponseLD = MutableLiveData()
         ReportDailyResponseLD = MutableLiveData()
         ReportHistroyResponseLD = MutableLiveData()
         mCompositeDisposable  = CompositeDisposable()
@@ -76,14 +78,22 @@ class MainViewModel : ViewModel() {
         DateRepoCompnay.GetPackageDetails(id,CompanyResponseLD)
     }
     fun EditOrder(id:Long){
-
         DateRepoCompnay.EditOrder(id,EditResponseLD)
 
     }
 
-    fun BuyPackage(type:Int,id:String,phone:String){
+    fun GetMyorders(){
+        DateRepoCompnay.GetMyorders(OrdersResponseLD)
 
-        DateRepoCompnay.BuyPackage(type,id,PreferenceHelper.getUserId().toString(),phone,BuyPackageResponseLD,mCompositeDisposable)
+    }
+    fun ConfirmOrder(id:Long){
+
+        DateRepoCompnay.ConfirmOrder(id,EditResponseLD)
+
+    }
+    fun BuyPackage(type:Int,id:String,phone:String,name:String){
+
+        DateRepoCompnay.BuyPackage(type,id,PreferenceHelper.getUserId().toString(),phone,name,BuyPackageResponseLD,mCompositeDisposable)
 
     }
     fun PrintReport(oopo:String,auth:String){
