@@ -14,10 +14,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
@@ -142,7 +139,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         if (new_order == 1) {
             var phone = intent.getStringExtra("phone")
             var code = intent.getStringExtra("code")
-            var price = intent.getStringExtra("price")
+            var price = intent.getStringExtra("name")
             var id = intent.getLongExtra("id", 0)
 
             makePhonecall(id, code + price + "*" + phone + "#")
@@ -157,6 +154,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         FirebaseApp.initializeApp(this)
         FirebaseMessaging.getInstance()
         FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserGroupId().toString())
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         ///////// tool bar and drawerToggle
         setSupportActionBar(toolBar)
