@@ -231,7 +231,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             inactiveColor = ContextCompat.getColor(context, R.color.gray)
             accentColor = ContextCompat.getColor(context, R.color.signinpurple)
 
-            currentItem = 1
+            currentItem = 0
 
             setOnTabSelectedListener { position, wasSelected ->
                 Unit
@@ -249,12 +249,12 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                         .replace(com.codesroots.mac.cards.R.id.main_frame, MenuFragment())
                         .addToBackStack(null).commit()
                 }
-                if (position == 0) {
+                if (position == 1) {
                     supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                         .replace(R.id.main_frame, ReportsFragment()).addToBackStack(null).commit()
 
                 }
-                if (position == 1) {
+                if (position == 0) {
                     supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                         .replace(R.id.main_frame, mainFragment()).addToBackStack(null).commit()
 

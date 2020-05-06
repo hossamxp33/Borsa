@@ -78,7 +78,7 @@ class MyService : Service(), NetworkChangeReceiver.ConnectivityReceiverListener 
 
                 }
             },
-            0, 30000
+            0, 60000
         )
 
 
