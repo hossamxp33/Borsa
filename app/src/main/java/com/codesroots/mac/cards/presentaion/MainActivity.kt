@@ -39,6 +39,7 @@ import com.codesroots.mac.cards.DataLayer.helper.MyService
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.models.CompanyDatum
+import com.codesroots.mac.cards.presentaion.changepassword.changePassword
 import com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetails
 import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
@@ -73,6 +74,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     lateinit var reportsFragment: ReportsFragment
     lateinit var moreFragment: MenuFragment
     lateinit var myorders: OrdersFragment
+    lateinit var changePW: changePassword
 
     lateinit var navigationView: NavigationView
 
@@ -240,7 +242,14 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             setOnTabSelectedListener { position, wasSelected ->
                 Unit
                 Log.e("tab positiion", position.toString())
+
                 /*  getLastLocation()*/
+                if (position == 4) {
+                    supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
+                        .replace(com.codesroots.mac.cards.R.id.main_frame, changePassword())
+                        .addToBackStack(null).commit()
+                }
+
                 if (position == 3) {
                     supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                         .replace(com.codesroots.mac.cards.R.id.main_frame, OrdersFragment())
@@ -327,6 +336,14 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 myorders = OrdersFragment()
                 supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                     .replace(R.id.main_frame, myorders)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
+            }
+
+            R.id.changepw -> {
+                changePW = changePassword()
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
+                    .replace(R.id.main_frame, changePW)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit()
             }

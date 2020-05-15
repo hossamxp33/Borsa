@@ -17,6 +17,10 @@
                 android:id="@+id/myorder"
                 android:icon="@drawable/more"
                 android:title="حسابات بنكية" />
+        <item
+                android:id="@+id/changepw"
+                android:icon="@drawable/key"
+                android:title=" تغيير كلمة المرور" />
 
 
     </group>

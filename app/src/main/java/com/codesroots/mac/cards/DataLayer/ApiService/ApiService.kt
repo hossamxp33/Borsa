@@ -15,6 +15,9 @@ interface APIServices {
         @Field("password") password: String
     ): Observable<LoginModel>
 
+
+
+
     @POST("companies.json")/*{company_id}*/
     fun GetCompanyData(@Query("auth") auth: String):
             Observable<CompanyData>
