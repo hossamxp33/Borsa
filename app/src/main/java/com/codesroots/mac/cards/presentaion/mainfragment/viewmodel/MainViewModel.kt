@@ -81,7 +81,10 @@ class MainViewModel : ViewModel() {
         DateRepoCompnay.EditOrder(id,EditResponseLD)
 
     }
+    fun ChangePassword(password:String){
+        DateRepoCompnay.ChangePassword(password,EditResponseLD)
 
+    }
     fun GetMyorders(){
         DateRepoCompnay.GetMyorders(OrdersResponseLD)
 

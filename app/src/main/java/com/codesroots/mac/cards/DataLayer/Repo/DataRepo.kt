@@ -121,7 +121,23 @@ print(error)
                 }
             )
     }
+    @SuppressLint("CheckResult")
 
+    fun ChangePassword(password:String,livedata: MutableLiveData<EditOrder>?) {
+
+        getServergetway().ChangePassword(password,PreferenceHelper.getUserId().toLong())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+
+                }
+            )
+    }
     @SuppressLint("CheckResult")
     fun GetMyorders(livedata: MutableLiveData<List<Myorders>>?) {
 

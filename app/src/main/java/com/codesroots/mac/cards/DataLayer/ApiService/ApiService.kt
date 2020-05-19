@@ -84,6 +84,11 @@ interface APIServices {
     fun EditOrder(        @Field("approve") approve: String,
                           @Path("order_id") order_id: Long):
             Observable<EditOrder>
+    @FormUrlEncoded
+    @POST("users/changepassword/{id}.json")/*{company_id}*/
+    fun ChangePassword(        @Field("password") password: String,
+                          @Path("id") user_id: Long):
+            Observable<EditOrder>
 
     @GET("orders/getOrderForEmployee.json")/*{company_id}*/
     fun GetMyorders():

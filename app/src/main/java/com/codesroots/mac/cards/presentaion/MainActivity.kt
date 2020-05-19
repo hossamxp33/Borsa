@@ -13,14 +13,10 @@ import android.opengl.ETC1.getHeight
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import android.util.Patterns
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -74,7 +70,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     lateinit var reportsFragment: ReportsFragment
     lateinit var moreFragment: MenuFragment
     lateinit var myorders: OrdersFragment
-    lateinit var changePW: changePassword
+    lateinit var changepw: changePassword
 
     lateinit var navigationView: NavigationView
 
@@ -242,14 +238,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             setOnTabSelectedListener { position, wasSelected ->
                 Unit
                 Log.e("tab positiion", position.toString())
-
                 /*  getLastLocation()*/
-                if (position == 4) {
-                    supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
-                        .replace(com.codesroots.mac.cards.R.id.main_frame, changePassword())
-                        .addToBackStack(null).commit()
-                }
-
                 if (position == 3) {
                     supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                         .replace(com.codesroots.mac.cards.R.id.main_frame, OrdersFragment())
@@ -339,11 +328,10 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit()
             }
-
             R.id.changepw -> {
-                changePW = changePassword()
+                changepw = changePassword()
                 supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
-                    .replace(R.id.main_frame, changePW)
+                    .replace(R.id.main_frame, changepw)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit()
             }
@@ -404,7 +392,17 @@ class ClickHandler {
         ( context as MainActivity).supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb,0, 0,0)
             .replace(R.id.main_frame, frag).addToBackStack(null).commit()
     }
-
+//    fun SwitchToReports( context: Context,comid :String) {
+//
+//        val bundle = Bundle()
+//        //  bundle.putParcelable("cliObj" ,clients[position] )
+//        val frag = ReportsFragment()
+//        frag.arguments =bundle
+//        bundle.putString("packageId" , comid)
+//        ( context as MainActivity).supportFragmentManager!!.beginTransaction()
+//
+//            .replace(com.codesroots.mac.cards.R.id.main_frame, frag).addToBackStack(null).commit()
+//    }
 
     fun SwitchToPayment(context: Context,id:CompanyDatum,viewmodel:MainViewModel) {
 
@@ -413,53 +411,11 @@ class ClickHandler {
         var dialogView = inflater.inflate(R.layout.alert_add_reserve, null)
 
         if (id.companyID!! == 2 ) {
+
              dialogView = inflater.inflate(R.layout.alert_add_employee, null)
 
 
         }
-
-        if (id.companyID!! == 15 ) {
-        fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-            this.addTextChangedListener(object: TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    afterTextChanged.invoke(s.toString())
-                }
-
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
-            })
-        }
-        dialogView.from.afterTextChanged {
-              val content =  dialogView.from.text.toString()
-            dialogView.from.error = if (content.startsWith("077") ) null
-
-            else "من فضلك ادخل الكود صحيح! "
-
-
-        }
-        }else{
-            fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-                this.addTextChangedListener(object: TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                        afterTextChanged.invoke(s.toString())
-                    }
-
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
-                })
-            }
-            dialogView.from.afterTextChanged {
-                val content =  dialogView.from.text.toString()
-                dialogView.from.error = if (content.length >= 11) null
-
-                else "من فضلك ادخل الكود صحيح! "
-
-
-            }
-        }
-
         dialogBuilder.setView(dialogView)
         val alertDialog = dialogBuilder.create()
         var  title =  TextView(context as MainActivity);
@@ -472,118 +428,46 @@ class ClickHandler {
 
         dialogBuilder.setCustomTitle(title);
         alertDialog.show()
-
         dialogView.save.setOnClickListener { v: View? ->
-
-
-            val msg: String = dialogView.from.text.toString()
-            //check if the EditText have values or not
-            if (id.companyID!! == 15 ) {
-            if(msg.trim().length >=11) {
-                if (msg.startsWith("077")){
-                    if (SystemClock.elapsedRealtime() - mLastClickTime < 10000){
-                        return@setOnClickListener
-                    }
-
-                    v!!.isGone = true
-
-                    mLastClickTime = SystemClock.elapsedRealtime();
-                    val auth = PreferenceHelper.getToken()
-                    var type = 1
-                    var name  = "admin"
-                    if (id.companyID!! == 2 ) {
-                        type = 2
-                        name = dialogView.name.text.toString()
-                    }
-                    viewmodel.BuyPackage(type,id.id!!,dialogView.from.text.toString(),name)
-
-
-                    if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
-                        viewmodel.BuyPackageResponseLD?.observe(context, Observer {
-
-
-                            if (it.center!!.err != null) {
-                                it.center!!.err!!.snack((context as MainActivity).window.decorView.rootView)
-                                dialogView.err.text = it.center!!.err
-                                dialogView.err.isGone = false
-                            } else {
-
-                                if (it!!.center!!.id != null) {
-                                    val homeIntent = Intent(context, Payment::class.java)
-
-
-                                    (context as MainActivity).startActivity(homeIntent)
-
-
-                                }
-
-                            }
-
-                        })
-                    }
-                }else{
-                    Toast.makeText(context, " يجب ان يبدا الكود ب 077", Toast.LENGTH_SHORT).show()
-                }
-               }else{
-                Toast.makeText(context, "من فضلك ادخل الكود صحيح!", Toast.LENGTH_SHORT).show()
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 10000){
+                return@setOnClickListener
             }
+            v!!.isGone = true
 
+            mLastClickTime = SystemClock.elapsedRealtime();
+            val auth = PreferenceHelper.getToken()
+            var type = 1
+            var name  = "admin"
+            if (id.companyID!! == 2 ) {
+                type = 2
+name = dialogView.name.text.toString()
             }
+            viewmodel.BuyPackage(type,id.id!!,dialogView.from.text.toString(),name)
 
-          else{
-                if(msg.trim().length >=11) {
 
-                        if (SystemClock.elapsedRealtime() - mLastClickTime < 10000){
-                            return@setOnClickListener
+            if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
+                viewmodel.BuyPackageResponseLD?.observe(context, Observer {
+
+
+                    if (it.center!!.err != null) {
+                        it.center!!.err!!.snack((context as MainActivity).window.decorView.rootView)
+                        dialogView.err.text = it.center!!.err
+                        dialogView.err.isGone = false
+                    } else {
+
+                        if (it!!.center!!.id != null) {
+                            val homeIntent = Intent(context, Payment::class.java)
+
+
+                            (context as MainActivity).startActivity(homeIntent)
+
+
                         }
 
-                        v!!.isGone = true
-
-                        mLastClickTime = SystemClock.elapsedRealtime();
-                        val auth = PreferenceHelper.getToken()
-                        var type = 1
-                        var name  = "admin"
-                        if (id.companyID!! == 2 ) {
-                            type = 2
-                            name = dialogView.name.text.toString()
-                        }
-                        viewmodel.BuyPackage(type,id.id!!,dialogView.from.text.toString(),name)
-
-
-                        if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
-                            viewmodel.BuyPackageResponseLD?.observe(context, Observer {
-
-
-                                if (it.center!!.err != null) {
-                                    it.center!!.err!!.snack((context as MainActivity).window.decorView.rootView)
-                                    dialogView.err.text = it.center!!.err
-                                    dialogView.err.isGone = false
-                                } else {
-
-                                    if (it!!.center!!.id != null) {
-                                        val homeIntent = Intent(context, Payment::class.java)
-
-
-                                        (context as MainActivity).startActivity(homeIntent)
-
-
-                                    }
-
-                                }
-
-                            })
-
                     }
 
-
-                }
-            else{
-                Toast.makeText(context, "من فضلك ادخل الكود صحيح! ", Toast.LENGTH_SHORT).show()
+                })
             }
-            }
-
-
-
         }
     }
 

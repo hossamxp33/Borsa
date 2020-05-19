@@ -54,6 +54,8 @@ class LoginActivity : AppCompatActivity() {
     }else {
        PreferenceHelper.setToken(it.token,this)
         PreferenceHelper.setUserId(it.userid!!)
+        PreferenceHelper.setUsername(it.username!!)
+
         PreferenceHelper.setUserGroupId(it.groupid!!.toInt())
         FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserGroupId().toString())
         FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserId().toString())

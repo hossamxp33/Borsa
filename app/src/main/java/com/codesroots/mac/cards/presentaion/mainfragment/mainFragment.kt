@@ -66,7 +66,7 @@ class mainFragment  : Fragment(){
             view.recyler.adapter = MainAdapter;
             //lastvalue.append(it.usercredit.toString())
             lastvalue.text =  it.usercredit.toString()
-
+            namevalue.text = PreferenceHelper.getUsername()
 
         })
 
