@@ -55,6 +55,7 @@
                 android:fontFamily="@font/fonts"
                 android:gravity="center"
                 android:hint=" اسم المستخدم "
+
                 android:inputType="text"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
