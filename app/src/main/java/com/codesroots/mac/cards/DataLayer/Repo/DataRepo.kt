@@ -32,7 +32,23 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
             }
         )
 }
+    @SuppressLint("CheckResult")
 
+    fun Register(username:String,password:String,mobile:String,groupid:String,agency:String,livedata: MutableLiveData<LoginData>?) {
+
+        getServergetway().userregister(username,password,mobile,groupid,agency,"1","1")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { success ->
+                    livedata?.postValue(success.data)
+                },
+                { error ->
+
+                }
+            )
+    }
     @SuppressLint("CheckResult")
 
     fun GetData(livedata: MutableLiveData<CompanyData>?) {
@@ -194,7 +210,23 @@ print(error)
                 }
             )
     }
+    @SuppressLint("CheckResult")
 
+    fun getMyOffices(livedata: MutableLiveData<List<LoginData>>?) {
+
+        getServergetway().Myoffices()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { success ->
+                    livedata?.postValue(success.myoffices)
+                },
+                { error ->
+
+                }
+            )
+    }
     @SuppressLint("CheckResult")
     fun GetTermsData(livedata: MutableLiveData<Terms>?) {
 
@@ -229,8 +261,8 @@ print(error)
                 }
             )
     }
-    @SuppressLint("CheckResult")
 
+    @SuppressLint("CheckResult")
     fun PrintReport(oopo:String,auth:String,livedata: MutableLiveData<Buypackge>?) {
 
         getServergetway().PrintReport(oopo,auth)
@@ -248,7 +280,6 @@ print(error)
     }
 
     @SuppressLint("CheckResult")
-
     fun GetMyImages(livedata: MutableLiveData<List<SliderElement>>?) {
 
         getServergetway().SliderData()
@@ -264,8 +295,8 @@ print(error)
                 }
             )
     }
-    @SuppressLint("CheckResult")
 
+    @SuppressLint("CheckResult")
     fun ConfirmOrder(id:Long,livedata: MutableLiveData<EditOrder>?) {
 
          getServergetway().EditOrderConfirm("1",id)
@@ -281,7 +312,23 @@ print(error)
                 }
             )
     }
+    @SuppressLint("CheckResult")
 
+    fun Transactions(user_id:String,mobile:String,value:String,livedata: MutableLiveData<trans>?,compiste: CompositeDisposable) {
+
+        compiste .add(   getServergetway().Transactions(user_id,value,mobile)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+                    print(error)
+                }
+            ))
+    }
     fun getServergetway () : APIServices
     {
         return ApiClient.getClient().create(APIServices::class.java)

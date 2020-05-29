@@ -51,6 +51,8 @@ class MainViewModel : ViewModel() {
     var ReportHistroyResponseLD : MutableLiveData<List<ReportDaily>>? = null
     var EditResponseLD : MutableLiveData<EditOrder>? = null
     var OrdersResponseLD : MutableLiveData<List<Myorders>>? = null
+    var LoginResponseLD : MutableLiveData<List<LoginData>>? = null
+    var transResponseLD : MutableLiveData<trans>? = null
 
 
     init {
@@ -61,6 +63,9 @@ class MainViewModel : ViewModel() {
         EditResponseLD = MutableLiveData()
         OrdersResponseLD = MutableLiveData()
         ReportDailyResponseLD = MutableLiveData()
+        LoginResponseLD = MutableLiveData()
+        transResponseLD = MutableLiveData()
+
         ReportHistroyResponseLD = MutableLiveData()
         mCompositeDisposable  = CompositeDisposable()
     }
@@ -89,6 +94,10 @@ class MainViewModel : ViewModel() {
         DateRepoCompnay.GetMyorders(OrdersResponseLD)
 
     }
+    fun GetMyOffices(){
+        DateRepoCompnay.getMyOffices(LoginResponseLD)
+
+    }
     fun ConfirmOrder(id:Long){
 
         DateRepoCompnay.ConfirmOrder(id,EditResponseLD)
@@ -97,6 +106,11 @@ class MainViewModel : ViewModel() {
     fun BuyPackage(type:Int,id:String,phone:String,name:String){
 
         DateRepoCompnay.BuyPackage(type,id,PreferenceHelper.getUserId().toString(),phone,name,BuyPackageResponseLD,mCompositeDisposable)
+
+    }
+    fun transactions(mobile:String,value:String){
+
+        DateRepoCompnay.Transactions(PreferenceHelper.getUserId().toString(),mobile,value,transResponseLD,mCompositeDisposable)
 
     }
     fun PrintReport(oopo:String,auth:String){

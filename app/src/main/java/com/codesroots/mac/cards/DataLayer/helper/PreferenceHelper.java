@@ -13,6 +13,7 @@ public class PreferenceHelper {
 	private static String Token = "auth";
 	private static String UserId = "userid";
 	private static String Username = "username";
+	private static String orderid = "orderid";
 
 	private static String UserGroupId = "UserGroupId";
 	private static String ROOMID = "ROOMID";
@@ -84,6 +85,14 @@ public class PreferenceHelper {
 	public static void setUsername(String username) {
 		Editor edit = app_prefs.edit();
 		edit.putString(Username, username);
+		edit.apply();
+	}
+	public static String getOrderid() {
+		return app_prefs.getString(orderid,"");
+	}
+	public static void setOrderid(String orderids) {
+		Editor edit = app_prefs.edit();
+		edit.putString(orderid, orderids);
 		edit.apply();
 	}
 	public static int getUserId() {

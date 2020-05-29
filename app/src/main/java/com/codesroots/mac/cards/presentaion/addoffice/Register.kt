@@ -1,14 +1,12 @@
-package com.codesroots.mac.cards.presentaion.login
+package com.codesroots.mac.cards.presentaion.addoffice
 
-
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.transition.TransitionInflater
-import android.util.Log
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -19,10 +17,15 @@ import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.isInternetConnectionAvailable
 import com.codesroots.mac.cards.presentaion.snack
+import com.codesroots.mac.cards.presentaion.toast
 import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_signin.*
+import kotlinx.android.synthetic.main.activity_signin.btnLogin
+import kotlinx.android.synthetic.main.activity_signin.etPassword
+import kotlinx.android.synthetic.main.activity_signin.etUsername
 
-class LoginActivity : AppCompatActivity() {
+class Register : AppCompatActivity()  {
     var network_enabled = false
     private val viewModel: LoginViewModel by lazy {
         ViewModelProviders.of(this).get(LoginViewModel::class.java)
@@ -32,39 +35,39 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PreferenceHelper(this)
-      setContentView(R.layout.activity_signin)
-         animation()
+        setContentView(R.layout.activity_register)
+        animation()
 
 
-        if (checkUserLogin(this))    startActivity(Intent(this  , MainActivity::class.java))
+      //  if (checkUserLogin(this))    startActivity(Intent(this  , MainActivity::class.java))
 
 
 
         btnLogin.setOnClickListener {
             if (!isInternetConnectionAvailable(this)) "رجاء تأكد من اتصالك بالانترنت".snack(window.decorView.rootView)
-            viewModel.Login(etUsername.text.toString(),etPassword.text.toString())
+            viewModel.register(etUsername.text.toString(),etPassword.text.toString(),mobile.text.toString())
 
         }
 
         viewModel.loginResponseLD?.observe(this , Observer {
 
 
-    if (it.token == null){
-        it.message!!.snack(window.decorView.rootView)
-    }else {
-       PreferenceHelper.setToken(it.token,this)
-        PreferenceHelper.setUserId(it.userid!!)
-        PreferenceHelper.setUsername(it.username!!)
+            if (it.token == null){
+                it.message!!.snack(window.decorView.rootView)
+                Toast.makeText(this, "موجود من قبل", Toast.LENGTH_LONG)
 
-        PreferenceHelper.setUserGroupId(it.groupid!!.toInt())
-        FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserGroupId().toString())
-        FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserId().toString())
-        val intent = Intent(this, MainActivity::class.java)
-
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-        startActivity(intent)
-    }
+            }else {
+//                PreferenceHelper.setToken(it.token,this)
+//                PreferenceHelper.setUserId(it.userid!!)
+//                PreferenceHelper.setUsername(it.username!!)
+//
+//                PreferenceHelper.setUserGroupId(it.groupid!!.toInt())
+//                FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserGroupId().toString())
+//                FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserId().toString())
+                "تم إضافة المكتب بنجاح".snack(window.decorView.rootView)
+                Toast.makeText(this, "تم إضافة المكتب بنجاح", Toast.LENGTH_LONG)
+             //   startActivity(Intent(this, MainActivity::class.java))
+            }
         })
 
         viewModel.coderesponse.observe(this , Observer {

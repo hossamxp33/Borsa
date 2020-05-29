@@ -18,6 +18,14 @@
                 android:icon="@drawable/more"
                 android:title="حسابات بنكية" />
         <item
+                android:id="@+id/addoffice"
+                android:icon="@drawable/more"
+                android:title="اضافة مكتب" />
+        <item
+                android:id="@+id/myoffices"
+                android:icon="@drawable/more"
+                android:title="مكاتبي" />
+        <item
                 android:id="@+id/changepw"
                 android:icon="@drawable/key"
                 android:title=" تغيير كلمة المرور" />

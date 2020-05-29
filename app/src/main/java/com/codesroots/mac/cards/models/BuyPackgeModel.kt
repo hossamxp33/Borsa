@@ -29,10 +29,24 @@ data class Center (
     val id: Long? = null,
     val err:String? = null
 )
+data class trans (
+    val trans: datatrans? = null
 
+)
+data class datatrans (
+    val userID: Long? = null,
+    val officeID: Long? = null,
+    val centerID: Long? = null,
+    val created: String? = null,
+    val modified: String? = null,
+    val id: Long? = null,
+    val err:String? = null
+
+)
 data class LoginModel (
     val success: Boolean? = null,
-    val data: LoginData? = null
+    val data: LoginData? = null,
+    val myoffices:List<LoginData>? = null
 )
 
 data class LoginData (
@@ -43,7 +57,8 @@ data class LoginData (
     val groupid: String? = null,
     val username: String? = null,
     val token: String? = null,
-    val message: String? = null
+    val message: String? = null,
+    val id: Int? = null
 
     )
 

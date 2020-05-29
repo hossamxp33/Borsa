@@ -15,6 +15,10 @@ interface APIServices {
         @Field("password") password: String
     ): Observable<LoginModel>
 
+    @GET("users/getmyoffices.json")
+    abstract fun Myoffices(
+
+    ): Observable<LoginModel>
 
 
 
@@ -99,5 +103,31 @@ interface APIServices {
     @GET("wserv?page=16")/*{company_id}*/
     fun GetPartnersData():
             Observable<List<PartnersModel>>
+
+
+    @FormUrlEncoded
+    @POST("users/add.json")
+    abstract fun userregister(
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("mobile") mobile: String,
+        @Field("user_group_id") groupid: String,
+        @Field("agency_id") agency: String,
+        @Field("active") active: String,
+        @Field("email_verified") email_verified: String
+
+
+    ): Observable<LoginModel>
+
+    @FormUrlEncoded
+    @POST("transactions/add.json")/*{company_id}*/
+    fun Transactions(
+        @Field("office_id") useris: String,
+        @Field("value") value: String,
+        @Field("mobile") mobile: String
+
+
+    ):
+            Observable<trans>
 
 }

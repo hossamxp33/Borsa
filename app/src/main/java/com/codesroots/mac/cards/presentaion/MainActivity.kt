@@ -38,11 +38,14 @@ import com.codesroots.mac.cards.DataLayer.helper.MyService
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.models.CompanyDatum
+import com.codesroots.mac.cards.models.LoginData
+import com.codesroots.mac.cards.presentaion.addoffice.Register
 import com.codesroots.mac.cards.presentaion.changepassword.changePassword
 import com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetails
 import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.menufragmen.MenuFragment
+import com.codesroots.mac.cards.presentaion.myoffices.myofficesFragment
 import com.codesroots.mac.cards.presentaion.ordersfragment.OrdersFragment
 import com.codesroots.mac.cards.presentaion.ordersfragment.ordersAdapter
 import com.codesroots.mac.cards.presentaion.payment.Payment
@@ -74,6 +77,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     lateinit var moreFragment: MenuFragment
     lateinit var myorders: OrdersFragment
     lateinit var changepw: changePassword
+    lateinit var myoffices: myofficesFragment
 
     lateinit var navigationView: NavigationView
 
@@ -84,7 +88,6 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-
         map = HashMap()
         map!!["KEY_LOGIN"] = HashSet(Arrays.asList("espere", "waiting", "loading", "esperando"))
         map!!["KEY_ERROR"] = HashSet(Arrays.asList("problema", "problem", "error", "null"))
@@ -196,7 +199,9 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 //
 
 
-        val typeface = ResourcesCompat.getFont(this, R.font.fonts)
+
+
+            val typeface = ResourcesCompat.getFont(this, R.font.fonts)
 
 
         // Create messages
@@ -232,6 +237,15 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
 
             }
+            if (PreferenceHelper.getUserGroupId() == 2) {
+                navigationView.getMenu().findItem(R.id.addoffice).setVisible(true);
+
+            }else {
+                navigationView.getMenu().findItem(R.id.addoffice).setVisible(false);
+
+            }
+
+
 
             inactiveColor = ContextCompat.getColor(context, R.color.gray)
             accentColor = ContextCompat.getColor(context, R.color.signinpurple)
@@ -273,7 +287,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
         }
 
-
+println(PreferenceHelper.getUserGroupId())
         if (PreferenceHelper.getUserGroupId() == 1) {
             startService(Intent(this, MyService::class.java))
             //   startService(Intent(this, USSDService::class.java))
@@ -330,6 +344,21 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                     .replace(R.id.main_frame, myorders)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit()
+            }
+
+            R.id.myoffices -> {
+                myoffices = myofficesFragment()
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
+                    .replace(R.id.main_frame, myoffices)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
+            }
+
+            R.id.addoffice -> {
+                val intent1 = Intent(applicationContext, Register::class.java)
+
+                startActivity(intent1)
+
             }
             R.id.changepw -> {
                 changepw = changePassword()
@@ -406,134 +435,138 @@ class ClickHandler {
 //
 //            .replace(com.codesroots.mac.cards.R.id.main_frame, frag).addToBackStack(null).commit()
 //    }
-
-    fun SwitchToPayment(context: Context,id:CompanyDatum,viewmodel:MainViewModel) {
-
-        val dialogBuilder = AlertDialog.Builder(( context as MainActivity) )
-        val inflater = ( context as MainActivity).getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        var dialogView = inflater.inflate(R.layout.alert_add_reserve, null)
-
-        if (id.companyID!! == 2 ) {
-            dialogView = inflater.inflate(R.layout.alert_add_employee, null)
-
-
-        }
-
-        if (id.companyID!! == 15 ) {
-            fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-                this.addTextChangedListener(object: TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                        afterTextChanged.invoke(s.toString())
-                    }
-
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
-                })
-            }
-            dialogView.from.afterTextChanged {
-                val content =  dialogView.from.text.toString()
-                dialogView.from.error = if (content.startsWith("077") ) null
-
-                else "من فضلك ادخل الكود صحيح! "
-
-
-            }
-        }else{
-            fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-                this.addTextChangedListener(object: TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                        afterTextChanged.invoke(s.toString())
-                    }
-
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
-                })
-            }
-            dialogView.from.afterTextChanged {
-                val content =  dialogView.from.text.toString()
-                dialogView.from.error = if (content.length >= 11) null
-
-                else "من فضلك ادخل الكود صحيح! "
-
-
-            }
-        }
-
-        dialogBuilder.setView(dialogView)
-        val alertDialog = dialogBuilder.create()
-        var  title =  TextView(context as MainActivity);
+    fun transactions(context: Context,data:LoginData?,viewmodel:MainViewModel,type:Int){
+    val dialogBuilder = AlertDialog.Builder(( context as MainActivity) )
+    val inflater = ( context as MainActivity).getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    var dialogView = inflater.inflate(R.layout.alert_offices, null)
+    dialogBuilder.setView(dialogView)
+    val alertDialog = dialogBuilder.create()
+    var  title =  TextView(context as MainActivity);
 // You Can Customise your Title here
-        title.setText("إضافة طلب");
-        title.setBackgroundColor(Color.DKGRAY);
-        title.setPadding(10, 10, 10, 10);
-        title.setGravity(Gravity.CENTER);
-        title.setTextSize(20f);
+    title.setText("إضافة طلب");
+    title.setBackgroundColor(Color.DKGRAY);
+    title.setPadding(10, 10, 10, 10);
+    title.setGravity(Gravity.CENTER);
+    title.setTextSize(20f);
 
-        dialogBuilder.setCustomTitle(title);
-        alertDialog.show()
+    dialogBuilder.setCustomTitle(title);
+    alertDialog.show()
 
-        dialogView.save.setOnClickListener { v: View? ->
+    dialogView.save.setOnClickListener { v: View? ->
+var mobile = ""
+        if (type == 1) {
 
+            mobile = dialogView.from.text.toString()
+        }else {
 
-            val msg: String = dialogView.from.text.toString()
-            //check if the EditText have values or not
-            if (id.companyID!! == 15 ) {
-                if(msg.trim().length >=11) {
-                    if (msg.startsWith("077")){
-                        if (SystemClock.elapsedRealtime() - mLastClickTime < 10000){
-                            return@setOnClickListener
-                        }
+            mobile = data!!.mobile.toString()
 
-                        v!!.isGone = true
-
-                        mLastClickTime = SystemClock.elapsedRealtime();
-                        val auth = PreferenceHelper.getToken()
-                        var type = 1
-                        var name  = "admin"
-                        if (id.companyID!! == 2 ) {
-                            type = 2
-                            name = dialogView.name.text.toString()
-                        }
-                        viewmodel.BuyPackage(type,id.id!!,dialogView.from.text.toString(),name)
+        }
 
 
-                        if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
-                            viewmodel.BuyPackageResponseLD?.observe(context, Observer {
+        viewmodel.transactions(mobile,dialogView.name.text.toString())
 
 
-                                if (it.center!!.err != null) {
-                                    it.center!!.err!!.snack((context as MainActivity).window.decorView.rootView)
-                                    dialogView.err.text = it.center!!.err
-                                    dialogView.err.isGone = false
-                                } else {
-
-                                    if (it!!.center!!.id != null) {
-                                        val homeIntent = Intent(context, Payment::class.java)
+        if (viewmodel.transResponseLD?.hasObservers() == false) {
+            viewmodel.transResponseLD?.observe(context, Observer {
 
 
-                                        (context as MainActivity).startActivity(homeIntent)
+                    if (it!!.trans!!.id != null) {
+                        "تم تحويل المبلغ بنجاح".snack(context.window.decorView.rootView)
+
+                        val homeIntent = Intent(context, Payment::class.java)
 
 
-                                    }
+                        (context as MainActivity).startActivity(homeIntent)
 
-                                }
 
-                            })
-                        }
-                    }else{
-                        Toast.makeText(context, " يجب ان يبدا الكود ب 077", Toast.LENGTH_SHORT).show()
+                    }else if (it!!.trans!!.err != null ) {
+
+                        it!!.trans!!.err!!.snack(context.window.decorView.rootView)
+
                     }
-                }else{
-                    Toast.makeText(context, "من فضلك ادخل الكود صحيح!", Toast.LENGTH_SHORT).show()
+            })
+
+        }
+
+    }
+
+    }
+fun SwitchToPayment(context: Context,id:CompanyDatum,viewmodel:MainViewModel) {
+
+    val dialogBuilder = AlertDialog.Builder(( context as MainActivity) )
+    val inflater = ( context as MainActivity).getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    var dialogView = inflater.inflate(R.layout.alert_add_reserve, null)
+
+    if (id.companyID!! == 2 ) {
+        dialogView = inflater.inflate(R.layout.alert_add_employee, null)
+
+
+    }
+
+    if (id.companyID!! == 15 ) {
+        fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+            this.addTextChangedListener(object: TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    afterTextChanged.invoke(s.toString())
                 }
 
-            }
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
 
-            else{
-                if(msg.trim().length >=11) {
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
+            })
+        }
+        dialogView.from.afterTextChanged {
+            val content =  dialogView.from.text.toString()
+            dialogView.from.error = if (content.startsWith("077") ) null
 
+            else "من فضلك ادخل الكود صحيح! "
+
+
+        }
+    }else{
+        fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+            this.addTextChangedListener(object: TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    afterTextChanged.invoke(s.toString())
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
+            })
+        }
+        dialogView.from.afterTextChanged {
+            val content =  dialogView.from.text.toString()
+            dialogView.from.error = if (content.length >= 11) null
+
+            else "من فضلك ادخل الكود صحيح! "
+
+
+        }
+    }
+
+    dialogBuilder.setView(dialogView)
+    val alertDialog = dialogBuilder.create()
+    var  title =  TextView(context as MainActivity);
+// You Can Customise your Title here
+    title.setText("إضافة طلب");
+    title.setBackgroundColor(Color.DKGRAY);
+    title.setPadding(10, 10, 10, 10);
+    title.setGravity(Gravity.CENTER);
+    title.setTextSize(20f);
+
+    dialogBuilder.setCustomTitle(title);
+    alertDialog.show()
+
+    dialogView.save.setOnClickListener { v: View? ->
+
+
+        val msg: String = dialogView.from.text.toString()
+        //check if the EditText have values or not
+        if (id.companyID!! == 15 ) {
+            if(msg.trim().length >=11) {
+                if (msg.startsWith("077")){
                     if (SystemClock.elapsedRealtime() - mLastClickTime < 10000){
                         return@setOnClickListener
                     }
@@ -573,21 +606,72 @@ class ClickHandler {
                             }
 
                         })
-
                     }
-
-
+                }else{
+                    Toast.makeText(context, " يجب ان يبدا الكود ب 077", Toast.LENGTH_SHORT).show()
                 }
-                else{
-                    Toast.makeText(context, "من فضلك ادخل الكود صحيح! ", Toast.LENGTH_SHORT).show()
-                }
+            }else{
+                Toast.makeText(context, "من فضلك ادخل الكود صحيح!", Toast.LENGTH_SHORT).show()
             }
 
-
-
         }
-    }
 
+        else{
+            if(msg.trim().length >=10) {
+
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 10000){
+                    return@setOnClickListener
+                }
+
+                v!!.isGone = true
+
+                mLastClickTime = SystemClock.elapsedRealtime();
+                val auth = PreferenceHelper.getToken()
+                var type = 1
+                var name  = "admin"
+                if (id.companyID!! == 2 ) {
+                    type = 2
+                    name = dialogView.name.text.toString()
+                }
+                viewmodel.BuyPackage(type,id.id!!,dialogView.from.text.toString(),name)
+
+
+                if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
+                    viewmodel.BuyPackageResponseLD?.observe(context, Observer {
+
+
+                        if (it.center!!.err != null) {
+                            it.center!!.err!!.snack((context as MainActivity).window.decorView.rootView)
+                            dialogView.err.text = it.center!!.err
+                            dialogView.err.isGone = false
+                        } else {
+
+                            if (it!!.center!!.id != null) {
+                                val homeIntent = Intent(context, Payment::class.java)
+
+
+                                (context as MainActivity).startActivity(homeIntent)
+
+
+                            }
+
+                        }
+
+                    })
+
+                }
+
+
+            }
+            else{
+                Toast.makeText(context, "من فضلك ادخل الكود صحيح! ", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
+    }
+}
 fun ConfirmOrder(id:Long,viewmodel:MainViewModel,context: Context){
 
     viewmodel.ConfirmOrder(id)

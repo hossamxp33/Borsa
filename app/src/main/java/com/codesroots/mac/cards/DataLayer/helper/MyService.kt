@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.codesroots.mac.cards.DataLayer.ApiService.ApiClient
@@ -55,17 +56,25 @@ class MyService : Service(), NetworkChangeReceiver.ConnectivityReceiverListener 
                                 if (books.myorders!!.id != null) {
                                     val intent1 = Intent(applicationContext, MainActivity::class.java)
                                       //  toast.ma(this@MyService,"aa")
-                                    Toast.makeText(this@MyService,"طلب جديد", Toast.LENGTH_SHORT).show()
+                                   // Toast.makeText(this@MyService,PreferenceHelper.getOrderid(), Toast.LENGTH_SHORT).show()
+
                                     intent1.putExtra("new_order",1)
                                     intent1.putExtra("id",books.myorders.id)
                                     intent1.putExtra("name",books.myorders.productPackage.name)
                                     intent1.putExtra("code",books.myorders.productPackage.company!!.code)
                                     intent1.putExtra("phone",books.myorders.mobile)
+   Log.i("idordier",books.myorders!!.id.toString())
+                                    Log.i("idordierprefrenche",PreferenceHelper.getOrderid())
 
+//                                    if (books.myorders!!.id > PreferenceHelper.getOrderid().toInt()) {
+    Toast.makeText(this@MyService,"طلب جديد", Toast.LENGTH_SHORT).show()
 
-                                    intent1.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+    PreferenceHelper.setOrderid(books.myorders!!.id.toString())
 
-                                    startActivity(intent1)
+    intent1.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
+    startActivity(intent1)
+   //}
                                 }else {
                                     Toast.makeText(this@MyService,"خطا", Toast.LENGTH_SHORT).show()
 
