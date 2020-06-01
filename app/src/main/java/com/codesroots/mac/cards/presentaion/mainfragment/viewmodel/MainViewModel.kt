@@ -52,7 +52,8 @@ class MainViewModel : ViewModel() {
     var EditResponseLD : MutableLiveData<EditOrder>? = null
     var OrdersResponseLD : MutableLiveData<List<Myorders>>? = null
     var LoginResponseLD : MutableLiveData<List<LoginData>>? = null
-    var transResponseLD : MutableLiveData<trans>? = null
+    var transResponseLD : MutableLiveData<Trans>? = null
+    var mytransResponseLD : MutableLiveData<List<Datatrans>>? = null
 
 
     init {
@@ -65,7 +66,7 @@ class MainViewModel : ViewModel() {
         ReportDailyResponseLD = MutableLiveData()
         LoginResponseLD = MutableLiveData()
         transResponseLD = MutableLiveData()
-
+        mytransResponseLD  = MutableLiveData()
         ReportHistroyResponseLD = MutableLiveData()
         mCompositeDisposable  = CompositeDisposable()
     }
@@ -98,6 +99,11 @@ class MainViewModel : ViewModel() {
         DateRepoCompnay.getMyOffices(LoginResponseLD)
 
     }
+    fun GetMyTrans(){
+        DateRepoCompnay.getMyTrans(mytransResponseLD)
+
+    }
+
     fun ConfirmOrder(id:Long){
 
         DateRepoCompnay.ConfirmOrder(id,EditResponseLD)

@@ -29,15 +29,19 @@ data class Center (
     val id: Long? = null,
     val err:String? = null
 )
-data class trans (
-    val trans: datatrans? = null
+data class Trans (
+    val trans: Datatrans? = null,
+    val data: List<Datatrans>? = null
+
 
 )
-data class datatrans (
+data class Datatrans (
     val userID: Long? = null,
     val officeID: Long? = null,
     val centerID: Long? = null,
+    val value: Long? = null,
     val created: String? = null,
+    val user:LoginData? = null,
     val modified: String? = null,
     val id: Long? = null,
     val err:String? = null

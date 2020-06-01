@@ -20,7 +20,10 @@ interface APIServices {
 
     ): Observable<LoginModel>
 
+    @GET("transactions/getAgencyTrans.json")
+    abstract fun MyTrans(
 
+    ): Observable<Trans>
 
     @POST("companies.json")/*{company_id}*/
     fun GetCompanyData(@Query("auth") auth: String):
@@ -128,6 +131,6 @@ interface APIServices {
 
 
     ):
-            Observable<trans>
+            Observable<Trans>
 
 }

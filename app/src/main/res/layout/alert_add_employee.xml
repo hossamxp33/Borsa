@@ -24,7 +24,7 @@
             android:background="@drawable/linear_background"
             android:fontFamily="@font/fonts"
             android:gravity="center"
-            android:hint="رقم الهاتف"
+            android:hint="كود"
             android:inputType="phone" />
     <EditText
             android:id="@+id/name"

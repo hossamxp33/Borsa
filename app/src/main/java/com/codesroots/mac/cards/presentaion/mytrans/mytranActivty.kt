@@ -1,4 +1,6 @@
-package com.codesroots.mac.cards.presentaion.myoffices
+package com.codesroots.mac.cards.presentaion.mytrans
+
+
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,16 +14,17 @@ import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.databinding.ActivityPaymentBinding
 import com.codesroots.mac.cards.databinding.MainFragmentBinding
 import com.codesroots.mac.cards.databinding.MyofficeLayoutBinding
+import com.codesroots.mac.cards.databinding.MytransactivityBinding
 import com.codesroots.mac.cards.presentaion.ClickHandler
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.ordersfragment.ordersAdapter
 import kotlinx.android.synthetic.main.orders_fragment.*
 
-class myofficesFragment : Fragment() {
+class mytranActivty : Fragment() {
 
 
-    lateinit var MainAdapter: myofficesadapter
+    lateinit var MainAdapter: mytransAdapter
     lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,26 +36,29 @@ class myofficesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view: MyofficeLayoutBinding =
-            DataBindingUtil.inflate(inflater,R.layout.myoffice_layout, container,false)
+        var view: MytransactivityBinding =
+            DataBindingUtil.inflate(inflater,R.layout.mytransactivity, container,false)
         view.listener =  ClickHandler()
         view.context =  context as MainActivity?
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         view.viewModel =  viewModel
 
-        viewModel.GetMyOffices();
+        viewModel.GetMyTrans();
 
-        viewModel.LoginResponseLD?.observe(this, androidx.lifecycle.Observer {
-            MainAdapter = myofficesadapter(viewModel, context, it)
+        viewModel.mytransResponseLD?.observe(this, androidx.lifecycle.Observer {
+            MainAdapter = mytransAdapter(viewModel, context, it)
             recylere.layoutManager = LinearLayoutManager(context);
             recylere.adapter = MainAdapter;
-            if (it.size > 0)
-            view.data = it.first()
+
 
             MainAdapter.notifyDataSetChanged()
 
         })
+
+
+
+
 
         return view.root;
 

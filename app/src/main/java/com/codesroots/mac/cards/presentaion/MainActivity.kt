@@ -46,6 +46,7 @@ import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.menufragmen.MenuFragment
 import com.codesroots.mac.cards.presentaion.myoffices.myofficesFragment
+import com.codesroots.mac.cards.presentaion.mytrans.mytranActivty
 import com.codesroots.mac.cards.presentaion.ordersfragment.OrdersFragment
 import com.codesroots.mac.cards.presentaion.ordersfragment.ordersAdapter
 import com.codesroots.mac.cards.presentaion.payment.Payment
@@ -75,6 +76,8 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     lateinit var homeFragment: mainFragment
     lateinit var reportsFragment: ReportsFragment
     lateinit var moreFragment: MenuFragment
+    lateinit var mytransfragment: mytranActivty
+
     lateinit var myorders: OrdersFragment
     lateinit var changepw: changePassword
     lateinit var myoffices: myofficesFragment
@@ -338,6 +341,13 @@ println(PreferenceHelper.getUserGroupId())
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit()
         }
+            R.id.mytrans -> {
+                mytransfragment = mytranActivty()
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
+                    .replace(R.id.main_frame, mytransfragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
+            }
             R.id.myorder -> {
                 myorders = OrdersFragment()
                 supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)

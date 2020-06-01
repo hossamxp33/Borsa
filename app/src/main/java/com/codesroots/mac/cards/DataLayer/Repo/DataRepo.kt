@@ -1,6 +1,7 @@
 package com.codesroots.mac.firstkotlon.DataLayer.Repo
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.codesroots.mac.cards.DataLayer.ApiService.ApiClient
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
@@ -25,6 +26,7 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
         .map { data -> data }
     .subscribe(
                 { success ->
+                    Log.i("success",success.toString())
                     livedata?.postValue(success.data)
                 },
             { error ->
@@ -228,6 +230,23 @@ print(error)
             )
     }
     @SuppressLint("CheckResult")
+
+    fun getMyTrans(livedata: MutableLiveData<List<Datatrans>>?) {
+
+        getServergetway().MyTrans()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { success ->
+                    livedata?.postValue(success.data)
+                },
+                { error ->
+
+                }
+            )
+    }
+    @SuppressLint("CheckResult")
     fun GetTermsData(livedata: MutableLiveData<Terms>?) {
 
         getServergetway().GetTerms()
@@ -314,7 +333,7 @@ print(error)
     }
     @SuppressLint("CheckResult")
 
-    fun Transactions(user_id:String,mobile:String,value:String,livedata: MutableLiveData<trans>?,compiste: CompositeDisposable) {
+    fun Transactions(user_id:String,mobile:String,value:String,livedata: MutableLiveData<Trans>?,compiste: CompositeDisposable) {
 
         compiste .add(   getServergetway().Transactions(user_id,value,mobile)
             .subscribeOn(Schedulers.io())

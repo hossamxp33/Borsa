@@ -25,6 +25,11 @@
                 android:id="@+id/myoffices"
                 android:icon="@drawable/more"
                 android:title="مكاتبي" />
+
+        <item
+                android:id="@+id/mytrans"
+                android:icon="@drawable/more"
+                android:title="تحويلاتي" />
         <item
                 android:id="@+id/changepw"
                 android:icon="@drawable/key"
