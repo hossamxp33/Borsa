@@ -37,7 +37,7 @@ class mainFragment  : Fragment(){
     lateinit var viewModel: MainViewModel
     private var currentPage = 0
     private var NUM_PAGES = 0
-   private var pager: ViewPager? = null
+    private var pager: ViewPager? = null
     var  text : TextView? = null
     var  recyclerView : RecyclerView? = null
 

@@ -15,7 +15,6 @@ import com.codesroots.mac.cards.databinding.MyofficeLayoutBinding
 import com.codesroots.mac.cards.presentaion.ClickHandler
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
-import com.codesroots.mac.cards.presentaion.ordersfragment.ordersAdapter
 import kotlinx.android.synthetic.main.orders_fragment.*
 
 class myofficesFragment : Fragment() {

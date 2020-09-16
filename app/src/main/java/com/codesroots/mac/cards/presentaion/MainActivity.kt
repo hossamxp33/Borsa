@@ -48,7 +48,6 @@ import com.codesroots.mac.cards.presentaion.menufragmen.MenuFragment
 import com.codesroots.mac.cards.presentaion.myoffices.myofficesFragment
 import com.codesroots.mac.cards.presentaion.mytrans.mytranActivty
 import com.codesroots.mac.cards.presentaion.ordersfragment.OrdersFragment
-import com.codesroots.mac.cards.presentaion.ordersfragment.ordersAdapter
 import com.codesroots.mac.cards.presentaion.payment.Payment
 import com.codesroots.mac.cards.presentaion.reportsFragment.ReportsFragment
 import com.crashlytics.android.Crashlytics
@@ -243,7 +242,7 @@ if (company_id == "33") {
                 addItems(listOf(item2,item1,  item3,item4))
 
             }else {
-                addItems(listOf(item1,item2, item3))
+                addItems(listOf(item1,item2, item3,item4))
 
 
             }
@@ -675,7 +674,7 @@ fun SwitchToPayment(context: Context,id:CompanyDatum,viewmodel:MainViewModel) {
 
                             if (it.center!!.err != null) {
                                 it.center!!.err!!.snack((context as MainActivity).window.decorView.rootView)
-                                dialogView.err.text = it.center!!.err
+                                dialogView.err.text = it.center.err
                                 dialogView.err.isGone = false
                             } else {
 

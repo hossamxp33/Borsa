@@ -11,14 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codesroots.mac.cards.R
-import com.codesroots.mac.cards.databinding.ActivityPaymentBinding
-import com.codesroots.mac.cards.databinding.MainFragmentBinding
-import com.codesroots.mac.cards.databinding.MyofficeLayoutBinding
 import com.codesroots.mac.cards.databinding.MytransactivityBinding
 import com.codesroots.mac.cards.presentaion.ClickHandler
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
-import com.codesroots.mac.cards.presentaion.ordersfragment.ordersAdapter
 import kotlinx.android.synthetic.main.orders_fragment.*
 
 class mytranActivty : Fragment() {
