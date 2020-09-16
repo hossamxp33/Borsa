@@ -1,8 +1,11 @@
 package com.codesroots.mac.cards.presentaion.ordersfragment
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.codesroots.mac.cards.R
@@ -15,6 +18,9 @@ import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 
 class ordersAdapter (var viewModel: MainViewModel, var context : Context?, var data: List<Myorders>?) : RecyclerView.Adapter<CustomViewHolder>() {
+
+    private var myClipboard: ClipboardManager? = null
+    private var myClip: ClipData? = null
     override fun getItemCount(): Int {
 
         return  data!!.size
@@ -32,7 +38,14 @@ class ordersAdapter (var viewModel: MainViewModel, var context : Context?, var d
         val  binding: OrdersItemAdapterBindingImpl = DataBindingUtil.inflate (
             LayoutInflater.from(p0.context),
             R.layout.orders_item_adapter,p0,false)
+        myClipboard = context!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?;
 
+        binding.tvUnpaid.setOnClickListener {
+            myClip = ClipData.newPlainText("text", binding.tvUnpaid.text);
+            myClipboard?.setPrimaryClip(myClip!!);
+
+            Toast.makeText(context, "تم النسخ", Toast.LENGTH_SHORT).show();
+        }
         return  CustomViewHolder(binding)
     }
 

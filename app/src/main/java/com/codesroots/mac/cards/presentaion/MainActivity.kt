@@ -152,8 +152,16 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             var code = intent.getStringExtra("code")
             var price = intent.getStringExtra("name")
             var id = intent.getLongExtra("id", 0)
+            var company_id = intent.getStringExtra("companyId")
+if (company_id == "33") {
+    makePhonecall(id, code + phone.substring(1)  + "*" + price  + "*12369"  + "#")
 
-            makePhonecall(id, code + price + "*" + phone + "#")
+
+}else {
+    makePhonecall(id, code + price + "*" + phone + "#")
+
+
+}
 
         }
     }
@@ -166,7 +174,6 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         FirebaseMessaging.getInstance()
         FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserGroupId().toString())
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
         ///////// tool bar and drawerToggle
         setSupportActionBar(toolBar)
         val actionBar = supportActionBar
@@ -231,7 +238,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         )
         with(bottom_navigation) {
             println(PreferenceHelper.getUserGroupId())
-            if (PreferenceHelper.getUserGroupId() == 4) {
+            if (PreferenceHelper.getUserGroupId() == 4 || PreferenceHelper.getUserGroupId() == 5 || PreferenceHelper.getUserGroupId() == 6) {
 
                 addItems(listOf(item2,item1,  item3,item4))
 
@@ -264,8 +271,6 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                         .replace(com.codesroots.mac.cards.R.id.main_frame, OrdersFragment())
                         .addToBackStack(null).commit()
                 }
-
-
                 if (position == 2) {
                     supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
                         .replace(com.codesroots.mac.cards.R.id.main_frame, MenuFragment())
@@ -349,11 +354,11 @@ println(PreferenceHelper.getUserGroupId())
                     .commit()
             }
             R.id.myorder -> {
-                myorders = OrdersFragment()
-                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
-                    .replace(R.id.main_frame, myorders)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit()
+//                myorders = OrdersFragment()
+//                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
+//                    .replace(R.id.main_frame, myorders)
+//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                    .commit()
             }
 
             R.id.myoffices -> {
@@ -463,13 +468,20 @@ class ClickHandler {
     alertDialog.show()
 
     dialogView.save.setOnClickListener { v: View? ->
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 10000){
+            return@setOnClickListener
+        }
+
+        v!!.isGone = true
+
+        mLastClickTime = SystemClock.elapsedRealtime();
 var mobile = ""
         if (type == 1) {
 
             mobile = dialogView.from.text.toString()
         }else {
 
-            mobile = data!!.mobile.toString()
+           mobile = data!!.mobile.toString()
 
         }
 
@@ -506,15 +518,15 @@ fun SwitchToPayment(context: Context,id:CompanyDatum,viewmodel:MainViewModel) {
 
     val dialogBuilder = AlertDialog.Builder(( context as MainActivity) )
     val inflater = ( context as MainActivity).getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    var dialogView = inflater.inflate(R.layout.alert_add_reserve, null)
+    var dialogView = inflater.inflate(R.layout.alert_add_employee, null)
 
-    if (id.companyID!! == 2 ) {
+    if (id.companyID!! != 15  || id.companyID!! != 30 || id.companyID!! != 33 ) {
         dialogView = inflater.inflate(R.layout.alert_add_employee, null)
 
 
     }
 
-    if (id.companyID!! == 15 ) {
+    if (id.companyID!! == 15  || id.companyID!! == 30 || id.companyID!! == 33) {
         fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
             this.addTextChangedListener(object: TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
@@ -528,7 +540,7 @@ fun SwitchToPayment(context: Context,id:CompanyDatum,viewmodel:MainViewModel) {
         }
         dialogView.from.afterTextChanged {
             val content =  dialogView.from.text.toString()
-            dialogView.from.error = if (content.startsWith("077") ) null
+            dialogView.from.error = if (content.startsWith("077") || content.startsWith("075")) null
 
             else "من فضلك ادخل الكود صحيح! "
 
@@ -547,10 +559,19 @@ fun SwitchToPayment(context: Context,id:CompanyDatum,viewmodel:MainViewModel) {
             })
         }
         dialogView.from.afterTextChanged {
-            val content =  dialogView.from.text.toString()
-            dialogView.from.error = if (content.length >= 11) null
+            if (id.companyID!! == 2  ) {
+                val content =  dialogView.from.text.toString()
+                dialogView.from.error = if (content.length == 10) null
 
-            else "من فضلك ادخل الكود صحيح! "
+                else "من فضلك ادخل الكود صحيح! "
+            }else {
+
+                val content =  dialogView.from.text.toString()
+                dialogView.from.error = if (content.length == 16) null
+
+                else "من فضلك ادخل الكود صحيح! "
+            }
+
 
 
         }
@@ -574,9 +595,10 @@ fun SwitchToPayment(context: Context,id:CompanyDatum,viewmodel:MainViewModel) {
 
         val msg: String = dialogView.from.text.toString()
         //check if the EditText have values or not
-        if (id.companyID!! == 15 ) {
-            if(msg.trim().length >=11) {
-                if (msg.startsWith("077")){
+        if (id.companyID!! == 15  || id.companyID!! == 30 || id.companyID!! == 33) {
+            if(msg.trim().length>=11) {
+               println( msg.substring(1))
+                if (msg.startsWith("077") || msg.startsWith("075")){
                     if (SystemClock.elapsedRealtime() - mLastClickTime < 10000){
                         return@setOnClickListener
                     }
@@ -589,6 +611,10 @@ fun SwitchToPayment(context: Context,id:CompanyDatum,viewmodel:MainViewModel) {
                     var name  = "admin"
                     if (id.companyID!! == 2 ) {
                         type = 2
+                        name = dialogView.name.text.toString()
+                    }
+                    if (id.companyID!! == 30 ) {
+                        type = 5
                         name = dialogView.name.text.toString()
                     }
                     viewmodel.BuyPackage(type,id.id!!,dialogView.from.text.toString(),name)
@@ -624,6 +650,54 @@ fun SwitchToPayment(context: Context,id:CompanyDatum,viewmodel:MainViewModel) {
                 Toast.makeText(context, "من فضلك ادخل الكود صحيح!", Toast.LENGTH_SHORT).show()
             }
 
+        }else if (id.companyID!! == 29  || id.companyID!! == 31 ) {
+            if(msg.trim().length == 16) {
+                    if (SystemClock.elapsedRealtime() - mLastClickTime < 10000){
+                        return@setOnClickListener
+                    }
+
+                    v!!.isGone = true
+
+                    mLastClickTime = SystemClock.elapsedRealtime();
+                    val auth = PreferenceHelper.getToken()
+                    var type = 3
+                    var name  = "admin"
+                    if (id.companyID!! == 31 ) {
+                        type = 4
+                        name = dialogView.name.text.toString()
+                    }
+                    viewmodel.BuyPackage(type,id.id!!,dialogView.from.text.toString(),name)
+
+
+                    if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
+                        viewmodel.BuyPackageResponseLD?.observe(context, Observer {
+
+
+                            if (it.center!!.err != null) {
+                                it.center!!.err!!.snack((context as MainActivity).window.decorView.rootView)
+                                dialogView.err.text = it.center!!.err
+                                dialogView.err.isGone = false
+                            } else {
+
+                                if (it!!.center!!.id != null) {
+                                    val homeIntent = Intent(context, Payment::class.java)
+
+
+                                    (context as MainActivity).startActivity(homeIntent)
+
+
+                                }
+
+                            }
+
+                        })
+                    }
+
+            }else{
+                Toast.makeText(context, "من فضلك ادخل الكود صحيح!", Toast.LENGTH_SHORT).show()
+            }
+
+
         }
 
         else{
@@ -643,6 +717,7 @@ fun SwitchToPayment(context: Context,id:CompanyDatum,viewmodel:MainViewModel) {
                     type = 2
                     name = dialogView.name.text.toString()
                 }
+
                 viewmodel.BuyPackage(type,id.id!!,dialogView.from.text.toString(),name)
 
 

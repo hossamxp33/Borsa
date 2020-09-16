@@ -14,8 +14,8 @@ android {
         minSdkVersion 23
         targetSdkVersion 29
         multiDexEnabled true
-        versionCode 7
-        versionName "1.0"
+        versionCode 8
+        versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         dataBinding {
             enabled = true

@@ -44,7 +44,7 @@ class SliderAdapter(activity: FragmentActivity, sliders: List<SliderElement>) : 
         val view = `object` as View
         container.removeView(view)
     }
-    override fun getPageWidth(position: Int): Float {
-        return 0.93f
-    }
+//    override fun getPageWidth(position: Int): Float {
+//        return 0.93f
+//    }
 }

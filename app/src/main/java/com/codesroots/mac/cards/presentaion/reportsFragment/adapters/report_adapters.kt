@@ -13,7 +13,19 @@ import com.codesroots.mac.cards.models.Report
 import com.codesroots.mac.cards.presentaion.ClickHandler
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
-class report_adapters ( var viewModel: MainViewModel,var context :Context?,var data: List<Report>) : RecyclerView.Adapter<CustomViewHolder>() {
+import android.R.attr.label
+import android.content.ClipData
+import androidx.core.content.ContextCompat.getSystemService
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
+import android.widget.Toast
+
+
+class report_adapters ( var viewModel: MainViewModel,var context :Context?,var data: List<Report>) : RecyclerView.Adapter<CustomViewHolder>()
+{
+
+
+
     override fun getItemCount(): Int {
 
         return  data.size
@@ -34,6 +46,7 @@ class report_adapters ( var viewModel: MainViewModel,var context :Context?,var d
 //        layoutParams.height = (p0.getHeight() /  2).toInt()
 //        layoutParams.width = (p0.getWidth() /  2.5).toInt()
 //        cellforrow.setLayoutParams(layoutParams)
+
         val  binding: ReportItemBinding = DataBindingUtil.inflate (LayoutInflater.from(p0.context),R.layout.report_item,p0,false)
 
         return  CustomViewHolder(binding)
@@ -43,7 +56,8 @@ class report_adapters ( var viewModel: MainViewModel,var context :Context?,var d
 }
 class CustomViewHolder (
     private val binding:ReportItemBinding
-) : RecyclerView.ViewHolder(binding.root){
+) : RecyclerView.ViewHolder(binding.root)
+{
 
     fun bind(
         viewModel:MainViewModel,

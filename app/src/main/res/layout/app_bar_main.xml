@@ -16,7 +16,14 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="#50017e"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
-
+<androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TAJNAZ/V1"
+        android:layout_gravity="center_horizontal"
+android:textSize="18dp"
+        android:textColor="@color/white"
+        ></androidx.appcompat.widget.AppCompatTextView>
         </androidx.appcompat.widget.Toolbar>
 
 

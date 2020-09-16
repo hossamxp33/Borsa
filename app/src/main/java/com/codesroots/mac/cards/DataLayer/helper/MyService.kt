@@ -62,6 +62,8 @@ class MyService : Service(), NetworkChangeReceiver.ConnectivityReceiverListener 
                                     intent1.putExtra("id",books.myorders.id)
                                     intent1.putExtra("name",books.myorders.productPackage.name)
                                     intent1.putExtra("code",books.myorders.productPackage.company!!.code)
+                                    intent1.putExtra("companyId",books.myorders.productPackage.company!!.id)
+
                                     intent1.putExtra("phone",books.myorders.mobile)
    Log.i("idordier",books.myorders!!.id.toString())
                                     Log.i("idordierprefrenche",PreferenceHelper.getOrderid())

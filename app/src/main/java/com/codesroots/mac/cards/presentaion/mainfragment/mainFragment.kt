@@ -73,10 +73,10 @@ class mainFragment  : Fragment(){
         viewModel.SliderDataResponseLD?.observe(this , Observer {
 
             pager!!.offscreenPageLimit = 3
-            pager!!.pageMargin = 20
+          //  pager!!.pageMargin = 20
             pager!!.clipChildren = false
             pager!!.clipToPadding = false
-            pager!!.setPadding(100, 0, 50, 0)
+         //   pager!!.setPadding(100, 0, 50, 0)
 
             view.pagerr.adapter = it?.let { it1 -> SliderAdapter(activity!!, it1) }
             indicator.setViewPager(view.pagerr)

@@ -57,7 +57,7 @@ data class LoginData (
     val userid: Int? = null,
     val roomid: Long? = null,
     val email: String? = null,
-    val mobile: Long? = null,
+    val mobile: String? = null,
     val groupid: String? = null,
     val username: String? = null,
     val token: String? = null,
