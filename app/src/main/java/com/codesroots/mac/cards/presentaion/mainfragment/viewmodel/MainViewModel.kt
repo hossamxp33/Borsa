@@ -44,6 +44,8 @@ class MainViewModel : ViewModel() {
      var mCompositeDisposable = CompositeDisposable()
 
     var CompanyResponseLD : MutableLiveData<CompanyData>? = null
+    var CompanyDetailsResponseLD : MutableLiveData<CompanyData>? = null
+
     var MyBalanceResponseLD : MutableLiveData<MyBalance>? = null
     var SliderDataResponseLD : MutableLiveData<List<SliderElement>>? = null
     var BuyPackageResponseLD : MutableLiveData<Buypackge>? = null
@@ -58,6 +60,8 @@ class MainViewModel : ViewModel() {
 
     init {
         CompanyResponseLD = MutableLiveData()
+        CompanyDetailsResponseLD = MutableLiveData()
+
         BuyPackageResponseLD = MutableLiveData()
         MyBalanceResponseLD = MutableLiveData()
         SliderDataResponseLD = MutableLiveData()
@@ -81,7 +85,7 @@ class MainViewModel : ViewModel() {
                     }
 
     fun getPackageDetails(id:String){
-        DateRepoCompnay.GetPackageDetails(id,CompanyResponseLD)
+        DateRepoCompnay.GetPackageDetails(id,CompanyDetailsResponseLD)
     }
     fun EditOrder(id:Long){
         DateRepoCompnay.EditOrder(id,EditResponseLD)

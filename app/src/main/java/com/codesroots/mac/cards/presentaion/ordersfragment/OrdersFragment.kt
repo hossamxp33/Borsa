@@ -8,9 +8,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -20,6 +18,8 @@ import androidx.viewpager.widget.ViewPager
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.databinding.ServerFragmentBinding
+import com.codesroots.mac.cards.models.CompanyData
+import com.codesroots.mac.cards.models.CompanyDatum
 import com.codesroots.mac.cards.presentaion.mainfragment.Adapter.SliderAdapter
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.main_fragment.indicator
@@ -32,7 +32,17 @@ class OrdersFragment : Fragment() {
     private var currentPage = 0
     private var NUM_PAGES = 0
     private var pager: ViewPager? = null
-//    lateinit var MainAdapter: ordersAdapter
+    var CompanyList:List<CompanyDatum>? = null
+    var Companydata:CompanyDatum? = null
+
+    var CompanyDetailsList:List<CompanyDatum>? = null
+    var package_id:String? = ""
+
+
+    //    lateinit var MainAdapter: ordersAdapter
+lateinit  var spinner: Spinner
+    lateinit  var spinner_type: Spinner
+
     lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,10 +62,8 @@ class OrdersFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.GetMyorders();
         viewModel.GetMyImages(PreferenceHelper.getToken())
-
-
-        val spinner = view.citySpinner
-
+        view.data = Companydata
+        viewModel.getcompanyData()
 
         viewModel.SliderDataResponseLD?.observe(this , Observer {
             pager!!.offscreenPageLimit = 3
@@ -69,19 +77,59 @@ class OrdersFragment : Fragment() {
 
         })
 
-        view.presenter  =  object : Presenter {
+        spinner = view.orderSpinner
+        spinner_type = view.orderTypeSpinner
 
+
+        viewModel.CompanyResponseLD?.observe(this, Observer {
+            CompanyList = it.companies
+            val arrayadapter =  CompanyList!!.
+                filter { companyDatum -> companyDatum.id == "15" || companyDatum.id == "33" }
+                spinner.adapter = activity?.applicationContext?.
+                let { it1 -> ArrayAdapter(it1, R.layout.spinner, arrayadapter.map { it.name }) }
+        })
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+             val arrayadapter =  CompanyList!!.
+            filter { companyDatum -> companyDatum.id == "15" || companyDatum.id == "33" }
+            var  com_id = arrayadapter!![position].id
+            viewModel.getPackageDetails(com_id!!)
+
+            }}
+
+        viewModel.CompanyDetailsResponseLD?.observe(this , Observer {
+             CompanyDetailsList = it.data
+            spinner_type.adapter = activity?.applicationContext?.
+                let { it1 -> ArrayAdapter(it1, R.layout.spinner, CompanyDetailsList!!.map { it.name }) }
+
+
+        })
+        spinner_type.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                  package_id = CompanyDetailsList!![position].id
+            }}
+        view.presenter  =  object : Presenter {
             override fun AddClick() {
                 showCustomDialog()
   //  Toast.makeText(context, "تم تسجيل البيانات", Toast.LENGTH_SHORT).show()
             }
-
         }
 
         return view.root;
 
-
     }
+
+
+
+
+
     private fun init(size: Int) {
         val density = getResources().getDisplayMetrics().density
         indicator.setRadius(4 * density)
