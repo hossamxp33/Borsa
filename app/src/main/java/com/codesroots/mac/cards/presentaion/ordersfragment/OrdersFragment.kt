@@ -23,6 +23,7 @@ import com.codesroots.mac.cards.models.CompanyDatum
 import com.codesroots.mac.cards.presentaion.mainfragment.Adapter.SliderAdapter
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.main_fragment.indicator
+import kotlinx.android.synthetic.main.server_fragment.*
 
 import kotlinx.android.synthetic.main.server_fragment.view.*
 import java.util.*
@@ -83,7 +84,7 @@ lateinit  var spinner: Spinner
 
         viewModel.CompanyResponseLD?.observe(this, Observer {
             CompanyList = it.companies
-            val arrayadapter =  CompanyList!!.
+            var arrayadapter =  CompanyList!!.
                 filter { companyDatum -> companyDatum.id == "15" || companyDatum.id == "33" }
                 spinner.adapter = activity?.applicationContext?.
                 let { it1 -> ArrayAdapter(it1, R.layout.spinner, arrayadapter.map { it.name }) }
@@ -95,7 +96,7 @@ lateinit  var spinner: Spinner
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
              val arrayadapter =  CompanyList!!.
             filter { companyDatum -> companyDatum.id == "15" || companyDatum.id == "33" }
-            var  com_id = arrayadapter!![position].id
+            var  com_id = arrayadapter[position].id
             viewModel.getPackageDetails(com_id!!)
 
             }}
@@ -104,23 +105,30 @@ lateinit  var spinner: Spinner
              CompanyDetailsList = it.data
             spinner_type.adapter = activity?.applicationContext?.
                 let { it1 -> ArrayAdapter(it1, R.layout.spinner, CompanyDetailsList!!.map { it.name }) }
-
-
         })
+
         spinner_type.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
 
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                   package_id = CompanyDetailsList!![position].id
+                  price_value.text = CompanyDetailsList!![position].sprice
+                process_time_text.text = CompanyDetailsList!![position].created
             }}
+
         view.presenter  =  object : Presenter {
             override fun AddClick() {
                 showCustomDialog()
-  //  Toast.makeText(context, "تم تسجيل البيانات", Toast.LENGTH_SHORT).show()
             }
         }
+
+view.send.setOnClickListener {
+
+}
+
+
+
 
         return view.root;
 
