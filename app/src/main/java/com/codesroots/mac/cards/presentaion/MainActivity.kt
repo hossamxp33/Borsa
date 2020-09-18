@@ -63,6 +63,7 @@ import kotlinx.android.synthetic.main.alert_add_reserve.view.err
 import kotlinx.android.synthetic.main.alert_add_reserve.view.from
 import kotlinx.android.synthetic.main.alert_add_reserve.view.save
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.jetbrains.anko.telephonyManager
 import java.util.*
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
@@ -152,11 +153,13 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             var price = intent.getStringExtra("name")
             var id = intent.getLongExtra("id", 0)
             var company_id = intent.getStringExtra("companyId")
-if (company_id == "33") {
+            company_id.snack(window.decorView.rootView,1000)
+
+if (company_id == "33" && telephonyManager.networkOperatorName == "KOREK") {
     makePhonecall(id, code + phone.substring(1)  + "*" + price  + "*12369"  + "#")
 
 
-}else {
+}else if  (company_id != "33" && telephonyManager.networkOperatorName != "KOREK"){
     makePhonecall(id, code + price + "*" + phone + "#")
 
 
@@ -181,6 +184,8 @@ if (company_id == "33") {
             object : ActionBarDrawerToggle(this, drawerLayout, toolBar, (R.string.open), (R.string.close)) {
 
         }
+        (telephonyManager.networkOperatorName).snack(window.decorView.rootView,3000)
+
         drawerToggle.isDrawerIndicatorEnabled = true
         drawerLayout.addDrawerListener(drawerToggle)
         animation()

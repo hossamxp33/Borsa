@@ -5,7 +5,10 @@
         >
 
     <data>
-
+        <variable
+                name="data"
+                type="com.codesroots.mac.cards.models.CompanyDatum"/>
+       
         <variable
                 name="presenter"
                 type="com.codesroots.mac.cards.presentaion.ordersfragment.Presenter"/>

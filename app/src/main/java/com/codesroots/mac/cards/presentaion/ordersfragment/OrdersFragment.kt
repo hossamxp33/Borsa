@@ -17,13 +17,17 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.R
+import com.codesroots.mac.cards.databinding.DialogCustomViewBinding
+import com.codesroots.mac.cards.databinding.MytransItemBinding
 import com.codesroots.mac.cards.databinding.ServerFragmentBinding
 import com.codesroots.mac.cards.models.CompanyData
 import com.codesroots.mac.cards.models.CompanyDatum
 import com.codesroots.mac.cards.presentaion.mainfragment.Adapter.SliderAdapter
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.dialog_custom_view.*
 import kotlinx.android.synthetic.main.main_fragment.indicator
 import kotlinx.android.synthetic.main.server_fragment.*
+import kotlinx.android.synthetic.main.server_fragment.process_time_text
 
 import kotlinx.android.synthetic.main.server_fragment.view.*
 import java.util.*
@@ -119,7 +123,7 @@ lateinit  var spinner: Spinner
 
         view.presenter  =  object : Presenter {
             override fun AddClick() {
-                showCustomDialog()
+                showCustomDialog(container!!)
             }
         }
 
@@ -169,13 +173,17 @@ view.send.setOnClickListener {
     private lateinit var alertDialog2: AlertDialog
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    fun showCustomDialog() {
+    fun showCustomDialog(container:ViewGroup) {
         val inflater: LayoutInflater = this.getLayoutInflater()
-        val dialogView: View = inflater.inflate(R.layout.dialog_custom_view, null)
+
+        val  dialogView: DialogCustomViewBinding = DataBindingUtil.inflate (
+            LayoutInflater.from(context),
+            R.layout.dialog_custom_view,container,false)
+
+
         val dialogView2: View = inflater.inflate(R.layout.thanks_dialog, null)
 
-        val cancel_button: Button = dialogView.findViewById(R.id.cancel_button)
-        cancel_button.setOnClickListener {
+        dialogView.cancelButton.setOnClickListener {
             alertDialog.dismiss()     }
 
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(context!!,R.style.yourCustomDialog)
@@ -185,12 +193,11 @@ view.send.setOnClickListener {
             }
         })
 
-        dialogBuilder.setView(dialogView)
+        dialogBuilder.setView(dialogView.root)
         alertDialog = dialogBuilder.create();
         alertDialog.show()
 
-        val accept_buy_now_button: Button = dialogView.findViewById(R.id.accept_buy_now)
-        accept_buy_now_button.setOnClickListener {
+        dialogView.acceptBuyNow.setOnClickListener {
             // Dismiss the popup window
             val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(context!!,R.style.LLDialog)
 
