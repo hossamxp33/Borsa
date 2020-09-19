@@ -2,35 +2,49 @@ package com.codesroots.mac.cards.presentaion.ordersfragment
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
+import com.codesroots.mac.cards.DataLayer.usecases.getTime
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.databinding.DialogCustomViewBinding
 import com.codesroots.mac.cards.databinding.MytransItemBinding
 import com.codesroots.mac.cards.databinding.ServerFragmentBinding
 import com.codesroots.mac.cards.models.CompanyData
 import com.codesroots.mac.cards.models.CompanyDatum
+import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.Adapter.SliderAdapter
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
+import com.codesroots.mac.cards.presentaion.payment.Payment
+import com.codesroots.mac.cards.presentaion.snack
+import com.google.android.gms.analytics.internal.zzy.v
+import kotlinx.android.synthetic.main.alert_add_employee.view.*
+import kotlinx.android.synthetic.main.alert_add_reserve.view.*
 import kotlinx.android.synthetic.main.dialog_custom_view.*
 import kotlinx.android.synthetic.main.main_fragment.indicator
 import kotlinx.android.synthetic.main.server_fragment.*
 import kotlinx.android.synthetic.main.server_fragment.process_time_text
 
 import kotlinx.android.synthetic.main.server_fragment.view.*
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.*
+import java.util.Calendar.*
+import java.time.LocalDateTime.of as of1
 
 
 class OrdersFragment : Fragment() {
@@ -85,6 +99,10 @@ lateinit  var spinner: Spinner
         spinner = view.orderSpinner
         spinner_type = view.orderTypeSpinner
 
+        val date = Calendar.getInstance().time
+        val formatter = SimpleDateFormat.getDateTimeInstance() //or use getDateInstance()
+        val formatedDate = formatter.format(date)
+        view.processTimeText.text = formatedDate
 
         viewModel.CompanyResponseLD?.observe(this, Observer {
             CompanyList = it.companies
@@ -105,6 +123,7 @@ lateinit  var spinner: Spinner
 
             }}
 
+
         viewModel.CompanyDetailsResponseLD?.observe(this , Observer {
              CompanyDetailsList = it.data
             spinner_type.adapter = activity?.applicationContext?.
@@ -115,19 +134,24 @@ lateinit  var spinner: Spinner
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                   package_id = CompanyDetailsList!![position].id
                   price_value.text = CompanyDetailsList!![position].sprice
-                process_time_text.text = CompanyDetailsList!![position].created
+
             }}
 
         view.presenter  =  object : Presenter {
             override fun AddClick() {
                 showCustomDialog(container!!)
+
             }
         }
 
 view.send.setOnClickListener {
+
+
+
 
 }
 
@@ -175,42 +199,52 @@ view.send.setOnClickListener {
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     fun showCustomDialog(container:ViewGroup) {
         val inflater: LayoutInflater = this.getLayoutInflater()
+        val phone_number = phone_number.text.toString()
+        if(phone_number.trim().length>=11) {
+            println( phone_number.substring(1))
+            if (phone_number.startsWith("077") || phone_number.startsWith("075")){
 
-        val  dialogView: DialogCustomViewBinding = DataBindingUtil.inflate (
-            LayoutInflater.from(context),
-            R.layout.dialog_custom_view,container,false)
+                val  dialogView: DialogCustomViewBinding = DataBindingUtil.inflate (
+                    LayoutInflater.from(context),
+                    R.layout.dialog_custom_view,container,false)
 
+                val dialogView2: View = inflater.inflate(R.layout.thanks_dialog, null)
 
-        val dialogView2: View = inflater.inflate(R.layout.thanks_dialog, null)
+                val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(context!!,R.style.yourCustomDialog)
 
-        dialogView.cancelButton.setOnClickListener {
-            alertDialog.dismiss()     }
+                dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
+                    override fun onDismiss(arg0: DialogInterface) {
+                    }
+                })
 
-        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(context!!,R.style.yourCustomDialog)
+                dialogBuilder.setView(dialogView.root)
+                alertDialog = dialogBuilder.create();
+                alertDialog.show()
 
-        dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
-            override fun onDismiss(arg0: DialogInterface) {
+                dialogView.acceptBuyNow.setOnClickListener {
+                    // Dismiss the popup window
+                    val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(context!!,R.style.LLDialog)
+                    alertDialog.dismiss()
+                    dialogBuilder.setView(dialogView2)
+                    alertDialog2 = dialogBuilder.create();
+                    alertDialog2.show()
+
+                }
+                val done_button: Button = dialogView2.findViewById(R.id.done)
+                done_button.setOnClickListener {
+                    alertDialog2.dismiss()     }
+            }else{
+                Toast.makeText(context, " يجب ان يبدا الكود ب 077", Toast.LENGTH_SHORT).show()
             }
-        })
-
-        dialogBuilder.setView(dialogView.root)
-        alertDialog = dialogBuilder.create();
-        alertDialog.show()
-
-        dialogView.acceptBuyNow.setOnClickListener {
-            // Dismiss the popup window
-            val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(context!!,R.style.LLDialog)
-
-
-            alertDialog.dismiss()
-            dialogBuilder.setView(dialogView2)
-            alertDialog2 = dialogBuilder.create();
-            alertDialog2.show()
-
+        }else{
+            Toast.makeText(context, "من فضلك ادخل الكود صحيح!", Toast.LENGTH_SHORT).show()
         }
-        val done_button: Button = dialogView2.findViewById(R.id.done)
-        done_button.setOnClickListener {
-            alertDialog2.dismiss()     }
+
+
+
+
+
+
     }
 }
 

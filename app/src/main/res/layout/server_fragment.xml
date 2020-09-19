@@ -96,7 +96,7 @@
                         android:layout_marginLeft="16dp"
                         android:background="@android:color/transparent"
                         android:gravity="left"
-                        android:spinnerMode="dropdown"
+                        android:spinnerMode="dialog"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -104,6 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="اختر طلب"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -117,7 +118,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="64dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="64dp"
                     android:background="@drawable/log_border"
                     android:padding="11dp"
@@ -134,7 +135,7 @@
                         android:layout_marginLeft="16dp"
                         android:background="@android:color/transparent"
                         android:gravity="left"
-                        android:spinnerMode="dropdown"
+                        android:spinnerMode="dialog"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,6 +143,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="اختر نوع الطلب"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -155,7 +157,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="64dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="64dp"
                     android:background="@drawable/log_border"
                     android:padding="11dp"
@@ -164,10 +166,12 @@
                     app:layout_constraintTop_toBottomOf="@id/chose_order_type">
 
                 <EditText
+                        android:id="@+id/phone_number"
                         android:layout_width="wrap_content"
-                        android:layout_height="70dp"
-                        android:hint="Write some thing"
-
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="اكتب رقم التليفون"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -181,7 +185,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="64dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="64dp"
                     android:background="@drawable/log_border"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -193,22 +197,22 @@
                         android:id="@+id/process_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="32dp"
+                        android:layout_marginRight="16dp"
                         android:layout_marginBottom="16dp"
                         android:text="وقت المعالجة"
+                        android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                         android:id="@+id/process_time_text"
-                        android:layout_width="wrap_content"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginRight="32dp"
-                        android:text=" M 1-5"
+                        android:layout_marginRight="8dp"
                         android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/process_time" />
@@ -220,6 +224,7 @@
                         android:layout_marginLeft="32dp"
                         android:layout_marginBottom="16dp"
                         android:text=" السعر"
+                        android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -246,12 +251,13 @@
                     android:layout_marginStart="64dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="64dp"
-                    android:background="@drawable/buttonbackground"
-                    android:backgroundTint="@color/blue"
+                    android:background="#0177fd"
+                    android:backgroundTint="#0177fd"
                     android:fontFamily="@font/fonts"
                     android:onClick="@{(v) -> presenter.AddClick()}"
                     android:text=" ارسال "
                     android:textColor="@color/white"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/process_time_layout" />
