@@ -84,6 +84,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
     lateinit var navigationView: NavigationView
 
+     var company_id: String = ""
 
     @TargetApi(Build.VERSION_CODES.O)
     @RequiresApi(Build.VERSION_CODES.O)
@@ -106,7 +107,11 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 var dataToSend = "data"// <- send "data" into USSD's input text
                 ussdApi!!.send("1") {
                     print(it)
+if (company_id == "33"){
 
+    ussdApi!!.cancel()
+
+}
                     if (it == "0مزيد") {
                         ussdApi!!.cancel()
                         viewModel.EditOrder(id)
@@ -152,8 +157,8 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             var code = intent.getStringExtra("code")
             var price = intent.getStringExtra("name")
             var id = intent.getLongExtra("id", 0)
-            var company_id = intent.getStringExtra("companyId")
-            company_id.snack(window.decorView.rootView,1000)
+             company_id = intent.getStringExtra("companyId")
+            company_id!!.snack(window.decorView.rootView,1000)
 
 if (company_id == "33" && telephonyManager.networkOperatorName == "KOREK") {
     makePhonecall(id, code + phone.substring(1)  + "*" + price  + "*12369"  + "#")
