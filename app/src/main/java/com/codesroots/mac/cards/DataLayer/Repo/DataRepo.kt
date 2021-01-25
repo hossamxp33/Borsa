@@ -14,48 +14,45 @@ import io.reactivex.schedulers.Schedulers
 
 class  DataRepo {
 
+    @SuppressLint("CheckResult")
+    fun Get_Borsa_Data(key:String ,livedata: MutableLiveData<List<StockData>>?) {
 
-@SuppressLint("CheckResult")
+        getServergetway().GetBorsaData(key)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+
+                }
+            )
+    }
 
 
-fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?) {
+//GetTextSliderData
+fun Get_TextSliderData(livedata: MutableLiveData<List<SliderDat>>?) {
 
-    getServergetway().userlogin(username,password)
+    getServergetway().GetTextSliderData()
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .map { data -> data }
-    .subscribe(
-                { success ->
-                    Log.i("success",success.toString())
-                    livedata?.postValue(success.data)
-                },
+        .subscribe(
+            { books ->
+                livedata?.postValue(books)
+            },
             { error ->
 
             }
         )
 }
-    @SuppressLint("CheckResult")
 
-    fun Register(username:String,password:String,mobile:String,groupid:String,agency:String,livedata: MutableLiveData<LoginData>?) {
+    //GetGoldData
+    fun Get_Gold_Data(livedata: MutableLiveData<List<Gold_Salary_News_Data>>?) {
 
-        getServergetway().userregister(username,password,mobile,groupid,agency,"1","1")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { success ->
-                    livedata?.postValue(success.data)
-                },
-                { error ->
-
-                }
-            )
-    }
-    @SuppressLint("CheckResult")
-
-    fun GetData(livedata: MutableLiveData<CompanyData>?) {
-
-        getServergetway().GetCompanyData(PreferenceHelper.getToken())
+        getServergetway().GetGoldPriceData()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { data -> data }
@@ -68,13 +65,10 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
                 }
             )
     }
+    //GetGoldData
+    fun Get_GazPriceData(livedata: MutableLiveData<List<Gold_Salary_News_Data>>?) {
 
-
-    @SuppressLint("CheckResult")
-
-    fun GetPackageDetails(id:String,livedata: MutableLiveData<CompanyData>?) {
-
-        getServergetway().GetPackageDetails(id)
+        getServergetway().GetGazPriceData()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { data -> data }
@@ -87,29 +81,26 @@ fun Login(username:String,password:String,livedata: MutableLiveData<LoginData>?)
                 }
             )
     }
+/// salary
+fun Get_Salary_Data(livedata: MutableLiveData<List<Gold_Salary_News_Data>>?) {
 
-    @SuppressLint("CheckResult")
+    getServergetway().GetSalaryData()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { data -> data }
+        .subscribe(
+            { books ->
+                livedata?.postValue(books)
+            },
+            { error ->
 
-    fun BuyPackage(type:Int,id:String,user_id:String,phone:String,name:String,livedata: MutableLiveData<Buypackge>?,compiste: CompositeDisposable) {
+            }
+        )
+}
+    /// Get_Currency_Data
+    fun Get_Currency_Data(key:String ,livedata: MutableLiveData<ArrayList<Currency>>?) {
 
-        compiste .add(   getServergetway().BuyPackage(user_id,id,phone,type,name)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books)
-                },
-                { error ->
-print(error)
-                }
-            ))
-    }
-    @SuppressLint("CheckResult")
-
-    fun GetMyBalance(livedata: MutableLiveData<MyBalance>?) {
-
-        getServergetway().GetMyBlanceData(PreferenceHelper.getToken())
+        getServergetway().GetCurrency(key)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { data -> data }
@@ -123,231 +114,6 @@ print(error)
             )
     }
     @SuppressLint("CheckResult")
-
-    fun EditOrder(id:Long,livedata: MutableLiveData<EditOrder>?) {
-
-        getServergetway().EditOrder("1",id)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books)
-                },
-                { error ->
-
-                }
-            )
-    }
-    @SuppressLint("CheckResult")
-
-    fun ChangePassword(password:String,livedata: MutableLiveData<EditOrder>?) {
-
-        getServergetway().ChangePassword(password,PreferenceHelper.getUserId().toLong())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books)
-                },
-                { error ->
-
-                }
-            )
-    }
-    @SuppressLint("CheckResult")
-    fun GetMyorders(livedata: MutableLiveData<List<Myorders>>?) {
-
-        getServergetway().GetMyorders()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books.myorders)
-                },
-                { error ->
-
-                }
-            )
-    }
-    @SuppressLint("CheckResult")
-    fun GetMyDeialyReport(
-        auth:String,
-        livedata: MutableLiveData<List<Report>>?
-    ) {
-
-        getServergetway().GetMyDeialyReport()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books.orders)
-                },
-                { error ->
-                    print(error)
-                }
-            )
-    }
-    @SuppressLint("CheckResult")
-    fun GetMyMonthReport(
-        auth:String,
-        from:String,
-        to:String,
-        livedata: MutableLiveData<List<Report>>?
-    ) {
-
-        getServergetway().GetDatesReport(from,to)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books.orders)
-                },
-                { error ->
-                    print(error)
-                }
-            )
-    }
-    @SuppressLint("CheckResult")
-
-    fun getMyOffices(livedata: MutableLiveData<List<LoginData>>?) {
-
-        getServergetway().Myoffices()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { success ->
-                    livedata?.postValue(success.myoffices)
-                },
-                { error ->
-
-                }
-            )
-    }
-    @SuppressLint("CheckResult")
-
-    fun getMyTrans(livedata: MutableLiveData<List<Datatrans>>?) {
-
-        getServergetway().MyTrans()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { success ->
-                    livedata?.postValue(success.data)
-                },
-                { error ->
-
-                }
-            )
-    }
-    @SuppressLint("CheckResult")
-    fun GetTermsData(livedata: MutableLiveData<Terms>?) {
-
-        getServergetway().GetTerms()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books)
-                },
-                { error ->
-                    print(error)
-                }
-            )
-    }
-
-
-    @SuppressLint("CheckResult")
-    fun GetPartnersData(livedata: MutableLiveData<List<PartnersModel>>?) {
-
-        getServergetway().GetPartnersData()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books)
-                },
-                { error ->
-                    print(error)
-                }
-            )
-    }
-
-    @SuppressLint("CheckResult")
-    fun PrintReport(oopo:String,auth:String,livedata: MutableLiveData<Buypackge>?) {
-
-        getServergetway().PrintReport(oopo,auth)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books)
-                },
-                { error ->
-                    print(error)
-                }
-            )
-    }
-
-    @SuppressLint("CheckResult")
-    fun GetMyImages(livedata: MutableLiveData<List<SliderElement>>?) {
-
-        getServergetway().SliderData()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { data -> data }
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books.data)
-                },
-                { error ->
-                    print(error)
-                }
-            )
-    }
-
-    @SuppressLint("CheckResult")
-    fun ConfirmOrder(id:Long,livedata: MutableLiveData<EditOrder>?) {
-
-         getServergetway().EditOrderConfirm("1",id)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books)
-                },
-                { error ->
-                    print(error)
-                }
-            )
-    }
-    @SuppressLint("CheckResult")
-
-    fun Transactions(user_id:String,mobile:String,value:String,livedata: MutableLiveData<Trans>?,compiste: CompositeDisposable) {
-
-        compiste .add(   getServergetway().Transactions(user_id,value,mobile)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-
-            .subscribe(
-                { books ->
-                    livedata?.postValue(books)
-                },
-                { error ->
-                    print(error)
-                }
-            ))
-    }
     fun getServergetway () : APIServices
     {
         return ApiClient.getClient().create(APIServices::class.java)

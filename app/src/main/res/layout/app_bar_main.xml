@@ -1,43 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+                name="Context"
+                type="com.codesroots.mac.cards.presentaion.MainActivity"/>
+        <variable
+                name="listener"
+                type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:background="#1C83D5">
 
 
-    <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-        <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolBar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="#50017e"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
-<androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TAJNAZ/V2"
-        android:layout_gravity="center_horizontal"
-android:textSize="18dp"
-        android:textColor="@color/white"
-        ></androidx.appcompat.widget.AppCompatTextView>
-        </androidx.appcompat.widget.Toolbar>
-
-
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
             android:id="@+id/main_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="50dp"
+
             android:background="@color/lightergrey" />
 
 
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/main_frame">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    app:srcCompat="@drawable/borsa"
+                    tools:srcCompat="@drawable/borsa">
+
+            </ImageView>
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

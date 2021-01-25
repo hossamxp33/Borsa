@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+                name="Context"
+                type="com.codesroots.mac.cards.presentaion.MainActivity"/>
+
+        <variable
+                name="ViewModel"
+                type="com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel"/>
+
+        <variable
+                name="listener"
+                type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
+
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/darkgrey"
+        android:orientation="vertical">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="قائمة"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@drawable/bottomreduisbackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/fainance_borsa" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <TextView
+                android:id="@+id/salary_news"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bluereduisbackground"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="أخبار الرواتب"
+                android:onClick="@{() -> listener.SwitchToSalaryNews(Context)}"
+
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/gaz_price"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bluereduisbackground"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="أسعار النفط"
+                android:onClick="@{() -> listener.SwitchToGazPrice(Context)}"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/salary_news" />
+
+        <TextView
+                android:id="@+id/gaz_price3"
+                style="d"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/red_reduisbackground"
+                android:onClick="@{() -> listener.SwitchToLogin(Context)}"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="تسجيل الخروج"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gaz_price" />
+
+        <TextView
+                android:id="@+id/gaz_price2"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bluereduisbackground"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="أسعار الذهب"
+                android:textAlignment="center"
+                android:onClick="@{() -> listener.SwitchToGoldFragment(Context)}"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/global_news3"
+                app:layout_constraintTop_toBottomOf="@+id/global_news3" />
+
+        <TextView
+                android:id="@+id/global_news3"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bluereduisbackground"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:onClick="@{() -> listener.SwitchToNews(Context)}"
+                android:text="أخبار عالمية"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/salary_news" />
+
+        <TextView
+                android:id="@+id/global_currency"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bluereduisbackground"
+                android:onClick="@{() -> listener.SwitchToCurrency(Context)}"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="العملات العالمية"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pagerr"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    <com.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="10dip"
+            app:centered="true"
+            app:fillColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/pagerr"
+            app:layout_constraintEnd_toEndOf="@+id/pagerr"
+            app:layout_constraintStart_toStartOf="@+id/pagerr"
+            app:pageColor="#fff"
+            app:snap="false" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

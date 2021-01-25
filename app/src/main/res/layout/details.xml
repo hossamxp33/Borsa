@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        >
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+                name="Context"
+                type="com.codesroots.mac.cards.presentaion.MainActivity"/>
+        <variable
+                name="listener"
+                type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
+        <variable
+                name="data"
+                type="com.codesroots.mac.cards.models.StockData"/>
+
+        <variable
+                name="alldata"
+                type="com.codesroots.mac.cards.models.StockData"/>
+        <variable
+                name="ViewModel"
+                type="com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel"/>
+        <variable
+                name="BindedValue"
+                type="com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.BindedValue"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/reduisbackground"
+            android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout7"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                    android:id="@+id/number"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:background="@drawable/reduisbackground"
+                    android:hint="00"
+                    android:padding="10dp"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+            <EditText
+                    android:id="@+id/IQ_value"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:background="@drawable/reduisbackground"
+                    android:padding="10dp"
+                    android:text=""
+                    android:hint="00"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+            <EditText
+                    android:id="@+id/USD_value"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:background="@drawable/reduisbackground"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textAlignment="center"
+
+                    android:hint="00"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView20" />
+
+            <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text=" الفئة :  "
+                    android:textColor="@color/blue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text=" سعر الصرف :  "
+                    android:textColor="@color/blue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+            <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="64dp"
+                    android:layout_marginEnd="16dp"
+                    android:text=" العدد  :  "
+                    android:textColor="@color/blue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+            <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="64dp"
+                    android:layout_marginEnd="16dp"
+                    android:text=" دينار عراقي  :  "
+                    android:textColor="@color/blue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+            <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="64dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="   :  USD "
+                    android:textColor="@color/blue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+            <TextView
+                    android:id="@+id/category_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="@{data.CName}"
+                    app:layout_constraintEnd_toStartOf="@+id/textView16"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{data.sPrice}"
+                    app:layout_constraintEnd_toStartOf="@+id/textView17"
+                    app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+            <TextView
+                    android:id="@+id/calculate_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/bluereduisbackground"
+                    android:padding="20dp"
+                    android:paddingStart="40dp"
+                    android:paddingLeft="40dp"
+                    android:paddingEnd="40dp"
+                    android:text="احسب"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/USD_value" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:checked="true"
+                android:gravity="center_vertical"
+                android:text="طلب"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout7" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

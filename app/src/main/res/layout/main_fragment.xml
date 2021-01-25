@@ -1,41 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-       xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/layout"
->
+        >
 
     <data>
         <import type="android.view.View"/>
 
-        <variable
-                name="MyBalannce"
-                type="com.codesroots.mac.cards.models.MyBalance"/>
+
         <variable
                 name="ViewModel"
                 type="com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel"/>
-
+        <variable
+                name="context"
+                type="com.codesroots.mac.cards.presentaion.MainActivity"/>
+        <variable
+                name="listener"
+                type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:background="#e9ebee">
+            android:layout_height="match_parent"
+            android:background="#1C83D5">
+
+
+
+        <androidx.viewpager.widget.ViewPager
+                android:id="@+id/top_pager"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/reduisbackground"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/pagerr"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/reduisbackground"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/top_pager">
+
+            <TextView
+                    android:id="@+id/orderText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="طلب"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                    app:layout_constraintTop_toTopOf="parent">
+
+            </TextView>
+
+            <TextView
+                    android:id="@+id/orderText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="عرض"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toTopOf="parent">
+
+            </TextView>
+
+            <TextView
+                    android:id="@+id/orderText3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="البورصة"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline7"
+                    app:layout_constraintTop_toTopOf="parent">
+
+            </TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/guideline14" />
+
+            <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.95" />
+
+            <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.71" />
+
+            <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="40dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.viewpager.widget.ViewPager
                 android:id="@+id/pagerr"
                 android:layout_width="0dp"
-                android:layout_height="180dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
+
         <com.viewpagerindicator.CirclePageIndicator
                 android:id="@+id/indicator"
                 android:layout_width="0dp"
@@ -43,112 +149,11 @@
                 android:padding="10dip"
                 app:centered="true"
                 app:fillColor="@color/colorPrimary"
-                android:layout_marginBottom="5dp"
-                app:layout_constraintStart_toStartOf="@+id/pagerr"
-                app:layout_constraintEnd_toEndOf="@+id/pagerr"
                 app:layout_constraintBottom_toBottomOf="@+id/pagerr"
+                app:layout_constraintEnd_toEndOf="@+id/pagerr"
+                app:layout_constraintStart_toStartOf="@+id/pagerr"
                 app:pageColor="#fff"
-                app:snap="false" app:layout_constraintBottom_toTopOf="@id/recyler"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyler"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginBottom="8dp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/constraintLayouttest"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pagerr" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayouttest"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/reduisbackground"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
-
-            <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/fonts"
-                    android:text="الرصيد"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                    android:id="@+id/lastvalue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="32dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/fonts"
-                    android:paddingLeft="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/textView5"
-                    app:layout_constraintTop_toTopOf="@+id/textView5" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/nameconstraint"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/reduisbackground"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/constraintLayouttest"
-                app:layout_constraintLeft_toLeftOf="parent">
-
-            <TextView
-                    android:id="@+id/nametextView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/fonts"
-                    android:text="الاسم : "
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                    android:id="@+id/namevalue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/fonts"
-                    android:paddingLeft="10dp"
-                    android:text="احمد"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/nametextView5" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:snap="false" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

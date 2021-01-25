@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/layout"
+        >
+
+    <data>
+
+        <variable
+                name="Context"
+                type="com.codesroots.mac.cards.presentaion.MainActivity"/>
+        <variable
+                name="listener"
+                type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
+        <variable
+                name="data"
+                type="com.codesroots.mac.cards.models.Currency"/>
+        <variable
+                name="viewmodel"
+                type="com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel"/>
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/reduisbackground"
+            android:layoutAnimation="@anim/layout_animation"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:visibility="visible"
+                app:imageResourcee="@{data.flag}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintHeight_percent="1"
+
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/awesome_money" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/calculate_btn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintHeight_percent="1"
+                android:onClick="@{() -> listener.SwitchToTransferPage(Context,data,viewmodel)}"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
+                app:srcCompat="@drawable/awesome_money"
+                tools:srcCompat="@drawable/awesome_money" />
+
+
+        <TextView
+                android:id="@+id/sympol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/fonts"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="@{data.sympol}"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toBottomOf="@+id/Cname" />
+
+        <TextView
+                android:id="@+id/CPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/fonts"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="@{data.cPrice}"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toBottomOf="@+id/sympol"
+                app:layout_constraintTop_toTopOf="@id/sympol" />
+
+        <TextView
+                android:id="@+id/Cname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/fonts"
+                android:gravity="center"
+                android:text="@{data.cName}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="اسم البورصة" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.53" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.53" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.99" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

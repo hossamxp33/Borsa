@@ -75,9 +75,9 @@ private fun isUSSDWidget(event: AccessibilityEvent): Boolean {
         }
 
 /**
- * The View has a login message into USSD Widget
+ * The View has a login_fragment message into USSD Widget
  * @param event AccessibilityEvent
- * @return boolean USSD Widget has login message
+ * @return boolean USSD Widget has login_fragment message
  */
 private fun LoginView(event: AccessibilityEvent): Boolean {
         return isUSSDWidget(event) && USSDController.instance!!.map!![USSDController.KEY_LOGIN]!!

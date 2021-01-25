@@ -1,10 +1,9 @@
 <resources>
-    <string name="app_name">TAJ NAZ</string>
+    <string name="app_name">بورصة العراق المالية</string>
     <string name="tab_1">الرئيسية</string>
     <string name="tab_2">تقارير</string>
     <string name="tab_3">المزيد</string>
     <string name="tab_4">السيرفر</string>
-
     <string name="manadeeb">المناديب</string>
     <string name="chat">المحادثة</string>
     <string name="server">السيرفر</string>

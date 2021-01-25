@@ -13,7 +13,6 @@ import androidx.viewpager.widget.ViewPager
 import com.codesroots.mac.cards.DataLayer.helper.MyApplication.context
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.presentaion.MainActivity
-import com.codesroots.mac.cards.presentaion.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashScreen : AppCompatActivity() {
@@ -28,7 +27,7 @@ class SplashScreen : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler().postDelayed({
-            val mainIntent = Intent(this, LoginActivity::class.java)
+            val mainIntent = Intent(this, MainActivity::class.java)
             startActivity(mainIntent)
             finish()
         }, SPLASH_DISPLAY_LENGTH.toLong())

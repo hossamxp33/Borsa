@@ -2,18 +2,71 @@ package com.codesroots.mac.cards.presentaion.mainfragment.viewmodel
 
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
-import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.models.*
+import com.codesroots.mac.cards.models.Currency
 import com.codesroots.mac.firstkotlon.DataLayer.Repo.DataRepo
 
 import io.reactivex.disposables.CompositeDisposable
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.databinding.BaseObservable
+import android.R
 
+
+class BindedValue : BaseObservable() {
+
+    var value: Double = 0.toDouble()
+
+
+    var setValue: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+     override   fun afterTextChanged(s: Editable) {
+            value = java.lang.Double.parseDouble(s.toString())
+        }
+    }
+}
+@BindingAdapter("app:imageStock")
+/////// set Stock image statue /////
+fun setimageStock(imageView: AppCompatImageView, resource: String?) {
+    when (resource){
+        "-1" ->   imageView.setImageDrawable(
+            ContextCompat.getDrawable(
+                imageView.context!!, // Context
+                com.codesroots.mac.cards.R.drawable.download // Drawable
+            )
+        )
+        "1" ->   imageView.setImageDrawable(
+            ContextCompat.getDrawable(
+                imageView.context!!, // Context
+                com.codesroots.mac.cards.R.drawable.upload // Drawable
+            )
+        )
+        else -> { // Note the block
+            // Display an image on image view from drawable
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    imageView.context!!, // Context
+                    com.codesroots.mac.cards.R.drawable.refresh // Drawable
+                )
+            )   }
+    }
+
+}
 @BindingAdapter("app:imageResource")
 fun setImageResource(imageView: AppCompatImageView, resource: String?) {
     Glide.with(imageView.context).load(resource).into(imageView)
@@ -38,102 +91,55 @@ fun setDatetext(text:TextView,resource: String?) {
     text.text = dateString
 
 }
+
 class MainViewModel : ViewModel() {
 
     var DateRepoCompnay: DataRepo = DataRepo()
      var mCompositeDisposable = CompositeDisposable()
 
-    var CompanyResponseLD : MutableLiveData<CompanyData>? = null
-    var CompanyDetailsResponseLD : MutableLiveData<CompanyData>? = null
+    var SpinnerData : Currency? = null
 
-    var MyBalanceResponseLD : MutableLiveData<MyBalance>? = null
-    var SliderDataResponseLD : MutableLiveData<List<SliderElement>>? = null
-    var BuyPackageResponseLD : MutableLiveData<Buypackge>? = null
-    var ReportDailyResponseLD : MutableLiveData<List<Report>>? = null
-    var ReportHistroyResponseLD : MutableLiveData<List<ReportDaily>>? = null
-    var EditResponseLD : MutableLiveData<EditOrder>? = null
-    var OrdersResponseLD : MutableLiveData<List<Myorders>>? = null
-    var LoginResponseLD : MutableLiveData<List<LoginData>>? = null
-    var transResponseLD : MutableLiveData<Trans>? = null
-    var mytransResponseLD : MutableLiveData<List<Datatrans>>? = null
-
+    var BorsaResponseLD : MutableLiveData<List<StockData>>? = null
+    var TextSliderDataResponseLD: MutableLiveData<List<SliderDat>>? = null
+       var GoldResponseLD : MutableLiveData<List<Gold_Salary_News_Data>>? = null
+    var CurrencyResponseLD : MutableLiveData<ArrayList<Currency>>? = null
 
     init {
-        CompanyResponseLD = MutableLiveData()
-        CompanyDetailsResponseLD = MutableLiveData()
 
-        BuyPackageResponseLD = MutableLiveData()
-        MyBalanceResponseLD = MutableLiveData()
-        SliderDataResponseLD = MutableLiveData()
-        EditResponseLD = MutableLiveData()
-        OrdersResponseLD = MutableLiveData()
-        ReportDailyResponseLD = MutableLiveData()
-        LoginResponseLD = MutableLiveData()
-        transResponseLD = MutableLiveData()
-        mytransResponseLD  = MutableLiveData()
-        ReportHistroyResponseLD = MutableLiveData()
-        mCompositeDisposable  = CompositeDisposable()
-    }
-
-
-    fun getMyBalance(){
-        DateRepoCompnay.GetMyBalance(MyBalanceResponseLD)
-    }
-
-    fun getcompanyData(){
-        DateRepoCompnay.GetData(CompanyResponseLD)
-                    }
-
-    fun getPackageDetails(id:String){
-        DateRepoCompnay.GetPackageDetails(id,CompanyDetailsResponseLD)
-    }
-    fun EditOrder(id:Long){
-        DateRepoCompnay.EditOrder(id,EditResponseLD)
-
-    }
-    fun ChangePassword(password:String){
-        DateRepoCompnay.ChangePassword(password,EditResponseLD)
-
-    }
-    fun GetMyorders(){
-        DateRepoCompnay.GetMyorders(OrdersResponseLD)
-
-    }
-    fun GetMyOffices(){
-        DateRepoCompnay.getMyOffices(LoginResponseLD)
-
-    }
-    fun GetMyTrans(){
-        DateRepoCompnay.getMyTrans(mytransResponseLD)
+        BorsaResponseLD = MutableLiveData()
+        TextSliderDataResponseLD = MutableLiveData()
+        GoldResponseLD = MutableLiveData()
+        CurrencyResponseLD = MutableLiveData()
 
     }
 
-    fun ConfirmOrder(id:Long){
 
-        DateRepoCompnay.ConfirmOrder(id,EditResponseLD)
 
-    }
-    fun BuyPackage(type:Int,id:String,phone:String,name:String){
+  fun  get_borca_data(key:String){
+    DateRepoCompnay.Get_Borsa_Data(key,BorsaResponseLD)
+}
 
-        DateRepoCompnay.BuyPackage(type,id,PreferenceHelper.getUserId().toString(),phone,name,BuyPackageResponseLD,mCompositeDisposable)
 
-    }
-    fun transactions(mobile:String,value:String){
 
-        DateRepoCompnay.Transactions(PreferenceHelper.getUserId().toString(),mobile,value,transResponseLD,mCompositeDisposable)
+//Get_SliderTextData/////////////////////////////////
+fun  get_TextSliderData(){
+    DateRepoCompnay.Get_TextSliderData(TextSliderDataResponseLD)
+}
+///////////// gold
+fun  get_GoldData(){
+    DateRepoCompnay.Get_Gold_Data(GoldResponseLD)
+}
 
+    ////salary
+    fun  get_SalaryData(){
+        DateRepoCompnay.Get_Salary_Data(GoldResponseLD)
     }
-    fun PrintReport(oopo:String,auth:String){
-        DateRepoCompnay.PrintReport(oopo,auth,BuyPackageResponseLD)
+    ////Gaz
+    fun  get_GazData(){
+        DateRepoCompnay.Get_GazPriceData(GoldResponseLD)
     }
-    fun GetMyDeialyReport(auth:String){
-        DateRepoCompnay.GetMyDeialyReport(auth,ReportDailyResponseLD)
-    }
-    fun GetMyDatesReport(auth:String,from:String,to:String){
-        DateRepoCompnay.GetMyMonthReport(auth,from,to,ReportDailyResponseLD)
-    }
-    fun GetMyImages(auth:String){
-        DateRepoCompnay.GetMyImages(SliderDataResponseLD)
+    fun  Get_Currency_Data(key:String){
+        DateRepoCompnay.Get_Currency_Data(key,CurrencyResponseLD)
     }
 
     override fun onCleared() {

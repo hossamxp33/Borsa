@@ -2,25 +2,25 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="data"
-            type="com.codesroots.mac.cards.models.CompanyDatum"/>
+                name="data"
+                type="com.codesroots.mac.cards.models.Currency"/>
 
     </data>
 
     <TextView
 
             android:id="@+id/textView7"
-            style="?android:attr/spinnerDropDownItemStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/flat"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:singleLine="true"
-            android:text="@{data.name}"
+            android:background="@drawable/spinnerbackground"
+            android:textColor="@color/red"
             android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:padding="5dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="false"
+            style="@style/DrawerArrowStyle"
+            android:textSize="18sp" />
 
 
 </layout>

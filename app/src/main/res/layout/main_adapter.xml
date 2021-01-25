@@ -14,52 +14,128 @@
                 type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
         <variable
                 name="data"
-                type="com.codesroots.mac.cards.models.CompanyDatum"/>
-    </data>
+                type="com.codesroots.mac.cards.models.StockData"/>
+        <variable
+                name="viewmodel"
+                type="com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel"/>
 
+    </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="4dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="4dp"
-            android:layoutAnimation="@anim/layout_animation"
             android:background="@drawable/reduisbackground"
-            android:onClick="@{() -> listener.SwitchToPackages(Context,data.id)}"
+            android:layoutAnimation="@anim/layout_animation"
             android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/appCompatImageView"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:imageResource="@{data.src}"
-                app:layout_constraintBottom_toTopOf="@+id/comoanyName"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="8dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight_percent="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.8" />
+                app:srcCompat="@drawable/awesome_money"
+                android:onClick="@{() -> listener.SwitchToBorsaDetails(Context,data)}"
+
+                tools:srcCompat="@drawable/awesome_money" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/state"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:imageStock="@{data.bS}" />
 
         <TextView
-                android:id="@+id/comoanyName"
-                android:layout_width="match_parent"
+                android:id="@+id/Sprice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/company_name_bg"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/fonts"
                 android:gravity="center"
                 android:padding="7dp"
-                android:text="@{data.name}"
-                android:textColor="@color/white"
+                android:text="@{data.sPrice}"
+                android:textColor="@{data.bS.equals(`1`) ? @color/red : @color/blue}"
+
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+                android:id="@+id/Bprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/fonts"
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="@{data.bprice}"
+                android:textColor="@{data.bS.equals(`1`) ? @color/red : @color/blue}"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/Bname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fonts"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="@{data.bName}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="اسم البورصة" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.73" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.53" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.55" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.99" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

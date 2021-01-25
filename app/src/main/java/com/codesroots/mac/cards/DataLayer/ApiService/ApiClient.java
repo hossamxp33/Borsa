@@ -17,8 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "http://credit.codesroots.com/api/";
-    //private static final String BASE_URL = "http://grz.codesroots.com/api/";
+    private static final String BASE_URL = "https://www.iqborsa.com/";
+    //private static final String BASE_URL = "https://www.iqborsa.com/iqws.php?k={moble identfer key}&o=2";
     private static final int TIMEOUT = 30;
     private static Retrofit retrofit = null;
 

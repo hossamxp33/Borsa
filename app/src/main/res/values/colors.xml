@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF133A1E</color>
+    <color name="colorPrimary">#2F7BBF</color>
     <color name="colorPrimaryDark">#194828</color>
     <color name="colorAccent">#D81B60</color>
     <color name="white">#ffffffff</color>
@@ -12,7 +12,7 @@
     <color name="lightergrey">#d8d8d9</color>
     <color name="red">#ef1919</color>
     <color name="shape">#E6EAED</color>
-    <color name="blue">#1e75de</color>
+    <color name="blue">#1E75DE</color>
     <color name="fbcolor">#4A70B7</color>
     <color name="text_blue">#2F7BBF</color>
     <color name="slider_home3">#490D39</color>

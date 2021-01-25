@@ -32,68 +32,68 @@ class MyService : Service(), NetworkChangeReceiver.ConnectivityReceiverListener 
     lateinit var viewModel: MainViewModel
 
 
-    override fun onCreate() {
-        // get an instance of the receiver in your service
-        val filter = IntentFilter()
-        filter.addAction("action")
-        filter.addAction("anotherAction")
-        mReceiver = MyReceiver()
-        //        MyApplication.getInstance().setConnectivityListener(this);
-        registerReceiver(mReceiver, filter)
-
-
-        timer.scheduleAtFixedRate(
-            object : TimerTask() {
-                @SuppressLint("CheckResult")
-                override fun run() {
-
-                    getServergetway().GetCenterOrder()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .map { data -> data }
-                        .subscribe(
-                            { books ->
-                                if (books.myorders!!.id != null) {
-                                    val intent1 = Intent(applicationContext, MainActivity::class.java)
-                                      //  toast.ma(this@MyService,"aa")
-                                   // Toast.makeText(this@MyService,PreferenceHelper.getOrderid(), Toast.LENGTH_SHORT).show()
-
-                                    intent1.putExtra("new_order",1)
-                                    intent1.putExtra("id",books.myorders.id)
-                                    intent1.putExtra("name",books.myorders.productPackage.name)
-                                    intent1.putExtra("code",books.myorders.productPackage.company!!.code)
-                                    intent1.putExtra("companyId",books.myorders.productPackage.company!!.id)
-
-                                    intent1.putExtra("phone",books.myorders.mobile)
-   Log.i("idordier",books.myorders!!.id.toString())
-                                    Log.i("idordierprefrenche",PreferenceHelper.getOrderid())
-
-//                                    if (books.myorders!!.id > PreferenceHelper.getOrderid().toInt()) {
-    Toast.makeText(this@MyService,"طلب جديد", Toast.LENGTH_SHORT).show()
-
-    PreferenceHelper.setOrderid(books.myorders!!.id.toString())
-
-    intent1.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-
-    startActivity(intent1)
-   //}
-                                }else {
-                                    Toast.makeText(this@MyService,"خطا", Toast.LENGTH_SHORT).show()
-
-                                }
-                            },
-                            { error ->
-
-                            }
-                        )
-
-                }
-            },
-            0, 60000
-        )
-
-
-    }
+//    override fun onCreate() {
+//        // get an instance of the receiver in your service
+//        val filter = IntentFilter()
+//        filter.addAction("action")
+//        filter.addAction("anotherAction")
+//        mReceiver = MyReceiver()
+//        //        MyApplication.getInstance().setConnectivityListener(this);
+//        registerReceiver(mReceiver, filter)
+//
+//
+//        timer.scheduleAtFixedRate(
+//            object : TimerTask() {
+//                @SuppressLint("CheckResult")
+//                override fun run() {
+//
+//                    getServergetway().GetCenterOrder()
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .map { data -> data }
+//                        .subscribe(
+//                            { books ->
+//                                if (books.myorders!!.id != null) {
+//                                    val intent1 = Intent(applicationContext, MainActivity::class.java)
+//                                      //  toast.ma(this@MyService,"aa")
+//                                   // Toast.makeText(this@MyService,PreferenceHelper.getOrderid(), Toast.LENGTH_SHORT).show()
+//
+//                                    intent1.putExtra("new_order",1)
+//                                    intent1.putExtra("id",books.myorders.id)
+//                                    intent1.putExtra("name",books.myorders.productPackage.name)
+//                                    intent1.putExtra("code",books.myorders.productPackage.company!!.code)
+//                                    intent1.putExtra("companyId",books.myorders.productPackage.company!!.id)
+//
+//                                    intent1.putExtra("phone",books.myorders.mobile)
+//   Log.i("idordier",books.myorders!!.id.toString())
+//                                    Log.i("idordierprefrenche",PreferenceHelper.getOrderid())
+//
+////                                    if (books.myorders!!.id > PreferenceHelper.getOrderid().toInt()) {
+//    Toast.makeText(this@MyService,"طلب جديد", Toast.LENGTH_SHORT).show()
+//
+//    PreferenceHelper.setOrderid(books.myorders!!.id.toString())
+//
+//    intent1.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//
+//    startActivity(intent1)
+//   //}
+//                                }else {
+//                                    Toast.makeText(this@MyService,"خطا", Toast.LENGTH_SHORT).show()
+//
+//                                }
+//                            },
+//                            { error ->
+//
+//                            }
+//                        )
+//
+//                }
+//            },
+//            0, 60000
+//        )
+//
+//
+//    }
 
 
     override fun onBind(intent: Intent): IBinder? {

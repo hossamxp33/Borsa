@@ -1,45 +1,50 @@
 package com.codesroots.mac.cards.presentaion.mainfragment
 
-import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
-import android.transition.Fade
-import android.transition.TransitionInflater
 import android.view.LayoutInflater
+import android.provider.Settings.Secure;
+
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.databinding.MainFragmentBinding
+import com.codesroots.mac.cards.models.StockData
+import com.codesroots.mac.cards.presentaion.ClickHandler
+import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.Adapter.MainAdapter
-import com.codesroots.mac.cards.presentaion.mainfragment.Adapter.SliderAdapter
+import com.codesroots.mac.cards.presentaion.mainfragment.Adapter.TextSliderAdapter
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.main_adapter.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_fragment.*
+import org.jetbrains.anko.view
 import java.util.*
-import android.view.Window as Window1
+
+
 
 class mainFragment  : Fragment(){
 
     lateinit var MainAdapter: MainAdapter
+    lateinit var TextPager : TextSliderAdapter
     lateinit var viewModel: MainViewModel
     private var currentPage = 0
     private var NUM_PAGES = 0
     private var pager: ViewPager? = null
     var  text : TextView? = null
     var  recyclerView : RecyclerView? = null
+    var data : StockData ? =null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,39 +55,66 @@ class mainFragment  : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         var view:MainFragmentBinding =
-            DataBindingUtil.inflate(inflater,R.layout.main_fragment, container,false)
+            DataBindingUtil.inflate(inflater,
+                com.codesroots.mac.cards.R.layout.main_fragment, container,false)
         val typeface = Typeface.createFromAsset(getContext()!!.assets, "fonts/DroidKufi_Regular.ttf")
+        val android_id = Secure.getString(getContext()?.getContentResolver(), Secure.ANDROID_ID);
+
+    //      MainActivity().appBarLayout2.visibility = View.GONE
+
+
+        view.context = context as MainActivity
+         view.listener = ClickHandler()
 
         pager = view.pagerr
         recyclerView = view.recyler
         viewModel =   ViewModelProviders.of(this).get(MainViewModel::class.java)
-        viewModel.getcompanyData()
-       // viewModel.getMyBalance()
-        viewModel.GetMyImages(PreferenceHelper.getToken())
-        viewModel.CompanyResponseLD?.observe(this , Observer {
-            MainAdapter = MainAdapter( viewModel,context,it.companies!!)
-            view.recyler.layoutManager = GridLayoutManager(context,2)
+        viewModel.get_borca_data(android_id)
+        viewModel.get_TextSliderData()
 
-            view.recyler.adapter = MainAdapter;
-            //lastvalue.append(it.usercredit.toString())
-            lastvalue.text =  it.usercredit.toString()
-            namevalue.text = PreferenceHelper.getUsername()
+        viewModel.TextSliderDataResponseLD?.observe(this , Observer {
+            TextPager = TextSliderAdapter(activity!!,it)
 
-        })
+            view.topPager.adapter = TextPager
+            indicator.setViewPager(view.topPager)
 
-        viewModel.SliderDataResponseLD?.observe(this , Observer {
-            pager!!.offscreenPageLimit = 3
-          //  pager!!.pageMargin = 20
+            //  pager!!.pageMargin = 20
             pager!!.clipChildren = false
             pager!!.clipToPadding = false
-         //   pager!!.setPadding(100, 0, 50, 0)
+            //   pager!!.setPadding(100, 0, 50, 0)
 
-            view.pagerr.adapter = it?.let { it1 -> SliderAdapter(activity!!, it1) }
+            view.topPager.adapter = it?.let { it1 -> TextSliderAdapter(activity!!, it1) }
 
-            indicator.setViewPager(view.pagerr)
+            indicator.setViewPager(view.topPager)
             it?.size?.let { it1 -> init(it1) }
 
+
+        viewModel.BorsaResponseLD?.observe(this , Observer {
+            MainAdapter = MainAdapter( viewModel,context, it!!)
+            view.recyler.layoutManager = LinearLayoutManager(context)
+            view.recyler.adapter = MainAdapter;
+            //lastvalue.append(it.usercredit.toString())
+
+
         })
+
+        })
+//        viewModel.SliderDataResponseLD?.observe(this , Observer {
+//            pager!!.offscreenPageLimit = 3
+//            view.topPager.adapter = it?.let { it1 -> SliderAdapter(activity!!, it1) }
+//            indicator.setViewPager(view.topPager)
+//
+//            //  pager!!.pageMargin = 20
+//            pager!!.clipChildren = false
+//            pager!!.clipToPadding = false
+//         //   pager!!.setPadding(100, 0, 50, 0)
+//
+//            view.pagerr.adapter = it?.let { it1 -> SliderAdapter(activity!!, it1) }
+//
+//            indicator.setViewPager(view.pagerr)
+//            it?.size?.let { it1 -> init(it1) }
+//
+//        })
 
 
         animation()
@@ -117,7 +149,7 @@ class mainFragment  : Fragment(){
         })
     }
     private fun animation(){
-        val ttb = AnimationUtils.loadAnimation(context, R.anim.ttb)
+        val ttb = AnimationUtils.loadAnimation(context, com.codesroots.mac.cards.R.anim.ttb)
         pager!!.animation = ttb
 
     }

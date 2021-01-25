@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+>
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+                name="Context"
+                type="com.codesroots.mac.cards.presentaion.MainActivity"/>
+        <variable
+                name="listener"
+                type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
+        <variable
+                name="data"
+                type="com.codesroots.mac.cards.models.StockData"/>
+        <variable
+                name="ViewModel"
+                type="com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel"/>
+
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout8"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/reduisbackground"
+            app:layout_constraintBottom_toTopOf="@+id/pagerr"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_pager">
+
+        <TextView
+                android:id="@+id/orderText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="طلب"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+
+        <TextView
+                android:id="@+id/orderText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="عرض"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+
+        <TextView
+                android:id="@+id/orderText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="البورصة"
+                app:layout_constraintEnd_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.71" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/reduisbackground"
+            android:layoutAnimation="@anim/layout_animation"
+            android:orientation="vertical"
+            android:onClick="@{() -> listener.SwitchToDetails(Context,data)}"
+
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/awesome_money"
+                tools:srcCompat="@drawable/awesome_money" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/state"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:visibility="visible"
+                app:imageStock="@{data.bS}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/Sprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/fonts"
+                android:gravity="center"
+                android:padding="7dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="@{data.SPrice}"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline16"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/Bprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/fonts"
+                android:gravity="center"
+                android:padding="7dp"
+                android:textColor="@color/black"
+                android:text="@{data.Bprice}"
+
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/Bname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/fonts"
+                android:gravity="center"
+                android:padding="7dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="@{data.bName}"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="اسم البورصة" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.71" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.53" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.53" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.99" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
