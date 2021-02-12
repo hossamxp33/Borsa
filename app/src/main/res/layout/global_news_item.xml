@@ -15,17 +15,17 @@
                 type="com.codesroots.mac.cards.presentaion.MainActivity"/>
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent"
+   <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/reduisbackground">
 
     <ImageView
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/guideline13"
+            app:layout_constraintRight_toLeftOf="@+id/guideline13"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
             app:srcCompat="@drawable/news" />
 
@@ -34,8 +34,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{data.details}"
-            app:layout_constraintEnd_toStartOf="@+id/guideline15"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/guideline15"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@{data.nDate}"
-            app:layout_constraintEnd_toStartOf="@+id/guideline13"
+            app:layout_constraintRight_toLeftOf="@+id/guideline13"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="الاخبار العالمية"
-            app:layout_constraintEnd_toStartOf="@+id/guideline13"
+            app:layout_constraintRight_toLeftOf="@+id/guideline13"
             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -67,6 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layoutDirection="rtl"
+
             app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -74,5 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layoutDirection="rtl"
+
             app:layout_constraintGuide_percent="0.71" />
 </androidx.constraintlayout.widget.ConstraintLayout></layout>

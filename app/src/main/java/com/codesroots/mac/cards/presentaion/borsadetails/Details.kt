@@ -25,7 +25,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codesroots.mac.cards.presentaion.mainfragment.Adapter.MainAdapter
 import com.codesroots.mac.cards.presentaion.menuitemsfragments.goldprice.GoldPriceAdapter
-import com.google.android.gms.analytics.internal.zzy.e
 import kotlinx.android.synthetic.main.details.*
 import java.lang.Exception
 

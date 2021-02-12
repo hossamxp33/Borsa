@@ -49,7 +49,6 @@ class TransferFragment  : Fragment(){
         first_data = arguments?.getParcelable("first_data")
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.Get_Currency_Data(android_id)
-
         view.context = context as MainActivity
 
         viewModel.CurrencyResponseLD?.observe(this , Observer {

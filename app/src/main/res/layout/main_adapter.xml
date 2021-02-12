@@ -26,11 +26,10 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="4dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="1dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="4dp"
             android:background="@drawable/reduisbackground"
-            android:layoutAnimation="@anim/layout_animation"
             android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -41,7 +40,7 @@
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight_percent="1"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/awesome_money"
                 android:onClick="@{() -> listener.SwitchToBorsaDetails(Context,data)}"
@@ -55,8 +54,8 @@
                 android:layout_marginStart="8dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHeight_percent="1"
-                app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
+                app:layout_constraintHeight_percent="-1"
+                app:layout_constraintLeft_toRightOf="@+id/appCompatImageView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:imageStock="@{data.bS}" />
 
@@ -69,12 +68,11 @@
                 android:gravity="center"
                 android:padding="7dp"
                 android:text="@{data.sPrice}"
-                android:textColor="@{data.bS.equals(`1`) ? @color/red : @color/blue}"
-
+                app:text_color="@{data.bS}"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintRight_toLeftOf="@+id/guideline4"
                 app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -86,11 +84,11 @@
                 android:gravity="center"
                 android:padding="7dp"
                 android:text="@{data.bprice}"
-                android:textColor="@{data.bS.equals(`1`) ? @color/red : @color/blue}"
+                app:text_color="@{data.bS}"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintRight_toLeftOf="@+id/guideline3"
                 app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -101,11 +99,10 @@
                 android:gravity="center"
                 android:padding="3dp"
                 android:text="@{data.bName}"
-                android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                app:layout_constraintRight_toLeftOf="@+id/guideline6"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="اسم البورصة" />
 
@@ -114,6 +111,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layoutDirection="rtl"
+
                 app:layout_constraintGuide_percent="0.73" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -121,6 +120,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layoutDirection="rtl"
+
                 app:layout_constraintGuide_percent="0.53" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -128,6 +129,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layoutDirection="rtl"
+
                 app:layout_constraintGuide_percent="0.55" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -135,6 +138,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layoutDirection="rtl"
+
                 app:layout_constraintGuide_percent="0.99" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

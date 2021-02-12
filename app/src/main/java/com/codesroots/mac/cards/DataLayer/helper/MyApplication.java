@@ -7,6 +7,8 @@ import android.util.Log;
 
 import androidx.multidex.MultiDex;
 
+import com.onesignal.OneSignal;
+
 
 public class MyApplication extends Application {
 
@@ -17,7 +19,11 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        // Enable verbose OneSignal logging to debug issues if needed.
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.DEBUG);
 
+        // OneSignal Initialization
+        OneSignal.initWithContext(this);
     }
     @Override
     protected void attachBaseContext(Context base) {

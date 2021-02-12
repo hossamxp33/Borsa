@@ -14,25 +14,31 @@
                         name="listener"
                         type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
         </data>
+        <ScrollView
+                android:id="@+id/scrollViewmain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
 
-<androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
         <include
+                android:id="@+id/include"
                 layout="@layout/app_bar_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/appBarLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#1C83D5"
-                android:onClick="@{() -> listener.SwitchToPackages(context)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -45,17 +51,31 @@
                         android:layout_gravity="center_vertical"
                         android:text="خيارات"
                         android:textColor="@color/white"
+                        android:onClick="@{() -> listener.SwitchToPackages(context)}"
                         android:textSize="18dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                 </androidx.appcompat.widget.AppCompatTextView>
 
+            <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:onClick="@{() -> listener.SwitchToMazad(context)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/bank" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 </layout>

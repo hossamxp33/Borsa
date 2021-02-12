@@ -14,14 +14,13 @@ public class PreferenceHelper {
 	private static String UserId = "userid";
 	private static String Username = "username";
 	private static String orderid = "orderid";
-
-	private static String UserGroupId = "UserGroupId";
+	private static String UserIdForMsg = "UserIdForMsg";
 	private static String ROOMID = "ROOMID";
 	private static String INCHAT = "INCHAT";
 	private final String CURRENTLAT = "latitude";
 	private final String CURRENTLONG = "longtude";
 	private final String CURRENTCATEGRY = "CURRENTCATEGRY";
-	private Context context;
+  	private Context context;
 
 	public PreferenceHelper(Context context) {
 		this.context = context;
@@ -82,6 +81,7 @@ public class PreferenceHelper {
 	public static String getUsername() {
 		return app_prefs.getString(Username,"");
 	}
+
 	public static void setUsername(String username) {
 		Editor edit = app_prefs.edit();
 		edit.putString(Username, username);
@@ -98,8 +98,8 @@ public class PreferenceHelper {
 	public static int getUserId() {
 		return app_prefs.getInt(UserId,0);
 	}
-	public static int getUserGroupId() {
-		return app_prefs.getInt(UserGroupId,0);
+	public static int getUserIdForMsg() {
+		return app_prefs.getInt(UserIdForMsg,0);
 	}
 	public static void setROOMID(String roomid) {
 		Editor edit = app_prefs.edit();
@@ -123,9 +123,9 @@ public class PreferenceHelper {
 		edit.putInt(UserId, user_id);
 		edit.apply();
 	}
-	public static void setUserGroupId(int userGroupId) {
+	public static void setUserIdForMsg(int userGroupId) {
 		Editor edit = app_prefs.edit();
-		edit.putInt(UserGroupId, userGroupId);
+		edit.putInt(UserIdForMsg, userGroupId);
 		edit.apply();
 	}
 
@@ -146,5 +146,10 @@ public class PreferenceHelper {
 	public void clearRequestData() {
 
  	}
+	public static void ClearUserID(){
+	Editor edit = app_prefs.edit();
 
+	edit.remove(UserId).apply();
+
+}
 }

@@ -24,9 +24,10 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:background="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -37,8 +38,8 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -47,8 +48,8 @@
             android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
 
@@ -57,6 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layoutDirection="rtl"
+
                 app:layout_constraintGuide_percent="0.9" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -64,6 +67,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layoutDirection="rtl"
+
                 app:layout_constraintGuide_percent="0.22" />
 
         <TextView
@@ -72,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:text="التاريخ"
-                app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                app:layout_constraintRight_toLeftOf="@+id/guideline9"
                 app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -81,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:text="السعر"
-                app:layout_constraintEnd_toStartOf="@+id/guideline10"
+                app:layout_constraintRight_toLeftOf="@+id/guideline10"
                 app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -90,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:text="العيار"
-                app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                app:layout_constraintRight_toLeftOf="@+id/guideline8"
                 app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -98,6 +103,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layoutDirection="rtl"
+
                 app:layout_constraintGuide_percent="0.56" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -107,8 +114,8 @@
             android:layout_height="0dp"
             android:layout_marginTop="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout></layout>

@@ -40,8 +40,8 @@
                 android:layout_height="40dp"
                 android:visibility="visible"
                 app:imageResourcee="@{data.flag}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/guideline4"
                 app:layout_constraintHeight_percent="1"
 
                 app:layout_constraintTop_toTopOf="parent"
@@ -53,8 +53,8 @@
                 android:layout_height="35dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/guideline4"
                 app:layout_constraintHeight_percent="1"
                 android:onClick="@{() -> listener.SwitchToTransferPage(Context,data,viewmodel)}"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
@@ -73,7 +73,7 @@
                 android:text="@{data.sympol}"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                app:layout_constraintRight_toLeftOf="@+id/guideline6"
                 app:layout_constraintTop_toBottomOf="@+id/Cname" />
 
         <TextView
@@ -87,7 +87,7 @@
                 android:text="@{data.cPrice}"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                app:layout_constraintRight_toLeftOf="@+id/guideline6"
                 app:layout_constraintTop_toBottomOf="@+id/sympol"
                 app:layout_constraintTop_toTopOf="@id/sympol" />
 
@@ -102,7 +102,7 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                app:layout_constraintRight_toLeftOf="@+id/guideline6"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="اسم البورصة" />
 
@@ -118,6 +118,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layoutDirection="rtl"
+
                 app:layout_constraintGuide_percent="0.53" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -125,6 +127,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layoutDirection="rtl"
+
                 app:layout_constraintGuide_percent="0.99" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

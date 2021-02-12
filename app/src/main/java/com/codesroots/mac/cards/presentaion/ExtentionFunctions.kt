@@ -33,8 +33,8 @@ fun isInternetConnectionAvailable(context: Context): Boolean {
                 as ConnectivityManager
 
         return (conMgr.activeNetworkInfo != null
-                && conMgr.activeNetworkInfo.isAvailable
-                && conMgr.activeNetworkInfo.isConnected )
+                && conMgr.activeNetworkInfo!!.isAvailable
+                && conMgr.activeNetworkInfo!!.isConnected )
 
     } catch (e: Exception) {
         e.printStackTrace()

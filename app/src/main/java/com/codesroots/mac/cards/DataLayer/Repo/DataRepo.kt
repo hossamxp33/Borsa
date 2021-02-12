@@ -49,6 +49,22 @@ fun Get_TextSliderData(livedata: MutableLiveData<List<SliderDat>>?) {
         )
 }
 
+    //GetTextSliderData
+    fun Get_AdsData(livedata: MutableLiveData<List<Result>>?) {
+
+        getServergetway().GetAdsData()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books.Result)
+                },
+                { error ->
+
+                }
+            )
+    }
     //GetGoldData
     fun Get_Gold_Data(livedata: MutableLiveData<List<Gold_Salary_News_Data>>?) {
 
@@ -84,19 +100,78 @@ fun Get_TextSliderData(livedata: MutableLiveData<List<SliderDat>>?) {
 /// salary
 fun Get_Salary_Data(livedata: MutableLiveData<List<Gold_Salary_News_Data>>?) {
 
-    getServergetway().GetSalaryData()
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .map { data -> data }
-        .subscribe(
-            { books ->
-                livedata?.postValue(books)
-            },
-            { error ->
+        getServergetway().GetSalaryData()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
 
-            }
-        )
-}
+                }
+            )
+    }
+
+   // SendMassage
+    fun SendMassage(key:String ,auth:String ,name:String ,phonetext:String ,title:String ,massage:String ,livedata: MutableLiveData<Int>?) {
+
+        getServergetway().SendMassage(key,"${auth},${phonetext},${name},${title},${massage},0")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+
+                }
+            )
+    }
+
+    //////Login
+    fun Login(key:String ,card_number : String,password: String ,livedata: MutableLiveData<Int>?) {
+
+        getServergetway().Login(key,"0,${card_number},${password}")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+
+                }
+            )
+    }
+
+
+
+
+
+    //////////////////////////// Check
+    @SuppressLint("CheckResult")
+    fun GetValidation(key:String , auth : String,livedata: MutableLiveData<Int>?) {
+
+        getServergetway().GetValidation(key,auth)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+
+                }
+            )
+    }
+
+
+
     /// Get_Currency_Data
     fun Get_Currency_Data(key:String ,livedata: MutableLiveData<ArrayList<Currency>>?) {
 
@@ -113,6 +188,28 @@ fun Get_Salary_Data(livedata: MutableLiveData<List<Gold_Salary_News_Data>>?) {
                 }
             )
     }
+
+
+    ///GetMazad
+    ///
+    fun GetMazad(key:String ,livedata: MutableLiveData<List<Result>>?) {
+
+        getServergetway().GetMazad(key)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books.Result)
+                },
+                { error ->
+
+                }
+            )
+    }
+
+
+
     @SuppressLint("CheckResult")
     fun getServergetway () : APIServices
     {

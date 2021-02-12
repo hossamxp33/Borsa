@@ -20,7 +20,6 @@ import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.menuitemsfragments.goldprice.GoldPriceAdapter
 import android.text.Editable
 import android.widget.*
-import com.google.android.gms.analytics.internal.zzy.s
 import androidx.core.content.ContextCompat.getSystemService
 import android.location.LocationManager
 import android.view.*

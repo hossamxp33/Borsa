@@ -19,22 +19,22 @@
         android:background="#1C83D5">
 
 
-
     <FrameLayout
             android:id="@+id/main_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="50dp"
-
-            android:background="@color/lightergrey" />
+            android:layout_height="0dp"
+            android:background="@color/lightergrey"
+            app:layout_constraintBottom_toTopOf="@+id/appBarLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.9"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/main_frame">
+            app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBar"

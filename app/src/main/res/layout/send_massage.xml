@@ -13,10 +13,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:background="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +39,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
-            android:id="@+id/textView12"
+            android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -54,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <EditText
-            android:id="@+id/textView13"
+            android:id="@+id/number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -68,10 +70,10 @@
             android:background="@drawable/reduisbackground"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <EditText
-            android:id="@+id/textView14"
+            android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -85,10 +87,10 @@
             android:textColorHint="@color/AEAEAE"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintTop_toBottomOf="@+id/number" />
 
     <EditText
-            android:id="@+id/textView15"
+            android:id="@+id/massage"
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:layout_marginStart="24dp"
@@ -102,10 +104,10 @@
             android:textColorHint="@color/AEAEAE"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/send_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -118,7 +120,7 @@
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@+id/massage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -40,8 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
                 android:layout_marginTop="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
             <EditText
@@ -53,7 +53,7 @@
                     android:hint="00"
                     android:padding="10dp"
                     android:textAlignment="center"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView18" />
 
             <EditText
@@ -66,7 +66,7 @@
                     android:text=""
                     android:hint="00"
                     android:textAlignment="center"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView19" />
 
             <EditText
@@ -81,7 +81,7 @@
 
                     android:hint="00"
 
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView20" />
 
             <TextView
@@ -92,7 +92,7 @@
                     android:layout_marginEnd="16dp"
                     android:text=" الفئة :  "
                     android:textColor="@color/blue"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -103,7 +103,7 @@
                     android:layout_marginEnd="16dp"
                     android:text=" سعر الصرف :  "
                     android:textColor="@color/blue"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
             <TextView
@@ -114,7 +114,7 @@
                     android:layout_marginEnd="16dp"
                     android:text=" العدد  :  "
                     android:textColor="@color/blue"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
             <TextView
@@ -125,7 +125,7 @@
                     android:layout_marginEnd="16dp"
                     android:text=" دينار عراقي  :  "
                     android:textColor="@color/blue"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <TextView
@@ -136,7 +136,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="   :  USD "
                     android:textColor="@color/blue"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
             <TextView
@@ -146,7 +146,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="24dp"
                     android:text="@{data.CName}"
-                    app:layout_constraintEnd_toStartOf="@+id/textView16"
+                    app:layout_constraintRight_toLeftOf="@+id/textView16"
                     app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -155,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:text="@{data.sPrice}"
-                    app:layout_constraintEnd_toStartOf="@+id/textView17"
+                    app:layout_constraintRight_toLeftOf="@+id/textView17"
                     app:layout_constraintTop_toTopOf="@+id/textView17" />
 
             <TextView
@@ -171,8 +171,8 @@
                     android:text="احسب"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/USD_value" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -185,7 +185,7 @@
                 android:checked="true"
                 android:gravity="center_vertical"
                 android:text="طلب"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout7" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

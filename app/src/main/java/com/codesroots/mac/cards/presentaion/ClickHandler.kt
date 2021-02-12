@@ -9,6 +9,7 @@ import com.codesroots.mac.cards.presentaion.borsadetails.BorsaDetailsFragment
 import com.codesroots.mac.cards.presentaion.borsadetails.Details
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.massagefragment.MassageFragment
+import com.codesroots.mac.cards.presentaion.mazadfragment.MazadFragment
 import com.codesroots.mac.cards.presentaion.menufragment.MenuFragment
 import com.codesroots.mac.cards.presentaion.menuitemsfragments.LoginFragment
 import com.codesroots.mac.cards.presentaion.menuitemsfragments.gaz.GazPriceFragment
@@ -85,10 +86,10 @@ class ClickHandler {
             com.codesroots.mac.cards.R.anim.ttb,0, 0,0)
             .replace(com.codesroots.mac.cards.R.id.main_frame, frag).addToBackStack(null).commit()
     }
-    fun SwitchToRegister(context: Context) {
+    fun SwitchToMazad(context: Context) {
         val bundle = Bundle()
         //  bundle.putParcelable("cliObj" ,clients[position] )
-        val frag = RegisterFragment()
+        val frag = MazadFragment()
         frag.arguments = bundle
         ( context as MainActivity).supportFragmentManager!!.beginTransaction().setCustomAnimations(
             com.codesroots.mac.cards.R.anim.ttb,0, 0,0)

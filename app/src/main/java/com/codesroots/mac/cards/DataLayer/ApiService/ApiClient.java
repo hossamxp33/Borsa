@@ -1,5 +1,7 @@
 package com.codesroots.mac.cards.DataLayer.ApiService;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper;
@@ -26,8 +28,7 @@ public class ApiClient {
     private static OkHttpClient getOkHttpClient() {
         return new OkHttpClient()
                 .newBuilder()
-                .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY ))
 
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
@@ -37,10 +38,7 @@ public class ApiClient {
                     builder.addHeader("Accept", "application/json");
                     builder.addHeader("Content-Type", "application/json");
 
-                    builder.addHeader(
-                            "Authorization",
-                            "Bearer "+ PreferenceHelper.getToken()
-                    )  ;
+
                     Request newRequest = builder.build();
                     return chain.proceed(newRequest);
                 })
@@ -55,6 +53,7 @@ public class ApiClient {
                     .addCallAdapterFactory( RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                     .client(getOkHttpClient())
                     .build();
+
         }
         return retrofit;
     }

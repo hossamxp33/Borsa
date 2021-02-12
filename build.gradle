@@ -5,31 +5,33 @@ buildscript {
     repositories {
         google()
         jcenter()
-         maven {
-	        url "https://jitpack.io"
-url 'https://maven.fabric.io/public'
+        gradlePluginPortal()
+         maven { url "https://jitpack.io"
+             url 'https://maven.fabric.io/public'
 	    }
 
     }
     dependencies {
-        classpath 'com.google.gms:google-services:4.3.3'  // Google Services plugin
 
+        classpath 'com.google.gms:google-services:4.3.3'  // Google Services plugin
         classpath 'com.android.tools.build:gradle:3.4.2'
-	
 
         // Add dependency
         classpath 'io.fabric.tools:gradle:1.31.2'  // Crashlytics plugin
-
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.9, 0.99.99]'
+
     }
 }
+
 
 allprojects {
     repositories {
         google()
         jcenter()
+        gradlePluginPortal()
         
     }
 }
